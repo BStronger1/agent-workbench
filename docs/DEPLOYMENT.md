@@ -12,7 +12,7 @@ agent-workbench/
   runtime/jre/            # Java 21 JRE
   runtime/node/           # Node 22
   runtime/browsers/       # Playwright Chromium
-  data/                   # 项目快照与验收截图
+  data/                   # 项目快照、验收截图与加密模型配置
   logs/
 ```
 
@@ -38,7 +38,13 @@ curl -f http://127.0.0.1:18123/api/workbench/config
 
 ## API 配置
 
-编辑 `.env`：
+默认保持 `WORKBENCH_MODE=demo`，用户在网页侧栏“模型配置”自行填写 Base URL、模型名和 Key，保存并启用后即可生成，不需要重启。保存本身不调用模型；可点击“测试已保存配置”进行一次少量 Token 的连接测试。模型需要兼容 Chat Completions 接口。
+
+配置按浏览器空间保存在 `data/providers`，AES-256-GCM 主密钥位于 `.master-key`，Linux 权限为目录 700、文件 600。必须将该目录和主密钥一同备份，不能只复制密文。API 不回传完整 Key。清除 Cookie 会失去原空间访问凭据，当前没有账户找回功能。
+
+默认接口域名列表见 `src/main/resources/application.properties`。若使用其他兼容服务，可在 `.env` 设置逗号分隔的 `PROVIDER_ALLOWED_HOSTS`（替换整份列表），重启后生效；只允许 HTTPS 和标准端口。公网访问需配置 HTTPS；当前 HTTP 内网入口只适合可信网络或 SSH 隧道。
+
+如需提供**服务器共享模型**，部署者可选编辑 `.env`：
 
 ```dotenv
 WORKBENCH_MODE=live
@@ -48,7 +54,7 @@ LLM_API_KEY=your-server-only-key
 LIVE_ACCESS_TOKEN=your-random-access-token-at-least-24-characters
 ```
 
-访问口令与供应商 API 密钥是两种不同凭据。用户页面仅输入访问口令。配置完后执行 `bash deploy/stop.sh` 和 `bash deploy/start.sh`。先做一条受控真实调用再运行带 `--live` 的批量评测。
+共享模式的访问口令与供应商 API 密钥是两种不同凭据。没有启用个人配置的用户使用共享模型时需要输入访问口令。配置完后执行 `bash deploy/stop.sh` 和 `bash deploy/start.sh`。先做一条受控真实调用再运行带 `--live` 的批量评测。
 
 ## 验收、备份与更新
 

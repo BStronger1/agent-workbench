@@ -7,6 +7,31 @@
   --border: #dfe5dc;
   --muted: #7a877d;
 }
+.model-settings {
+  max-width: 880px;
+}
+.model-settings .panel-title h3 {
+  font-size: 18px;
+  color: #395342;
+}
+.settings-success {
+  border-radius: 8px;
+  padding: 14px;
+  background: #edf5e7;
+  color: #386342;
+  font-size: 13px;
+}
+.settings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 22px 0;
+}
+.saved-key {
+  margin-left: 10px;
+  font-size: 11px;
+  color: #7a8e6c;
+}
 * {
   box-sizing: border-box;
 }

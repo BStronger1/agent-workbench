@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import type { Project, Config, Source } from "./types";
+import ModelSettings from "./ModelSettings.vue";
 const projects = ref<Project[]>([]),
   current = ref<Project | null>(null),
   config = ref<Config | null>(null);
@@ -32,6 +33,7 @@ const tabs = [
   { id: "knowledge", label: "项目知识", icon: "⌕" },
   { id: "report", label: "汇报助手", icon: "▤" },
   { id: "metrics", label: "运行评测", icon: "▥" },
+  { id: "settings", label: "模型配置", icon: "⚙" },
 ];
 const activeRun = computed(
   () =>
@@ -98,6 +100,11 @@ async function action(fn: () => Promise<void>) {
   } finally {
     busy.value = false;
   }
+}
+async function refreshConfig() {
+  await action(async () => {
+    config.value = await api("/config");
+  });
 }
 async function refresh() {
   if (current.value) {
@@ -303,24 +310,28 @@ onUnmounted(() => clearInterval(timer));
           <p class="eyebrow">BUILD WITH CONTEXT. SHIP WITH EVIDENCE.</p>
           <h1>
             {{
-              tab === "studio"
-                ? "让想法，成为可用的作品。"
-                : tab === "knowledge"
-                  ? "让每次回答，都有据可循。"
-                  : tab === "report"
-                    ? "把开发过程，整理成成果。"
-                    : "看见每一次运行的表现。"
+              tab === "settings"
+                ? "选择模型，开始真实创作。"
+                : tab === "studio"
+                  ? "让想法，成为可用的作品。"
+                  : tab === "knowledge"
+                    ? "让每次回答，都有据可循。"
+                    : tab === "report"
+                      ? "把开发过程，整理成成果。"
+                      : "看见每一次运行的表现。"
             }}
           </h1>
           <p class="intro-text">
             {{
-              tab === "studio"
-                ? "从需求出发，带着项目记忆生成、检查和修复。"
-                : tab === "knowledge"
-                  ? "把项目文档、约束与决策放在一起，检索可以追溯的原文。"
-                  : tab === "report"
-                    ? "从同一个项目的资料和运行证据，生成可下载的开发汇报。"
-                    : "保留成功与失败，分别查看演示运行和真实模型结果。"
+              tab === "settings"
+                ? "填写你自己的模型与 API Key，随时启用、替换或清除。"
+                : tab === "studio"
+                  ? "从需求出发，带着项目记忆生成、检查和修复。"
+                  : tab === "knowledge"
+                    ? "把项目文档、约束与决策放在一起，检索可以追溯的原文。"
+                    : tab === "report"
+                      ? "从同一个项目的资料和运行证据，生成可下载的开发汇报。"
+                      : "保留成功与失败，分别查看演示运行和真实模型结果。"
             }}
           </p>
         </div>
@@ -334,14 +345,19 @@ onUnmounted(() => clearInterval(timer));
         <p>
           {{
             config?.mode === "live"
-              ? "真实调用会使用服务器配置的 API。请设置验收要求，并留意预算和运行状态。"
+              ? "真实调用会使用已启用的模型配置。请设置验收要求，并留意预算和运行状态。"
               : "当前为固定模板演示：可体验项目记忆、真实浏览器验收与修复流程，不代表模型生成能力。"
           }}<small v-if="config && !config.browserValidation"
             >浏览器验收尚未配置，结果只标记为“结构检查通过”。</small
           >
         </p>
       </div>
-      <section v-if="!current" class="empty panel">
+      <ModelSettings
+        v-if="tab === 'settings'"
+        :request="api"
+        @saved="refreshConfig"
+      />
+      <section v-else-if="!current" class="empty panel">
         <span class="empty-icon">◈</span>
         <h2>从你的第一个项目开始</h2>
         <p>一份项目空间，连接应用、知识和汇报。</p>
@@ -702,9 +718,7 @@ onUnmounted(() => clearInterval(timer));
                   <td>{{ r.attempts.length }}</td>
                   <td>{{ (r.durationMs / 1000).toFixed(1) }}s</td>
                   <td>
-                    {{
-                      r.usageKnown ? r.inputTokens + r.outputTokens : "未知"
-                    }}
+                    {{ r.usageKnown ? r.inputTokens + r.outputTokens : "未知" }}
                     /
                     {{
                       r.estimatedCost == null

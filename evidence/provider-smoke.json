@@ -1,0 +1,17 @@
+{
+  "verifiedAt": "2026-10-04T13:17:09.626Z",
+  "status": "passed",
+  "checks": [
+    "save",
+    "masked response",
+    "no-store",
+    "reload persistence",
+    "owner isolation",
+    "csrf",
+    "endpoint restrictions",
+    "disable with key retained",
+    "clear",
+    "mobile layout"
+  ],
+  "externalProviderCalls": 0
+}

@@ -25,6 +25,9 @@ public class WorkflowEngine {
     }
     public String mode() { return mode; }
     public Run submit(String owner, String projectId, GenerateRequest request) {
+        return submit(owner, projectId, request, null);
+    }
+    public Run submit(String owner, String projectId, GenerateRequest request, ProviderSettings.Credentials credentials) {
         Project p = store.get(owner, projectId);
         if (p.runs.size() >= 50) throw new IllegalArgumentException("项目运行记录达到上限，请新建项目");
         if (p.runs.stream().anyMatch(r -> Set.of("RUNNING", "QUEUED").contains(r.status))) throw new IllegalArgumentException("项目已有运行中的任务");
@@ -37,18 +40,22 @@ public class WorkflowEngine {
         r.checkInteraction = !Boolean.FALSE.equals(request.checkInteraction());
         r.memoryStrategy = request.memoryStrategy() == null ? "retrieval" : request.memoryStrategy();
         if (!Set.of("none", "window", "retrieval").contains(r.memoryStrategy)) throw new IllegalArgumentException("未知记忆策略");
-        r.mode = mode; r.model = mode.equals("demo") ? "deterministic-template-v1" : model.name();
+        r.mode = credentials == null ? mode : "live";
+        r.model = credentials != null ? credentials.model() : mode.equals("demo") ? "deterministic-template-v1" : model.name();
         r.memorySources = memory.context(p, r.prompt, r.memoryStrategy);
-        if (mode.equals("live") && !model.configured()) throw new IllegalArgumentException("请先在服务器配置 API 密钥");
+        if (r.mode.equals("live") && credentials == null && !model.configured()) throw new IllegalArgumentException("请先填写模型配置");
         store.update(owner, projectId, project -> {
             if (project.runs.stream().anyMatch(x -> Set.of("RUNNING", "QUEUED").contains(x.status))) throw new IllegalArgumentException("项目已有运行中的任务");
             project.runs.add(r); return null;
         });
-        try { executor.execute(() -> execute(owner, projectId, r, Boolean.TRUE.equals(request.demoFailure()))); }
+        try { executor.execute(() -> executeWithCredentials(owner, projectId, r, Boolean.TRUE.equals(request.demoFailure()), credentials)); }
         catch (RejectedExecutionException e) { finish(owner, projectId, r, "FAILED", "任务队列已满，请稍后重试"); }
         return r;
     }
     void execute(String owner, String projectId, Run r, boolean demoFailure) {
+        executeWithCredentials(owner, projectId, r, demoFailure, null);
+    }
+    void executeWithCredentials(String owner, String projectId, Run r, boolean demoFailure, ProviderSettings.Credentials credentials) {
         long start = System.nanoTime(); r.status = "RUNNING";
         event(owner, projectId, r, "memory", "已选取 " + r.memorySources.size() + " 条来源（" + r.memoryStrategy + "）");
         String html = null; List<String> errors = List.of();
@@ -63,7 +70,8 @@ public class WorkflowEngine {
                 }
                 event(owner, projectId, r, i == 0 ? "generate" : "repair", i == 0 ? "开始生成" : "根据验收失败原因修复，第 " + i + " 轮");
                 long attemptStart = System.nanoTime();
-                ModelReply reply = model.generate(r, html, errors, demoFailure && i == 0);
+                ModelReply reply = credentials == null ? model.generate(r, html, errors, demoFailure && i == 0)
+                        : model.generate(r, html, errors, demoFailure && i == 0, credentials);
                 html = reply.html(); r.inputTokens += reply.inputTokens(); r.outputTokens += reply.outputTokens(); r.usageKnown &= reply.usageKnown();
                 event(owner, projectId, r, "validate", "检查结构、资源边界及浏览器交互");
                 var validation = validator.validate(html, r, i); errors = validation.errors();
@@ -77,7 +85,10 @@ public class WorkflowEngine {
         } finally {
             r.durationMs = (System.nanoTime() - start) / 1_000_000;
             if (r.mode.equals("demo")) r.estimatedCost = 0.0;
-            else if (r.usageKnown && inputPrice > 0 && outputPrice > 0) r.estimatedCost = (r.inputTokens * inputPrice + r.outputTokens * outputPrice) / 1_000_000;
+            else {
+                double in = credentials == null ? inputPrice : credentials.inputPrice(), out = credentials == null ? outputPrice : credentials.outputPrice();
+                if (r.usageKnown && in > 0 && out > 0) r.estimatedCost = (r.inputTokens * in + r.outputTokens * out) / 1_000_000;
+            }
             finish(owner, projectId, r, r.status, r.error);
         }
     }

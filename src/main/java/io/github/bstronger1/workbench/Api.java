@@ -20,15 +20,35 @@ public class Api {
     private final ArtifactValidator validator;
     private final GenerationModel model;
     private final String accessToken;
+    private final ProviderSettings providers;
     public Api(ProjectStore store, MemoryService memory, WorkflowEngine engine, ArtifactValidator validator,
-               GenerationModel model, @Value("${workbench.live-access-token}") String accessToken) {
+               GenerationModel model, @Value("${workbench.live-access-token}") String accessToken, ProviderSettings providers) {
         this.store = store; this.memory = memory; this.engine = engine; this.validator = validator; this.model = model; this.accessToken = accessToken;
+        this.providers = providers;
     }
     @GetMapping("/config") public Map<String, Object> config(HttpServletRequest req, HttpServletResponse res) {
-        owner(req, res);
-        return Map.of("name", "Agent Workbench", "mode", engine.mode(), "modelConfigured", model.configured(),
-                "browserValidation", validator.browserEnabled(), "liveAccessRequired", engine.mode().equals("live"),
+        String owner = owner(req, res);
+        var personal = providers.active(owner);
+        return Map.of("name", "Agent Workbench", "mode", personal != null ? "live" : engine.mode(), "modelConfigured", personal != null || model.configured(),
+                "browserValidation", validator.browserEnabled(), "liveAccessRequired", personal == null && engine.mode().equals("live"),
+                "providerSource", personal != null ? "personal" : engine.mode().equals("live") ? "server" : "demo",
                 "scope", "Self-contained HTML apps · lexical project retrieval · source-grounded reports");
+    }
+    @GetMapping("/provider") public ProviderSettings.View provider(HttpServletRequest req, HttpServletResponse res) {
+        return providers.view(owner(req, res));
+    }
+    @PostMapping("/provider") public ProviderSettings.View saveProvider(@RequestBody ProviderSettings.Input body, HttpServletRequest req, HttpServletResponse res) {
+        return providers.save(owner(req, res), body);
+    }
+    @DeleteMapping("/provider") public Map<String, Boolean> clearProvider(HttpServletRequest req, HttpServletResponse res) {
+        providers.clear(owner(req, res)); return Map.of("cleared", true);
+    }
+    @PostMapping("/provider/test") public Map<String, Object> testProvider(HttpServletRequest req, HttpServletResponse res) {
+        var credentials = providers.active(owner(req, res));
+        if (credentials == null) throw new IllegalArgumentException("请先保存并启用模型配置");
+        try { model.testConnection(credentials); return Map.of("ok", true, "message", "连接测试成功", "model", credentials.model()); }
+        catch (IllegalStateException e) { throw new IllegalArgumentException(e.getMessage()); }
+        catch (Exception e) { throw new IllegalArgumentException("连接测试失败或超时，请检查服务商配置"); }
     }
     @GetMapping("/projects") public List<Project> list(HttpServletRequest req, HttpServletResponse res) {
         return store.list(owner(req, res)).stream().map(this::publicProject).toList();
@@ -63,12 +83,13 @@ public class Api {
     }
     @PostMapping("/projects/{id}/runs") public Run run(@PathVariable String id, @RequestBody GenerateRequest body, HttpServletRequest req, HttpServletResponse res) {
         String owner = owner(req, res);
-        if (engine.mode().equals("live")) {
+        var credentials = providers.active(owner);
+        if (credentials == null && engine.mode().equals("live")) {
             String supplied = Objects.toString(req.getHeader("X-Live-Access"), "");
             if (accessToken.length() < 24 || !MessageDigest.isEqual(accessToken.getBytes(StandardCharsets.UTF_8), supplied.getBytes(StandardCharsets.UTF_8)))
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "真实模型调用需要工作台访问口令");
         }
-        return engine.submit(owner, id, body);
+        return engine.submit(owner, id, body, credentials);
     }
     @PostMapping("/projects/{id}/select/{runId}") public Project select(@PathVariable String id, @PathVariable String runId, HttpServletRequest req, HttpServletResponse res) {
         String owner = owner(req, res);
@@ -109,6 +130,7 @@ public class Api {
         return text.trim();
     }
     private String owner(HttpServletRequest req, HttpServletResponse res) {
+        res.setHeader("Cache-Control", "no-store");
         if (!req.getMethod().equals("GET")) {
             if (!"workbench".equals(req.getHeader("X-Requested-With")) || "cross-site".equals(req.getHeader("Sec-Fetch-Site")))
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "请求来源校验失败");

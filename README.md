@@ -14,6 +14,7 @@
 | 项目知识 | 文本/Markdown 资料导入；中文双字和关键词检索；段落来源；无匹配时明确提示 |
 | 汇报助手 | 从同一项目的有效记忆、资料、运行证据确定性生成 Markdown 汇报和演示提纲 |
 | 运行评测 | 查看耗时、尝试次数、模型模式、Token 和配置价格下的估算费用；导出 JSON；固定评测集 |
+| 模型配置 | 自填接口地址、模型名称与 API Key；按浏览器空间加密保存；连接测试、启停和清除 |
 
 项目记忆包含约束、决策和经验。同名更新会使旧记忆失效，旧版本仍可审计；支持停用。生成时可选择无记忆、最近三次需求或项目记忆检索。当前为词法检索，尚未实现向量检索、HMMEM 或自动提炼记忆。
 
@@ -47,11 +48,15 @@ Linux 的浏览器沙箱需要可用的用户命名空间及 Chromium 运行库�
 
 首次进入点击“创建我的项目”；添加一条约束；勾选“演示一次交互失败，再自动修复”；运行后在“过程”中查看失败截图与第二次验收。演示会确定性修复预设缺陷，**没有模拟真实模型推理质量**。
 
-## 后续接入 API
+## 填写自己的模型和 Key
 
-复制 `.env.example` 为服务器上的 `.env`，填写 `LLM_API_KEY`、HTTPS `LLM_BASE_URL`、`LLM_MODEL`、至少 24 字符的 `LIVE_ACCESS_TOKEN`，将 `WORKBENCH_MODE` 改为 `live`，再重启。启动脚本会加载 `.env`；直接 `java -jar` 时需要自行导出环境变量。
+打开侧栏 **模型配置**，填写服务商的 HTTPS Base URL、模型名称和 API Key，勾选启用后保存。无需修改服务器文件或重启。保存不会调用模型；“测试已保存配置”会发起一次少量 Token 的请求。留空 Key 可保留原值，清除配置会删除该空间保存的 Key。
 
-浏览器只输入工作台访问口令，模型密钥留在服务器。当前实现 OpenAI-compatible Chat Completions HTTP 接口，要求模型返回 `{"html":"..."}`。每次最多输出 4096 tokens；任务可设 0–3 次修复和保守 Token 预算。未返回用量的供应商不推算消耗；未配置价格不估算费用。真实供应商的兼容性、质量与账单仍需配置后验证。
+配置属于当前浏览器空间；服务端使用 AES-256-GCM 加密保存，接口仅返回掩码。接口域名使用允许列表，部署者可扩展 `PROVIDER_ALLOWED_HOSTS`。默认支持 DeepSeek、阿里云百炼、SiliconFlow、OpenAI 等兼容服务的域名，具体模型需要填写服务商提供的名称。清除 Cookie 后无法访问原空间；公网使用前应启用 HTTPS。
+
+当前实现 Chat Completions HTTP 接口，生成任务要求模型返回 `{"html":"..."}`。每次最多输出 4096 tokens；任务可设 0–3 次修复和保守 Token 预算。未返回用量的供应商不推算消耗；未配置价格不估算费用。真实供应商的兼容性、质量与账单仍需配置后验证。部署者也可选择配置服务器共享模型，见 [部署说明](docs/DEPLOYMENT.md)。
+
+![模型配置](docs/images/model-settings.png)
 
 ## 验证
 
@@ -59,6 +64,7 @@ Linux 的浏览器沙箱需要可用的用户命名空间及 Chromium 运行库�
 mvn -gs settings.xml -s settings.xml test
 cd qa
 node smoke.mjs
+node provider-smoke.mjs
 node evaluate.mjs
 # 真实 API 评测需显式 --live，并会产生费用：
 # LIVE_ACCESS_TOKEN=... node evaluate.mjs --live
@@ -70,8 +76,8 @@ node evaluate.mjs
 
 前端静态资源打包进 Spring Boot JAR，可在单台服务器的用户目录运行。部署脚本、独立运行环境目录与操作步骤见 [部署说明](docs/DEPLOYMENT.md)。当前针对个人工作台，没有微服务、容器编排或多实例数据库要求。
 
-## 项目来源与贡献范围
+## 关于项目
 
-这个项目由对 [yu-ai-code-mother](https://github.com/liyupi/yu-ai-code-mother) 的学习和改造需求发展而来。公开仓库是新写的独立工作台模块，不包含原仓库 Java/Vue 源码、课程材料、品牌资源或 Git 历史；原项目保留在本地作为参考。未将上游实现宣称为个人原创。
+Agent Workbench 是 [BStronger1](https://github.com/BStronger1) 开发的个人 AI 产品工作台，将应用工坊、项目知识、汇报和评测组织在同一项目空间中。
 
-新增实现：独立无密钥运行链路、项目记忆版本管理、带验收契约的有界修复、浏览器交互验证、同源隔离预览、来源检索、证据汇报、评测集与部署材料。开发使用 AI 辅助，简历与报告按实际测试结果描述。MIT 许可仅适用于本仓库新增代码，详见 [NOTICE](NOTICE.md)。
+项目采用 [MIT 许可](LICENSE)。依赖组件保留各自许可证，验证范围见 [项目说明](NOTICE.md)。
