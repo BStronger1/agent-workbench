@@ -1,0 +1,42 @@
+name: Verify workbench
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: |
+            web/package-lock.json
+            qa/package-lock.json
+      - run: npm ci --prefix web && npm run build --prefix web
+      - run: mkdir -p src/main/resources/static && cp -R web/dist/. src/main/resources/static/
+      - run: mvn -B -gs settings.xml -s settings.xml package
+      - run: npm ci --prefix qa && cd qa && npx playwright install --with-deps chromium
+      - name: End-to-end browser verification
+        run: |
+          export QA_COMMAND="[\"node\",\"$GITHUB_WORKSPACE/qa/worker.mjs\"]"
+          java -jar target/agent-workbench-0.1.0.jar > server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8123/api/workbench/config && break; sleep 1; done
+          cd qa && node smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verification-evidence
+          path: |
+            qa/test-results/
+            target/surefire-reports/
+            server.log

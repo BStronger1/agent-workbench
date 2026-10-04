@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: io.github.bstronger1.workbench.CoreTest
+-------------------------------------------------------------------------------
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.309 s -- in io.github.bstronger1.workbench.CoreTest

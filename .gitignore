@@ -1,0 +1,14 @@
+target/
+data/
+.env
+*.log
+web/node_modules/
+web/dist/
+qa/node_modules/
+qa/test-results/
+.tools/
+runtime/
+logs/
+run.pid
+app.jar
+src/main/resources/static/

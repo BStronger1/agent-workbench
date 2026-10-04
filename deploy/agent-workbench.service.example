@@ -1,0 +1,18 @@
+[Unit]
+Description=Agent Workbench
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/apps/agent-workbench
+EnvironmentFile=%h/apps/agent-workbench/.env
+Environment=WORKBENCH_DATA=%h/apps/agent-workbench/data
+ExecStart=%h/apps/agent-workbench/runtime/jre/bin/java -Xms128m -Xmx768m -jar %h/apps/agent-workbench/app.jar
+Restart=on-failure
+RestartSec=5
+UMask=0077
+
+[Install]
+WantedBy=default.target
+# For a user service, add QA_COMMAND, PATH and PLAYWRIGHT_BROWSERS_PATH to .env
+# using absolute paths. A working user systemd manager is required.

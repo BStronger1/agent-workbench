@@ -1,0 +1,2851 @@
+{
+  "timestamp": "2026-10-04T12:38:26.641Z",
+  "mode": "demo",
+  "scope": "Deterministic fixtures test workflow behavior, NOT model quality or memory effectiveness.",
+  "model": "deterministic-template-v1",
+  "summary": {
+    "count": 36,
+    "firstPass": 18,
+    "finalPass": 36,
+    "meanAttempts": 1.5,
+    "meanDurationMs": 4709.416666666667
+  },
+  "splits": {
+    "dev": {
+      "count": 24,
+      "firstPass": 12,
+      "finalPass": 24,
+      "meanAttempts": 1.5,
+      "meanDurationMs": 5064.333333333333
+    },
+    "test": {
+      "count": 12,
+      "firstPass": 6,
+      "finalPass": 12,
+      "meanAttempts": 1.5,
+      "meanDurationMs": 3999.5833333333335
+    }
+  },
+  "results": [
+    {
+      "caseId": "WB-001",
+      "split": "dev",
+      "strategy": "none",
+      "injectedFailure": true,
+      "id": "ff0e2a3c-a5b2-4b4d-84ee-4f9ad460c0dc",
+      "prompt": "制作一个研究任务看板，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:35:27.003119Z",
+      "completedAt": "2026-10-04T12:35:33.880236500Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 6873,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "研究任务",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:35:27.007112600Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:35:27.015115100Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:35:27.019113300Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:35:31.644199900Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:35:31.648213100Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:35:33.880236500Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个研究任务看板，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个研究任务看板，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>研究任务</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "ff0e2a3c-a5b2-4b4d-84ee-4f9ad460c0dc/attempt-0/screenshot.png",
+          "durationMs": 4624
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个研究任务看板，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个研究任务看板，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>研究任务</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "ff0e2a3c-a5b2-4b4d-84ee-4f9ad460c0dc/attempt-1/screenshot.png",
+          "durationMs": 2232
+        }
+      ]
+    },
+    {
+      "caseId": "WB-002",
+      "split": "dev",
+      "strategy": "window",
+      "injectedFailure": true,
+      "id": "4b821ff9-c905-46c5-8447-d7a7b404275a",
+      "prompt": "制作一个研究任务看板，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:35:34.233348500Z",
+      "completedAt": "2026-10-04T12:35:43.337338100Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 9098,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "研究任务",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "ff0e2a3c-a5b2-4b4d-84ee-4f9ad460c0dc",
+          "title": "近期需求",
+          "excerpt": "制作一个研究任务看板，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:35:34.238349100Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:35:34.242349200Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:35:34.249348200Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:35:38.721150500Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:35:38.729461700Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:35:43.337338100Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个研究任务看板，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个研究任务看板，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>研究任务</li><li>项目进度</li></ul><p>近期需求：制作一个研究任务看板，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "4b821ff9-c905-46c5-8447-d7a7b404275a/attempt-0/screenshot.png",
+          "durationMs": 4471
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个研究任务看板，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个研究任务看板，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>研究任务</li><li>项目进度</li></ul><p>近期需求：制作一个研究任务看板，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "4b821ff9-c905-46c5-8447-d7a7b404275a/attempt-1/screenshot.png",
+          "durationMs": 4608
+        }
+      ]
+    },
+    {
+      "caseId": "WB-003",
+      "split": "dev",
+      "strategy": "retrieval",
+      "injectedFailure": true,
+      "id": "31779693-af41-4364-9991-3fd4dc24a38d",
+      "prompt": "制作一个研究任务看板，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:35:43.731700900Z",
+      "completedAt": "2026-10-04T12:35:54.032858600Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 10290,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "研究任务",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2.0454545454545454
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:35:43.741701Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:35:43.754703400Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:35:43.767336100Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:35:50.941885400Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:35:50.948870400Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:35:54.032858600Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个研究任务看板，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个研究任务看板，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>研究任务</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "31779693-af41-4364-9991-3fd4dc24a38d/attempt-0/screenshot.png",
+          "durationMs": 7174
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个研究任务看板，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个研究任务看板，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>研究任务</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "31779693-af41-4364-9991-3fd4dc24a38d/attempt-1/screenshot.png",
+          "durationMs": 3083
+        }
+      ]
+    },
+    {
+      "caseId": "WB-004",
+      "split": "dev",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "3c9fed20-e0c0-4678-9b77-d3af04de4bd1",
+      "prompt": "制作一个阅读进度记录，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:35:54.229140800Z",
+      "completedAt": "2026-10-04T12:35:57.098916900Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 2863,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "阅读进度",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:35:54.236026900Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:35:54.242040Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:35:54.249814100Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:35:57.098916900Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个阅读进度记录，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个阅读进度记录，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>阅读进度</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "3c9fed20-e0c0-4678-9b77-d3af04de4bd1/attempt-0/screenshot.png",
+          "durationMs": 2849
+        }
+      ]
+    },
+    {
+      "caseId": "WB-005",
+      "split": "dev",
+      "strategy": "window",
+      "injectedFailure": false,
+      "id": "5108eb36-8dbe-4cbb-b2df-62be129784b8",
+      "prompt": "制作一个阅读进度记录，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:35:57.398695500Z",
+      "completedAt": "2026-10-04T12:35:59.898810900Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 2494,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "阅读进度",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "4b821ff9-c905-46c5-8447-d7a7b404275a",
+          "title": "近期需求",
+          "excerpt": "制作一个研究任务看板，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "31779693-af41-4364-9991-3fd4dc24a38d",
+          "title": "近期需求",
+          "excerpt": "制作一个研究任务看板，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "3c9fed20-e0c0-4678-9b77-d3af04de4bd1",
+          "title": "近期需求",
+          "excerpt": "制作一个阅读进度记录，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:35:57.404699300Z",
+          "stage": "memory",
+          "message": "已选取 3 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:35:57.411252Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:35:57.417251700Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:35:59.899814200Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个阅读进度记录，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个阅读进度记录，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>阅读进度</li><li>项目进度</li></ul><p>近期需求：制作一个研究任务看板，支持点击按钮更新完成数量。</p><p>近期需求：制作一个研究任务看板，支持点击按钮更新完成数量。</p><p>近期需求：制作一个阅读进度记录，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "5108eb36-8dbe-4cbb-b2df-62be129784b8/attempt-0/screenshot.png",
+          "durationMs": 2481
+        }
+      ]
+    },
+    {
+      "caseId": "WB-006",
+      "split": "dev",
+      "strategy": "retrieval",
+      "injectedFailure": false,
+      "id": "bc806499-a7ce-4796-b8f2-5d555aeffc49",
+      "prompt": "制作一个阅读进度记录，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:00.023756800Z",
+      "completedAt": "2026-10-04T12:36:02.827952400Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 2793,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "阅读进度",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2.090909090909091
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:00.034596300Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:36:00.040592800Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:00.048597500Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:02.827952400Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个阅读进度记录，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个阅读进度记录，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>阅读进度</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "bc806499-a7ce-4796-b8f2-5d555aeffc49/attempt-0/screenshot.png",
+          "durationMs": 2779
+        }
+      ]
+    },
+    {
+      "caseId": "WB-007",
+      "split": "dev",
+      "strategy": "none",
+      "injectedFailure": true,
+      "id": "1b6d838f-466a-491b-bebb-267b6b515bb3",
+      "prompt": "制作一个实验准备清单，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:03.213340700Z",
+      "completedAt": "2026-10-04T12:36:10.197369800Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 6978,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "实验准备",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:03.219384600Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:36:03.225082800Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:03.231548300Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:07.845312100Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:36:07.852309100Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:10.197369800Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个实验准备清单，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个实验准备清单，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>实验准备</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "1b6d838f-466a-491b-bebb-267b6b515bb3/attempt-0/screenshot.png",
+          "durationMs": 4614
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个实验准备清单，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个实验准备清单，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>实验准备</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "1b6d838f-466a-491b-bebb-267b6b515bb3/attempt-1/screenshot.png",
+          "durationMs": 2345
+        }
+      ]
+    },
+    {
+      "caseId": "WB-008",
+      "split": "dev",
+      "strategy": "window",
+      "injectedFailure": true,
+      "id": "3b38b868-a762-4703-9b30-3b04df921ed1",
+      "prompt": "制作一个实验准备清单，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:10.557927100Z",
+      "completedAt": "2026-10-04T12:36:18.979463600Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 8412,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "实验准备",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "5108eb36-8dbe-4cbb-b2df-62be129784b8",
+          "title": "近期需求",
+          "excerpt": "制作一个阅读进度记录，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "bc806499-a7ce-4796-b8f2-5d555aeffc49",
+          "title": "近期需求",
+          "excerpt": "制作一个阅读进度记录，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "1b6d838f-466a-491b-bebb-267b6b515bb3",
+          "title": "近期需求",
+          "excerpt": "制作一个实验准备清单，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:10.567927200Z",
+          "stage": "memory",
+          "message": "已选取 3 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:36:10.575929Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:10.586924900Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:16.121527200Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:36:16.133528800Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:18.979463600Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个实验准备清单，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个实验准备清单，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>实验准备</li><li>项目进度</li></ul><p>近期需求：制作一个阅读进度记录，支持点击按钮更新完成数量。</p><p>近期需求：制作一个阅读进度记录，支持点击按钮更新完成数量。</p><p>近期需求：制作一个实验准备清单，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "3b38b868-a762-4703-9b30-3b04df921ed1/attempt-0/screenshot.png",
+          "durationMs": 5535
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个实验准备清单，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个实验准备清单，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>实验准备</li><li>项目进度</li></ul><p>近期需求：制作一个阅读进度记录，支持点击按钮更新完成数量。</p><p>近期需求：制作一个阅读进度记录，支持点击按钮更新完成数量。</p><p>近期需求：制作一个实验准备清单，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "3b38b868-a762-4703-9b30-3b04df921ed1/attempt-1/screenshot.png",
+          "durationMs": 2846
+        }
+      ]
+    },
+    {
+      "caseId": "WB-009",
+      "split": "dev",
+      "strategy": "retrieval",
+      "injectedFailure": true,
+      "id": "9f6d275f-feb7-4074-a6b0-fc9e8fdf39e9",
+      "prompt": "制作一个实验准备清单，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:19.417303100Z",
+      "completedAt": "2026-10-04T12:36:26.241464100Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 6819,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "实验准备",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:19.422302400Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:36:19.426308200Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:19.431301Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:23.356498700Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:36:23.361501600Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:26.241464100Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个实验准备清单，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个实验准备清单，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>实验准备</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "9f6d275f-feb7-4074-a6b0-fc9e8fdf39e9/attempt-0/screenshot.png",
+          "durationMs": 3925
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个实验准备清单，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个实验准备清单，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>实验准备</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "9f6d275f-feb7-4074-a6b0-fc9e8fdf39e9/attempt-1/screenshot.png",
+          "durationMs": 2879
+        }
+      ]
+    },
+    {
+      "caseId": "WB-010",
+      "split": "dev",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "c43c22a1-3324-4b1d-ad14-8c9deff8840e",
+      "prompt": "制作一个项目里程碑，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:26.632998100Z",
+      "completedAt": "2026-10-04T12:36:28.618258200Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 1982,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "项目里程碑",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:26.635999400Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:36:26.638998900Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:26.640996900Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:28.618258200Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个项目里程碑，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个项目里程碑，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>项目里程碑</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "c43c22a1-3324-4b1d-ad14-8c9deff8840e/attempt-0/screenshot.png",
+          "durationMs": 1977
+        }
+      ]
+    },
+    {
+      "caseId": "WB-011",
+      "split": "dev",
+      "strategy": "window",
+      "injectedFailure": false,
+      "id": "bdd6af3e-bfbf-4423-a4a1-c7be6f379f8e",
+      "prompt": "制作一个项目里程碑，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:28.718317500Z",
+      "completedAt": "2026-10-04T12:36:30.846656700Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 2124,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "项目里程碑",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "3b38b868-a762-4703-9b30-3b04df921ed1",
+          "title": "近期需求",
+          "excerpt": "制作一个实验准备清单，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "9f6d275f-feb7-4074-a6b0-fc9e8fdf39e9",
+          "title": "近期需求",
+          "excerpt": "制作一个实验准备清单，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "c43c22a1-3324-4b1d-ad14-8c9deff8840e",
+          "title": "近期需求",
+          "excerpt": "制作一个项目里程碑，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:28.722318100Z",
+          "stage": "memory",
+          "message": "已选取 3 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:36:28.727314500Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:28.733312400Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:30.846656700Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个项目里程碑，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个项目里程碑，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>项目里程碑</li><li>项目进度</li></ul><p>近期需求：制作一个实验准备清单，支持点击按钮更新完成数量。</p><p>近期需求：制作一个实验准备清单，支持点击按钮更新完成数量。</p><p>近期需求：制作一个项目里程碑，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "bdd6af3e-bfbf-4423-a4a1-c7be6f379f8e/attempt-0/screenshot.png",
+          "durationMs": 2113
+        }
+      ]
+    },
+    {
+      "caseId": "WB-012",
+      "split": "dev",
+      "strategy": "retrieval",
+      "injectedFailure": false,
+      "id": "a2bd1886-7aa9-4ea9-b78e-90c33623b5b1",
+      "prompt": "制作一个项目里程碑，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:31.288219800Z",
+      "completedAt": "2026-10-04T12:36:33.318795600Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 2025,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "项目里程碑",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2.0476190476190474
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:31.293958500Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:36:31.298957600Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:31.302960100Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:33.318795600Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个项目里程碑，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个项目里程碑，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>项目里程碑</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "a2bd1886-7aa9-4ea9-b78e-90c33623b5b1/attempt-0/screenshot.png",
+          "durationMs": 2016
+        }
+      ]
+    },
+    {
+      "caseId": "WB-013",
+      "split": "dev",
+      "strategy": "none",
+      "injectedFailure": true,
+      "id": "c845b7a1-fbb0-43b8-9287-36dd37c5983c",
+      "prompt": "制作一个学习计划页面，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:33.366509500Z",
+      "completedAt": "2026-10-04T12:36:39.699939400Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 6329,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "学习计划",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:33.369650Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:36:33.373422400Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:33.379302Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:37.434790100Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:36:37.437327400Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:39.699939400Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个学习计划页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个学习计划页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>学习计划</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "c845b7a1-fbb0-43b8-9287-36dd37c5983c/attempt-0/screenshot.png",
+          "durationMs": 4055
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个学习计划页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个学习计划页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>学习计划</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "c845b7a1-fbb0-43b8-9287-36dd37c5983c/attempt-1/screenshot.png",
+          "durationMs": 2262
+        }
+      ]
+    },
+    {
+      "caseId": "WB-014",
+      "split": "dev",
+      "strategy": "window",
+      "injectedFailure": true,
+      "id": "1b5fc433-cdb1-47a2-b8fa-13bdcf738bc9",
+      "prompt": "制作一个学习计划页面，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:40.067095200Z",
+      "completedAt": "2026-10-04T12:36:45.760499100Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 5690,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "学习计划",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "bdd6af3e-bfbf-4423-a4a1-c7be6f379f8e",
+          "title": "近期需求",
+          "excerpt": "制作一个项目里程碑，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "a2bd1886-7aa9-4ea9-b78e-90c33623b5b1",
+          "title": "近期需求",
+          "excerpt": "制作一个项目里程碑，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "c845b7a1-fbb0-43b8-9287-36dd37c5983c",
+          "title": "近期需求",
+          "excerpt": "制作一个学习计划页面，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:40.070094900Z",
+          "stage": "memory",
+          "message": "已选取 3 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:36:40.074789400Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:40.080788300Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:44.097969100Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:36:44.100668Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:45.760499100Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个学习计划页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个学习计划页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>学习计划</li><li>项目进度</li></ul><p>近期需求：制作一个项目里程碑，支持点击按钮更新完成数量。</p><p>近期需求：制作一个项目里程碑，支持点击按钮更新完成数量。</p><p>近期需求：制作一个学习计划页面，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "1b5fc433-cdb1-47a2-b8fa-13bdcf738bc9/attempt-0/screenshot.png",
+          "durationMs": 4016
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个学习计划页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个学习计划页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>学习计划</li><li>项目进度</li></ul><p>近期需求：制作一个项目里程碑，支持点击按钮更新完成数量。</p><p>近期需求：制作一个项目里程碑，支持点击按钮更新完成数量。</p><p>近期需求：制作一个学习计划页面，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "1b5fc433-cdb1-47a2-b8fa-13bdcf738bc9/attempt-1/screenshot.png",
+          "durationMs": 1660
+        }
+      ]
+    },
+    {
+      "caseId": "WB-015",
+      "split": "dev",
+      "strategy": "retrieval",
+      "injectedFailure": true,
+      "id": "63da08e2-1f9b-4dea-9604-2ce11f01e495",
+      "prompt": "制作一个学习计划页面，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:46.253092700Z",
+      "completedAt": "2026-10-04T12:36:51.730215Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 5474,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "学习计划",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:46.256093800Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:36:46.261081500Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:46.267070900Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:50.017386400Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:36:50.019219100Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:51.730215Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个学习计划页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个学习计划页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>学习计划</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "63da08e2-1f9b-4dea-9604-2ce11f01e495/attempt-0/screenshot.png",
+          "durationMs": 3750
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个学习计划页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个学习计划页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>学习计划</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "63da08e2-1f9b-4dea-9604-2ce11f01e495/attempt-1/screenshot.png",
+          "durationMs": 1710
+        }
+      ]
+    },
+    {
+      "caseId": "WB-016",
+      "split": "dev",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "90bd22db-26ba-4ee4-927c-35f70de656fe",
+      "prompt": "制作一个文献收藏列表，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:51.916745200Z",
+      "completedAt": "2026-10-04T12:36:53.663938500Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 1744,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "文献收藏",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:51.919743900Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:36:51.924746500Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:51.929742Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:53.663938500Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个文献收藏列表，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个文献收藏列表，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>文献收藏</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "90bd22db-26ba-4ee4-927c-35f70de656fe/attempt-0/screenshot.png",
+          "durationMs": 1734
+        }
+      ]
+    },
+    {
+      "caseId": "WB-017",
+      "split": "dev",
+      "strategy": "window",
+      "injectedFailure": false,
+      "id": "76ee25cd-22a3-4bf5-b43d-f23bb4ae13bc",
+      "prompt": "制作一个文献收藏列表，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:54.006117800Z",
+      "completedAt": "2026-10-04T12:36:55.518897800Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 1510,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "文献收藏",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "1b5fc433-cdb1-47a2-b8fa-13bdcf738bc9",
+          "title": "近期需求",
+          "excerpt": "制作一个学习计划页面，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "63da08e2-1f9b-4dea-9604-2ce11f01e495",
+          "title": "近期需求",
+          "excerpt": "制作一个学习计划页面，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "90bd22db-26ba-4ee4-927c-35f70de656fe",
+          "title": "近期需求",
+          "excerpt": "制作一个文献收藏列表，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:54.009000500Z",
+          "stage": "memory",
+          "message": "已选取 3 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:36:54.014055300Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:54.018056800Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:55.518897800Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个文献收藏列表，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个文献收藏列表，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>文献收藏</li><li>项目进度</li></ul><p>近期需求：制作一个学习计划页面，支持点击按钮更新完成数量。</p><p>近期需求：制作一个学习计划页面，支持点击按钮更新完成数量。</p><p>近期需求：制作一个文献收藏列表，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "76ee25cd-22a3-4bf5-b43d-f23bb4ae13bc/attempt-0/screenshot.png",
+          "durationMs": 1501
+        }
+      ]
+    },
+    {
+      "caseId": "WB-018",
+      "split": "dev",
+      "strategy": "retrieval",
+      "injectedFailure": false,
+      "id": "042eeb4a-464e-462c-b6c3-29c72b10db8d",
+      "prompt": "制作一个文献收藏列表，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:55.562865Z",
+      "completedAt": "2026-10-04T12:36:57.876914800Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 2310,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "文献收藏",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:55.565863800Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:36:55.569548200Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:55.572552900Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:36:57.876914800Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个文献收藏列表，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个文献收藏列表，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>文献收藏</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "042eeb4a-464e-462c-b6c3-29c72b10db8d/attempt-0/screenshot.png",
+          "durationMs": 2303
+        }
+      ]
+    },
+    {
+      "caseId": "WB-019",
+      "split": "dev",
+      "strategy": "none",
+      "injectedFailure": true,
+      "id": "30653082-26e2-42ed-99d1-d173965aa4dc",
+      "prompt": "制作一个小组活动安排，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:36:58.172653200Z",
+      "completedAt": "2026-10-04T12:37:11.953573Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 13777,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "小组活动",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:36:58.175653Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:36:58.181651800Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:36:58.187428Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:01.982012400Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:37:01.984000500Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:11.953573Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个小组活动安排，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个小组活动安排，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>小组活动</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "30653082-26e2-42ed-99d1-d173965aa4dc/attempt-0/screenshot.png",
+          "durationMs": 3794
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个小组活动安排，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个小组活动安排，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>小组活动</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "30653082-26e2-42ed-99d1-d173965aa4dc/attempt-1/screenshot.png",
+          "durationMs": 9969
+        }
+      ]
+    },
+    {
+      "caseId": "WB-020",
+      "split": "dev",
+      "strategy": "window",
+      "injectedFailure": true,
+      "id": "38d87c73-b018-4746-ba38-b94b6cb27f83",
+      "prompt": "制作一个小组活动安排，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:37:12.066180800Z",
+      "completedAt": "2026-10-04T12:37:18.943014700Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 6871,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "小组活动",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "76ee25cd-22a3-4bf5-b43d-f23bb4ae13bc",
+          "title": "近期需求",
+          "excerpt": "制作一个文献收藏列表，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "042eeb4a-464e-462c-b6c3-29c72b10db8d",
+          "title": "近期需求",
+          "excerpt": "制作一个文献收藏列表，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "30653082-26e2-42ed-99d1-d173965aa4dc",
+          "title": "近期需求",
+          "excerpt": "制作一个小组活动安排，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:37:12.070651400Z",
+          "stage": "memory",
+          "message": "已选取 3 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:37:12.077677100Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:37:12.084484300Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:17.317186800Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:37:17.319187Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:18.943014700Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个小组活动安排，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个小组活动安排，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>小组活动</li><li>项目进度</li></ul><p>近期需求：制作一个文献收藏列表，支持点击按钮更新完成数量。</p><p>近期需求：制作一个文献收藏列表，支持点击按钮更新完成数量。</p><p>近期需求：制作一个小组活动安排，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "38d87c73-b018-4746-ba38-b94b6cb27f83/attempt-0/screenshot.png",
+          "durationMs": 5232
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个小组活动安排，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个小组活动安排，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>小组活动</li><li>项目进度</li></ul><p>近期需求：制作一个文献收藏列表，支持点击按钮更新完成数量。</p><p>近期需求：制作一个文献收藏列表，支持点击按钮更新完成数量。</p><p>近期需求：制作一个小组活动安排，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "38d87c73-b018-4746-ba38-b94b6cb27f83/attempt-1/screenshot.png",
+          "durationMs": 1624
+        }
+      ]
+    },
+    {
+      "caseId": "WB-021",
+      "split": "dev",
+      "strategy": "retrieval",
+      "injectedFailure": true,
+      "id": "a425f6b5-0e79-4759-b67f-01d6d9d0f244",
+      "prompt": "制作一个小组活动安排，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:37:19.294079300Z",
+      "completedAt": "2026-10-04T12:37:25.002347200Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 5705,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "小组活动",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:37:19.297078200Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:37:19.301077900Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:37:19.303082300Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:22.676900700Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:37:22.679902600Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:25.002347200Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个小组活动安排，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个小组活动安排，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>小组活动</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "a425f6b5-0e79-4759-b67f-01d6d9d0f244/attempt-0/screenshot.png",
+          "durationMs": 3374
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个小组活动安排，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个小组活动安排，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>小组活动</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "a425f6b5-0e79-4759-b67f-01d6d9d0f244/attempt-1/screenshot.png",
+          "durationMs": 2323
+        }
+      ]
+    },
+    {
+      "caseId": "WB-022",
+      "split": "dev",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "444a7244-45a3-4049-a471-925ec2abb7cf",
+      "prompt": "制作一个开发任务管理，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:37:25.519943500Z",
+      "completedAt": "2026-10-04T12:37:27.906506900Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 2381,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "开发任务",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:37:25.525173900Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:37:25.530714100Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:37:25.535713Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:27.906506900Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个开发任务管理，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个开发任务管理，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>开发任务</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "444a7244-45a3-4049-a471-925ec2abb7cf/attempt-0/screenshot.png",
+          "durationMs": 2371
+        }
+      ]
+    },
+    {
+      "caseId": "WB-023",
+      "split": "dev",
+      "strategy": "window",
+      "injectedFailure": false,
+      "id": "6e14e057-533e-4bc6-9ae6-85913a37b53b",
+      "prompt": "制作一个开发任务管理，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:37:28.123824700Z",
+      "completedAt": "2026-10-04T12:37:32.111048500Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 3982,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "开发任务",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "38d87c73-b018-4746-ba38-b94b6cb27f83",
+          "title": "近期需求",
+          "excerpt": "制作一个小组活动安排，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "a425f6b5-0e79-4759-b67f-01d6d9d0f244",
+          "title": "近期需求",
+          "excerpt": "制作一个小组活动安排，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "444a7244-45a3-4049-a471-925ec2abb7cf",
+          "title": "近期需求",
+          "excerpt": "制作一个开发任务管理，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:37:28.129808900Z",
+          "stage": "memory",
+          "message": "已选取 3 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:37:28.133820200Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:37:28.137809200Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:32.111048500Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个开发任务管理，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个开发任务管理，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>开发任务</li><li>项目进度</li></ul><p>近期需求：制作一个小组活动安排，支持点击按钮更新完成数量。</p><p>近期需求：制作一个小组活动安排，支持点击按钮更新完成数量。</p><p>近期需求：制作一个开发任务管理，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "6e14e057-533e-4bc6-9ae6-85913a37b53b/attempt-0/screenshot.png",
+          "durationMs": 3973
+        }
+      ]
+    },
+    {
+      "caseId": "WB-024",
+      "split": "dev",
+      "strategy": "retrieval",
+      "injectedFailure": false,
+      "id": "a34ee5cb-97f9-4993-b04c-010f9e3c5362",
+      "prompt": "制作一个开发任务管理，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:37:32.356347900Z",
+      "completedAt": "2026-10-04T12:37:35.388319900Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 3020,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "开发任务",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2.0454545454545454
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:37:32.367997900Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:37:32.377403300Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:37:32.385943500Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:35.388319900Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个开发任务管理，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个开发任务管理，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>开发任务</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "a34ee5cb-97f9-4993-b04c-010f9e3c5362/attempt-0/screenshot.png",
+          "durationMs": 3002
+        }
+      ]
+    },
+    {
+      "caseId": "WB-025",
+      "split": "test",
+      "strategy": "none",
+      "injectedFailure": true,
+      "id": "62975023-eff6-4b6b-91e6-7395ad45405d",
+      "prompt": "制作一个访谈进度页面，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:37:35.524679Z",
+      "completedAt": "2026-10-04T12:37:41.554719100Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 6025,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "访谈进度",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:37:35.529680800Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:37:35.533680700Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:37:35.536680500Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:39.366383500Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:37:39.371383800Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:41.554719100Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个访谈进度页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个访谈进度页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>访谈进度</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "62975023-eff6-4b6b-91e6-7395ad45405d/attempt-0/screenshot.png",
+          "durationMs": 3829
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个访谈进度页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个访谈进度页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>访谈进度</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "62975023-eff6-4b6b-91e6-7395ad45405d/attempt-1/screenshot.png",
+          "durationMs": 2183
+        }
+      ]
+    },
+    {
+      "caseId": "WB-026",
+      "split": "test",
+      "strategy": "window",
+      "injectedFailure": true,
+      "id": "daf8245e-1a88-4730-b889-6c7db6a2178a",
+      "prompt": "制作一个访谈进度页面，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:37:41.757581600Z",
+      "completedAt": "2026-10-04T12:37:48.039357100Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 6273,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "访谈进度",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "6e14e057-533e-4bc6-9ae6-85913a37b53b",
+          "title": "近期需求",
+          "excerpt": "制作一个开发任务管理，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "a34ee5cb-97f9-4993-b04c-010f9e3c5362",
+          "title": "近期需求",
+          "excerpt": "制作一个开发任务管理，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "62975023-eff6-4b6b-91e6-7395ad45405d",
+          "title": "近期需求",
+          "excerpt": "制作一个访谈进度页面，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:37:41.765846700Z",
+          "stage": "memory",
+          "message": "已选取 3 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:37:41.775381900Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:37:41.784380300Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:45.949613500Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:37:45.954631100Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:48.039357100Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个访谈进度页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个访谈进度页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>访谈进度</li><li>项目进度</li></ul><p>近期需求：制作一个开发任务管理，支持点击按钮更新完成数量。</p><p>近期需求：制作一个开发任务管理，支持点击按钮更新完成数量。</p><p>近期需求：制作一个访谈进度页面，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "daf8245e-1a88-4730-b889-6c7db6a2178a/attempt-0/screenshot.png",
+          "durationMs": 4165
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个访谈进度页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个访谈进度页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>访谈进度</li><li>项目进度</li></ul><p>近期需求：制作一个开发任务管理，支持点击按钮更新完成数量。</p><p>近期需求：制作一个开发任务管理，支持点击按钮更新完成数量。</p><p>近期需求：制作一个访谈进度页面，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "daf8245e-1a88-4730-b889-6c7db6a2178a/attempt-1/screenshot.png",
+          "durationMs": 2084
+        }
+      ]
+    },
+    {
+      "caseId": "WB-027",
+      "split": "test",
+      "strategy": "retrieval",
+      "injectedFailure": true,
+      "id": "70772f18-17e4-48c1-95fb-c5d2fe0cf0ea",
+      "prompt": "制作一个访谈进度页面，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:37:48.550642700Z",
+      "completedAt": "2026-10-04T12:37:55.667614800Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 7112,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "访谈进度",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2.0454545454545454
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:37:48.555301500Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:37:48.560394Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:37:48.564295100Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:52.723243800Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:37:52.744253900Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:55.667614800Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个访谈进度页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个访谈进度页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>访谈进度</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "70772f18-17e4-48c1-95fb-c5d2fe0cf0ea/attempt-0/screenshot.png",
+          "durationMs": 4159
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个访谈进度页面，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个访谈进度页面，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>访谈进度</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "70772f18-17e4-48c1-95fb-c5d2fe0cf0ea/attempt-1/screenshot.png",
+          "durationMs": 2922
+        }
+      ]
+    },
+    {
+      "caseId": "WB-028",
+      "split": "test",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "88397c6d-d739-49a1-a628-663c5bdff89d",
+      "prompt": "制作一个数据标注记录，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:37:55.883442100Z",
+      "completedAt": "2026-10-04T12:37:58.335140200Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 2444,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "数据标注",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:37:55.891447400Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:37:55.912455600Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:37:55.919444100Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:37:58.335140200Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个数据标注记录，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个数据标注记录，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>数据标注</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "88397c6d-d739-49a1-a628-663c5bdff89d/attempt-0/screenshot.png",
+          "durationMs": 2416
+        }
+      ]
+    },
+    {
+      "caseId": "WB-029",
+      "split": "test",
+      "strategy": "window",
+      "injectedFailure": false,
+      "id": "b91fdbd2-f48d-4db4-bda5-0f9d9dbf5ee5",
+      "prompt": "制作一个数据标注记录，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:37:58.537844Z",
+      "completedAt": "2026-10-04T12:38:01.116887800Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 2572,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "数据标注",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "daf8245e-1a88-4730-b889-6c7db6a2178a",
+          "title": "近期需求",
+          "excerpt": "制作一个访谈进度页面，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "70772f18-17e4-48c1-95fb-c5d2fe0cf0ea",
+          "title": "近期需求",
+          "excerpt": "制作一个访谈进度页面，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "88397c6d-d739-49a1-a628-663c5bdff89d",
+          "title": "近期需求",
+          "excerpt": "制作一个数据标注记录，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:37:58.544845800Z",
+          "stage": "memory",
+          "message": "已选取 3 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:37:58.550846Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:37:58.557846200Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:38:01.116887800Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个数据标注记录，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个数据标注记录，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>数据标注</li><li>项目进度</li></ul><p>近期需求：制作一个访谈进度页面，支持点击按钮更新完成数量。</p><p>近期需求：制作一个访谈进度页面，支持点击按钮更新完成数量。</p><p>近期需求：制作一个数据标注记录，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "b91fdbd2-f48d-4db4-bda5-0f9d9dbf5ee5/attempt-0/screenshot.png",
+          "durationMs": 2558
+        }
+      ]
+    },
+    {
+      "caseId": "WB-030",
+      "split": "test",
+      "strategy": "retrieval",
+      "injectedFailure": false,
+      "id": "86bf5775-b43a-48e1-b789-eac5d78d1519",
+      "prompt": "制作一个数据标注记录，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:38:01.171840300Z",
+      "completedAt": "2026-10-04T12:38:03.101231200Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 1923,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "数据标注",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2.0454545454545454
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:38:01.178378200Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:38:01.183365500Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:38:01.190364500Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:38:03.101231200Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个数据标注记录，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个数据标注记录，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>数据标注</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "86bf5775-b43a-48e1-b789-eac5d78d1519/attempt-0/screenshot.png",
+          "durationMs": 1910
+        }
+      ]
+    },
+    {
+      "caseId": "WB-031",
+      "split": "test",
+      "strategy": "none",
+      "injectedFailure": true,
+      "id": "14d66257-6ab2-4614-a713-b669ebaa41eb",
+      "prompt": "制作一个会议行动项，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:38:03.261233700Z",
+      "completedAt": "2026-10-04T12:38:08.259967800Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 4994,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "会议行动",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:38:03.265389500Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:38:03.268915Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:38:03.272915400Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:38:06.841659600Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:38:06.844913900Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:38:08.259967800Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个会议行动项，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个会议行动项，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>会议行动</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "14d66257-6ab2-4614-a713-b669ebaa41eb/attempt-0/screenshot.png",
+          "durationMs": 3568
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个会议行动项，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个会议行动项，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>会议行动</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "14d66257-6ab2-4614-a713-b669ebaa41eb/attempt-1/screenshot.png",
+          "durationMs": 1414
+        }
+      ]
+    },
+    {
+      "caseId": "WB-032",
+      "split": "test",
+      "strategy": "window",
+      "injectedFailure": true,
+      "id": "82ed0cfd-9af2-4319-ad7d-8cf4ee133c46",
+      "prompt": "制作一个会议行动项，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:38:08.434568600Z",
+      "completedAt": "2026-10-04T12:38:13.764851200Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 5325,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "会议行动",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "b91fdbd2-f48d-4db4-bda5-0f9d9dbf5ee5",
+          "title": "近期需求",
+          "excerpt": "制作一个数据标注记录，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "86bf5775-b43a-48e1-b789-eac5d78d1519",
+          "title": "近期需求",
+          "excerpt": "制作一个数据标注记录，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "14d66257-6ab2-4614-a713-b669ebaa41eb",
+          "title": "近期需求",
+          "excerpt": "制作一个会议行动项，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:38:08.439567900Z",
+          "stage": "memory",
+          "message": "已选取 3 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:38:08.444565200Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:38:08.451398900Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:38:12.078013600Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:38:12.083014100Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:38:13.764851200Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个会议行动项，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个会议行动项，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>会议行动</li><li>项目进度</li></ul><p>近期需求：制作一个数据标注记录，支持点击按钮更新完成数量。</p><p>近期需求：制作一个数据标注记录，支持点击按钮更新完成数量。</p><p>近期需求：制作一个会议行动项，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "82ed0cfd-9af2-4319-ad7d-8cf4ee133c46/attempt-0/screenshot.png",
+          "durationMs": 3626
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个会议行动项，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个会议行动项，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>会议行动</li><li>项目进度</li></ul><p>近期需求：制作一个数据标注记录，支持点击按钮更新完成数量。</p><p>近期需求：制作一个数据标注记录，支持点击按钮更新完成数量。</p><p>近期需求：制作一个会议行动项，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "82ed0cfd-9af2-4319-ad7d-8cf4ee133c46/attempt-1/screenshot.png",
+          "durationMs": 1681
+        }
+      ]
+    },
+    {
+      "caseId": "WB-033",
+      "split": "test",
+      "strategy": "retrieval",
+      "injectedFailure": true,
+      "id": "12686ca8-3ee9-4594-a79e-3ed7b9270612",
+      "prompt": "制作一个会议行动项，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:38:14.135710200Z",
+      "completedAt": "2026-10-04T12:38:19.827606Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 5684,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "会议行动",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:38:14.143708600Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:38:14.151709800Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:38:14.158708700Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:38:17.957698600Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-04T12:38:17.962552200Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:38:19.827606Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个会议行动项，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个会议行动项，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>会议行动</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p></main></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "12686ca8-3ee9-4594-a79e-3ed7b9270612/attempt-0/screenshot.png",
+          "durationMs": 3798
+        },
+        {
+          "number": 1,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个会议行动项，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个会议行动项，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>会议行动</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "12686ca8-3ee9-4594-a79e-3ed7b9270612/attempt-1/screenshot.png",
+          "durationMs": 1866
+        }
+      ]
+    },
+    {
+      "caseId": "WB-034",
+      "split": "test",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "717db83e-a919-4a12-a205-58949aea4369",
+      "prompt": "制作一个设备检查清单，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:38:20.342619100Z",
+      "completedAt": "2026-10-04T12:38:22.027767800Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 1680,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "设备检查",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-04T12:38:20.347619800Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-04T12:38:20.353622600Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:38:20.361741Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:38:22.027767800Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个设备检查清单，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个设备检查清单，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>设备检查</li><li>项目进度</li></ul></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "717db83e-a919-4a12-a205-58949aea4369/attempt-0/screenshot.png",
+          "durationMs": 1666
+        }
+      ]
+    },
+    {
+      "caseId": "WB-035",
+      "split": "test",
+      "strategy": "window",
+      "injectedFailure": false,
+      "id": "5bbfb67d-8b21-49be-9593-e0dff23bdd16",
+      "prompt": "制作一个设备检查清单，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "window",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:38:22.429191400Z",
+      "completedAt": "2026-10-04T12:38:24.315843300Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 1880,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "设备检查",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "82ed0cfd-9af2-4319-ad7d-8cf4ee133c46",
+          "title": "近期需求",
+          "excerpt": "制作一个会议行动项，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "12686ca8-3ee9-4594-a79e-3ed7b9270612",
+          "title": "近期需求",
+          "excerpt": "制作一个会议行动项，支持点击按钮更新完成数量。",
+          "score": 1
+        },
+        {
+          "id": "717db83e-a919-4a12-a205-58949aea4369",
+          "title": "近期需求",
+          "excerpt": "制作一个设备检查清单，支持点击按钮更新完成数量。",
+          "score": 1
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:38:22.435192Z",
+          "stage": "memory",
+          "message": "已选取 3 条来源（window）"
+        },
+        {
+          "at": "2026-10-04T12:38:22.440194800Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:38:22.445192500Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:38:24.315843300Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个设备检查清单，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个设备检查清单，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>设备检查</li><li>项目进度</li></ul><p>近期需求：制作一个会议行动项，支持点击按钮更新完成数量。</p><p>近期需求：制作一个会议行动项，支持点击按钮更新完成数量。</p><p>近期需求：制作一个设备检查清单，支持点击按钮更新完成数量。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "5bbfb67d-8b21-49be-9593-e0dff23bdd16/attempt-0/screenshot.png",
+          "durationMs": 1870
+        }
+      ]
+    },
+    {
+      "caseId": "WB-036",
+      "split": "test",
+      "strategy": "retrieval",
+      "injectedFailure": false,
+      "id": "0feb688b-2d92-4657-84fc-99bb94e567fb",
+      "prompt": "制作一个设备检查清单，支持点击按钮更新完成数量。",
+      "mode": "demo",
+      "model": "deterministic-template-v1",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-04T12:38:24.533084500Z",
+      "completedAt": "2026-10-04T12:38:26.624493700Z",
+      "error": null,
+      "maxRepairs": 2,
+      "tokenBudget": 24000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "usageKnown": true,
+      "durationMs": 2083,
+      "estimatedCost": 0,
+      "requiredTexts": [
+        "设备检查",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "8faca7f5-04e9-49be-8089-a1106c7f8786",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-04T12:38:24.541242400Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-04T12:38:24.550051200Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-04T12:38:24.558224700Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-04T12:38:26.624493700Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>制作一个设备检查清单，支持点击按钮更新完成数量。</title><style>body{font-family:system-ui;margin:0;background:#f5f3ed;color:#153632}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#56736d}h1{font-size:38px}button{background:#145c4d;color:white;border:0;border-radius:12px;padding:16px 24px;cursor:pointer}article{background:white;border-radius:20px;padding:24px;margin:24px 0}li{margin:10px 0}</style></head><body><main><small>AGENT WORKBENCH · 固定模板演示 / 非模型生成</small><h1>制作一个设备检查清单，支持点击按钮更新完成数量。</h1><article><h2>项目需求</h2><ul><li>设备检查</li><li>项目进度</li></ul><p>constraint · 项目约束：使用中文标题，保留项目进度与任务记录。</p></article><button data-testid='primary-action'>完成一项任务</button><p data-testid='result'>已完成 0 项</p><script>let n=0;document.querySelector('button').onclick=()=>{document.querySelector('[data-testid=result]').textContent='已完成 '+(++n)+' 项'};</script></main></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "0feb688b-2d92-4657-84fc-99bb94e567fb/attempt-0/screenshot.png",
+          "durationMs": 2066
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,398 @@
+[
+  {
+    "id": "WB-001",
+    "split": "dev",
+    "prompt": "制作一个研究任务看板，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "研究任务",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-002",
+    "split": "dev",
+    "prompt": "制作一个研究任务看板，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "研究任务",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-003",
+    "split": "dev",
+    "prompt": "制作一个研究任务看板，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "研究任务",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-004",
+    "split": "dev",
+    "prompt": "制作一个阅读进度记录，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "阅读进度",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-005",
+    "split": "dev",
+    "prompt": "制作一个阅读进度记录，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "阅读进度",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-006",
+    "split": "dev",
+    "prompt": "制作一个阅读进度记录，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "阅读进度",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-007",
+    "split": "dev",
+    "prompt": "制作一个实验准备清单，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "实验准备",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-008",
+    "split": "dev",
+    "prompt": "制作一个实验准备清单，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "实验准备",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-009",
+    "split": "dev",
+    "prompt": "制作一个实验准备清单，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "实验准备",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-010",
+    "split": "dev",
+    "prompt": "制作一个项目里程碑，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "项目里程碑",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-011",
+    "split": "dev",
+    "prompt": "制作一个项目里程碑，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "项目里程碑",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-012",
+    "split": "dev",
+    "prompt": "制作一个项目里程碑，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "项目里程碑",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-013",
+    "split": "dev",
+    "prompt": "制作一个学习计划页面，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "学习计划",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-014",
+    "split": "dev",
+    "prompt": "制作一个学习计划页面，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "学习计划",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-015",
+    "split": "dev",
+    "prompt": "制作一个学习计划页面，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "学习计划",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-016",
+    "split": "dev",
+    "prompt": "制作一个文献收藏列表，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "文献收藏",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-017",
+    "split": "dev",
+    "prompt": "制作一个文献收藏列表，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "文献收藏",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-018",
+    "split": "dev",
+    "prompt": "制作一个文献收藏列表，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "文献收藏",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-019",
+    "split": "dev",
+    "prompt": "制作一个小组活动安排，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "小组活动",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-020",
+    "split": "dev",
+    "prompt": "制作一个小组活动安排，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "小组活动",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-021",
+    "split": "dev",
+    "prompt": "制作一个小组活动安排，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "小组活动",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-022",
+    "split": "dev",
+    "prompt": "制作一个开发任务管理，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "开发任务",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-023",
+    "split": "dev",
+    "prompt": "制作一个开发任务管理，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "开发任务",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-024",
+    "split": "dev",
+    "prompt": "制作一个开发任务管理，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "开发任务",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-025",
+    "split": "test",
+    "prompt": "制作一个访谈进度页面，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "访谈进度",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-026",
+    "split": "test",
+    "prompt": "制作一个访谈进度页面，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "访谈进度",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-027",
+    "split": "test",
+    "prompt": "制作一个访谈进度页面，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "访谈进度",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-028",
+    "split": "test",
+    "prompt": "制作一个数据标注记录，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "数据标注",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-029",
+    "split": "test",
+    "prompt": "制作一个数据标注记录，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "数据标注",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-030",
+    "split": "test",
+    "prompt": "制作一个数据标注记录，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "数据标注",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-031",
+    "split": "test",
+    "prompt": "制作一个会议行动项，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "会议行动",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-032",
+    "split": "test",
+    "prompt": "制作一个会议行动项，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "会议行动",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-033",
+    "split": "test",
+    "prompt": "制作一个会议行动项，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "会议行动",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": true
+  },
+  {
+    "id": "WB-034",
+    "split": "test",
+    "prompt": "制作一个设备检查清单，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "设备检查",
+      "项目进度"
+    ],
+    "memoryStrategy": "none",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-035",
+    "split": "test",
+    "prompt": "制作一个设备检查清单，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "设备检查",
+      "项目进度"
+    ],
+    "memoryStrategy": "window",
+    "injectFailure": false
+  },
+  {
+    "id": "WB-036",
+    "split": "test",
+    "prompt": "制作一个设备检查清单，支持点击按钮更新完成数量。",
+    "requiredTexts": [
+      "设备检查",
+      "项目进度"
+    ],
+    "memoryStrategy": "retrieval",
+    "injectFailure": false
+  }
+]
