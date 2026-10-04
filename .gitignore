@@ -1,6 +1,7 @@
 target/
 data/
 .env
+tls/
 *.log
 web/node_modules/
 web/dist/

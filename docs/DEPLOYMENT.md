@@ -38,6 +38,8 @@ curl -f http://127.0.0.1:18123/api/workbench/config
 
 ## API 配置
 
+没有域名的内网部署可按 [内网 HTTPS](HTTPS.md) 配置专用证书。访问设备需要导入该证书后才能获得无警告的连接。
+
 默认保持 `WORKBENCH_MODE=demo`，用户在网页侧栏“模型配置”自行填写 Base URL、模型名和 Key，保存并启用后即可生成，不需要重启。保存本身不调用模型；可点击“测试已保存配置”进行一次少量 Token 的连接测试。模型需要兼容 Chat Completions 接口。
 
 配置按浏览器空间保存在 `data/providers`，AES-256-GCM 主密钥位于 `.master-key`，Linux 权限为目录 700、文件 600。必须将该目录和主密钥一同备份，不能只复制密文。API 不回传完整 Key。清除 Cookie 会失去原空间访问凭据，当前没有账户找回功能。

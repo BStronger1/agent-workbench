@@ -28,6 +28,19 @@ class ProviderSettingsTest {
     ProviderSettings.Input input(boolean enabled, String secret) {
         return new ProviderSettings.Input(enabled, "https://api.deepseek.com/v1", "my-model", secret, 2.0, 8.0);
     }
+    @Test void httpsUpgradesExistingCookieWithoutLosingWorkspace() throws Exception {
+        String token="c".repeat(64);
+        String owner=java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(token.getBytes(StandardCharsets.UTF_8)));
+        var project=store.create(owner,"existing workspace");
+        var api=new Api(store,new MemoryService(),mock(WorkflowEngine.class),mock(ArtifactValidator.class),mock(GenerationModel.class),"",settings);
+        var request=new org.springframework.mock.web.MockHttpServletRequest("GET","/api/workbench/projects");
+        request.setSecure(true);request.setCookies(new jakarta.servlet.http.Cookie("wb_owner",token));
+        var response=new org.springframework.mock.web.MockHttpServletResponse();
+        assertEquals(project.id,api.list(request,response).getFirst().id);
+        String cookie=response.getHeader("Set-Cookie");
+        assertNotNull(cookie);assertTrue(cookie.contains("wb_owner="+token));
+        assertTrue(cookie.contains("Secure"));assertTrue(cookie.contains("HttpOnly"));assertTrue(cookie.contains("SameSite=Lax"));
+    }
     @Test void encryptedAtRestAndApiViewNeverIncludesKey() throws Exception {
         var view = settings.save(alice, input(true, key));
         assertEquals("••••••••5678", view.keyMask());

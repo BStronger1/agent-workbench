@@ -2,7 +2,8 @@ import { chromium } from "playwright";
 import { mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
 const base = process.env.BASE_URL ?? "http://127.0.0.1:8123";
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({ headless: true,
+  args: process.env.TEST_TLS_SPKI ? [`--ignore-certificate-errors-spki-list=${process.env.TEST_TLS_SPKI}`] : [] });
 const context = await browser.newContext({
   viewport: { width: 1440, height: 1080 },
 });

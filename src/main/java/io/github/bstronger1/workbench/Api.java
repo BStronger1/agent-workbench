@@ -137,8 +137,12 @@ public class Api {
         }
         String token = null;
         if (req.getCookies() != null) for (Cookie c : req.getCookies()) if (c.getName().equals("wb_owner") && c.getValue().matches("[a-f0-9]{64}")) token = c.getValue();
-        if (token == null) {
+        boolean newOwner = token == null;
+        if (newOwner) {
             token = UUID.randomUUID().toString().replace("-", "") + UUID.randomUUID().toString().replace("-", "");
+        }
+        // Preserve existing workspaces while upgrading their cookie after enabling HTTPS.
+        if (newOwner || req.isSecure()) {
             res.addHeader("Set-Cookie", ResponseCookie.from("wb_owner", token).path("/").httpOnly(true).sameSite("Lax").secure(req.isSecure()).maxAge(31536000).build().toString());
         }
         try { return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(token.getBytes(StandardCharsets.UTF_8))); }

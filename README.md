@@ -74,6 +74,8 @@ node evaluate.mjs
 
 ## 部署
 
+支持固定内网 IP 的 HTTPS，服务器配置与客户端证书信任步骤见 [内网 HTTPS](docs/HTTPS.md)。
+
 前端静态资源打包进 Spring Boot JAR，可在单台服务器的用户目录运行。部署脚本、独立运行环境目录与操作步骤见 [部署说明](docs/DEPLOYMENT.md)。当前针对个人工作台，没有微服务、容器编排或多实例数据库要求。
 
 ## 关于项目
