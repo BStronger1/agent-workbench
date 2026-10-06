@@ -41,5 +41,11 @@ test("summary separates repair and missing usage", () => {
   assert.equal(result.outputTokens, 40);
   rows[0].usageKnown = false;
   assert.equal(evaluationSummary(rows).outputTokens, null);
+  rows[0].usageKnown = true;
+  rows[0].status = "FAILED";
+  rows[0].attempts = [rows[0].attempts[0]];
+  rows[0].events = [{stage:"repair"}];
+  assert.equal(evaluationSummary(rows).repairAttempted, 1);
+  assert.equal(evaluationSummary(rows).outputTokens, null);
   assert.equal(evaluationSummary([]).meanDurationMs, null);
 });
