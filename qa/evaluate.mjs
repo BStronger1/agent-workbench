@@ -1,5 +1,6 @@
 import { request } from "playwright";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
+import { requireEvaluationMode } from "./eval-policy.mjs";
 const base = process.env.BASE_URL ?? "http://127.0.0.1:8123";
 const context = await request.newContext({
   baseURL: base,
@@ -11,12 +12,7 @@ const context = await request.newContext({
   },
 });
 const config = await (await context.get("/api/workbench/config")).json();
-if (config.mode === "live" && !process.argv.includes("--live"))
-  throw Error(
-    "Live evaluation requires explicit --live and consumes configured API budget.",
-  );
-if (!config.browserValidation)
-  throw Error("Browser validation must be configured for this evaluation.");
+requireEvaluationMode(config, process.argv.includes("--live"));
 const fixtures = JSON.parse(
   await readFile(new URL("./fixtures.json", import.meta.url), "utf8"),
 );

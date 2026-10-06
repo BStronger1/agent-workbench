@@ -2,6 +2,8 @@
 
 个人 AI 工作台：把项目记忆、应用生成、浏览器验收与开发汇报连接起来。
 
+核心 AI 链路：需求与记忆上下文 → Chat Completions 模型调用 → HTML 结构与浏览器验收 → 将错误和上一版代码反馈给模型。支持最多 3 次修复、三种上下文策略、Token 预算与运行证据。
+
 **状态：可运行的无密钥演示版；真实模型接口已实现，尚未使用真实 API 验证。** 演示生成采用固定模板，浏览器验收、状态持久化、记忆检索和资料检索实际执行。演示成功率不是模型效果指标。
 
 ![工作台界面](docs/images/desktop.png)
@@ -69,6 +71,8 @@ node evaluate.mjs
 # 真实 API 评测需显式 --live，并会产生费用：
 # LIVE_ACCESS_TOKEN=... node evaluate.mjs --live
 ```
+
+小规模真实测试使用 `node live-smoke.mjs --live`，默认 6 个任务，每个任务最多修复 1 次，支持临时个人模型配置；详细步骤见 [真实模型测试](docs/LIVE-EVALUATION.md)。任何真实测试入口在演示模式下都会停止，不能将演示结果标为真实模型验证。
 
 见 [验证记录](docs/EVALUATION.md)、[演示评测原始数据](evidence/evaluation-demo.json) 和 [架构与边界](docs/ARCHITECTURE.md)。CI 会构建前后端、运行单元测试和浏览器端到端测试。
 
