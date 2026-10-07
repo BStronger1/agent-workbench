@@ -24,7 +24,11 @@ public final class Domain {
     public record Source(String id, String title, String excerpt, double score) {}
     public static class Run {
         public String id = id(), prompt, mode, model, memoryStrategy, status = "QUEUED", createdAt = now(), completedAt, error;
-        public int maxRepairs, tokenBudget, inputTokens, outputTokens;
+        public int maxRepairs, tokenBudget, inputTokens, outputTokens, calls;
+        public String workflow = "legacy", contractHash;
+        public boolean pauseAfterPlan, resumable;
+        public List<Step> steps = new ArrayList<>();
+        public java.util.Map<String,Object> plan = new java.util.LinkedHashMap<>();
         public boolean usageKnown = true;
         public long durationMs;
         public Double estimatedCost;
@@ -36,7 +40,12 @@ public final class Domain {
     }
     public record Event(String at, String stage, String message) {}
     public record Attempt(int number, String html, List<String> errors, String browserStatus, String screenshot, long durationMs) {}
+    public record Step(String action, String target, String value) {}
     public record GenerateRequest(String prompt, Integer maxRepairs, Integer tokenBudget,
-                                  List<String> requiredTexts, Boolean checkInteraction, String memoryStrategy, Boolean demoFailure) {}
+                                  List<String> requiredTexts, Boolean checkInteraction, String memoryStrategy, Boolean demoFailure, String workflow, List<Step> steps, Boolean pauseAfterPlan) {
+        public GenerateRequest(String prompt, Integer maxRepairs, Integer tokenBudget, List<String> requiredTexts, Boolean checkInteraction, String memoryStrategy, Boolean demoFailure) {
+            this(prompt,maxRepairs,tokenBudget,requiredTexts,checkInteraction,memoryStrategy,demoFailure,"legacy",List.of(),false);
+        }
+    }
     public record ModelReply(String html, int inputTokens, int outputTokens, boolean usageKnown) {}
 }

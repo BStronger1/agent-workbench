@@ -13,3 +13,8 @@ logs/
 run.pid
 app.jar
 src/main/resources/static/
+
+ai.pid
+__pycache__/
+.pytest_cache/
+*.pyc

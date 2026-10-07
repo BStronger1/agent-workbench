@@ -1,0 +1,115 @@
+{
+  "scope": "Six authored Chinese retrieval fixtures; real local ONNX embeddings; not held out, no LLM calls. Database isolation is tested separately in PostgreSQL integration tests.",
+  "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "dimensions": 384,
+  "results": [
+    {
+      "query": "最多可以花多少钱",
+      "expected": "budget",
+      "hybrid": [],
+      "lexical": [],
+      "cosine": {
+        "budget": 0.41529335579059384,
+        "style": 0.040116720270551964,
+        "checklist": 0.03509183407115086,
+        "security": -0.14983567160743388,
+        "key": -0.06882447063336804,
+        "qa": -0.05135338292529395
+      }
+    },
+    {
+      "query": "界面应该采用什么颜色",
+      "expected": "style",
+      "hybrid": [
+        "style"
+      ],
+      "lexical": [],
+      "cosine": {
+        "budget": -0.06580220780257234,
+        "style": 0.51733578203963,
+        "checklist": 0.11275836053826993,
+        "security": 0.06250124445004175,
+        "key": 0.1112682551643861,
+        "qa": 0.12787423046062335
+      }
+    },
+    {
+      "query": "提交清单之前要做什么",
+      "expected": "checklist",
+      "hybrid": [
+        "checklist"
+      ],
+      "lexical": [
+        "checklist"
+      ],
+      "cosine": {
+        "budget": 0.15039710170016404,
+        "style": 0.1313158107892938,
+        "checklist": 0.5070931728216678,
+        "security": 0.04909540791603109,
+        "key": -0.04527252773319431,
+        "qa": 0.27866964269686867
+      }
+    },
+    {
+      "query": "能否加载互联网上的代码",
+      "expected": "security",
+      "hybrid": [
+        "security"
+      ],
+      "lexical": [
+        "security"
+      ],
+      "cosine": {
+        "budget": 0.05994549298607361,
+        "style": 0.24149715087346718,
+        "checklist": 0.26189659139257127,
+        "security": 0.32352482732791293,
+        "key": 0.30942123819647976,
+        "qa": 0.2760536167310079
+      }
+    },
+    {
+      "query": "用户的访问凭据如何保护",
+      "expected": "key",
+      "hybrid": [
+        "key"
+      ],
+      "lexical": [],
+      "cosine": {
+        "budget": -0.030892504297041372,
+        "style": 0.10588191842378698,
+        "checklist": 0.103625085788041,
+        "security": 0.3788658521835687,
+        "key": 0.4550359439415209,
+        "qa": 0.25900709823445295
+      }
+    },
+    {
+      "query": "怎样验证生成的网页能够使用",
+      "expected": "qa",
+      "hybrid": [
+        "security",
+        "qa",
+        "style",
+        "checklist",
+        "key"
+      ],
+      "lexical": [
+        "security",
+        "style",
+        "key"
+      ],
+      "cosine": {
+        "budget": 0.006407560887844656,
+        "style": 0.36705959625606777,
+        "checklist": 0.45439285521871714,
+        "security": 0.45768725436084307,
+        "key": 0.236952466147794,
+        "qa": 0.5401895288186067
+      }
+    }
+  ],
+  "hybridRecallAt3": 0.8333333333333334,
+  "lexicalRecallAt3": 0.3333333333333333
+}

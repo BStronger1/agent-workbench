@@ -20,6 +20,7 @@ public class Api {
     private final ArtifactValidator validator;
     private final GenerationModel model;
     private final String accessToken;
+    @org.springframework.beans.factory.annotation.Autowired private AiClient ai;
     private final ProviderSettings providers;
     public Api(ProjectStore store, MemoryService memory, WorkflowEngine engine, ArtifactValidator validator,
                GenerationModel model, @Value("${workbench.live-access-token}") String accessToken, ProviderSettings providers) {
@@ -32,7 +33,7 @@ public class Api {
         return Map.of("name", "Agent Workbench", "mode", personal != null ? "live" : engine.mode(), "modelConfigured", personal != null || model.configured(),
                 "browserValidation", validator.browserEnabled(), "liveAccessRequired", personal == null && engine.mode().equals("live"),
                 "providerSource", personal != null ? "personal" : engine.mode().equals("live") ? "server" : "demo",
-                "scope", "Self-contained HTML apps · lexical project retrieval · source-grounded reports");
+                "aiEnabled", ai.enabled(), "scope", "应用生成 · 项目检索 · 可追溯验收");
     }
     @GetMapping("/provider") public ProviderSettings.View provider(HttpServletRequest req, HttpServletResponse res) {
         return providers.view(owner(req, res));
@@ -90,6 +91,15 @@ public class Api {
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "真实模型调用需要工作台访问口令");
         }
         return engine.submit(owner, id, body, credentials);
+    }
+    @PostMapping("/projects/{id}/runs/{runId}/resume") public Run resume(@PathVariable String id,@PathVariable String runId,HttpServletRequest req,HttpServletResponse res) {
+        String owner=owner(req,res); return engine.resume(owner,id,runId,providers.active(owner));
+    }
+    @PostMapping("/projects/{id}/knowledge") public Object advancedKnowledge(@PathVariable String id,@RequestBody Map<String,Object> body,HttpServletRequest req,HttpServletResponse res) {
+        String owner=owner(req,res); Project p=store.get(owner,id);
+        boolean answer=Boolean.TRUE.equals(body.get("answer"));var credentials=providers.active(owner);
+        if(answer && credentials==null) throw new IllegalArgumentException("请先启用个人模型配置");
+        return ai.knowledge(p,requireText(Objects.toString(body.get("query"),""),1000),answer,credentials);
     }
     @PostMapping("/projects/{id}/select/{runId}") public Project select(@PathVariable String id, @PathVariable String runId, HttpServletRequest req, HttpServletResponse res) {
         String owner = owner(req, res);

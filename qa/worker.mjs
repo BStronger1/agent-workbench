@@ -1,3 +1,4 @@
+import { executeSteps } from "./contract.mjs";
 import { chromium } from "playwright";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -54,7 +55,10 @@ try {
   for (const text of contract.requiredTexts)
     if (!(await page.getByText(text, { exact: false }).first().isVisible()))
       errors.push("验收文本不可见：" + text);
-  if (contract.checkInteraction) {
+  if (contract.steps?.length) {
+    try { await executeSteps(page, contract.steps); }
+    catch { errors.push("结构化交互步骤或断言失败"); }
+  } else if (contract.checkInteraction) {
     const button = page.getByTestId("primary-action"),
       result = page.getByTestId("result");
     try {

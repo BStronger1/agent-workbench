@@ -20,7 +20,14 @@ export interface Attempt {
   screenshot?: string;
   durationMs: number;
 }
+export interface Step { action: string; target: string; value?: string }
 export interface Run {
+  workflow?: string;
+  calls?: number;
+  steps?: Step[];
+  plan?: {summary?: string};
+  contractHash?: string;
+  resumable?: boolean;
   id: string;
   prompt: string;
   mode: string;
@@ -47,6 +54,7 @@ export interface Project {
   selectedRunId?: string;
 }
 export interface Config {
+  aiEnabled: boolean;
   mode: string;
   modelConfigured: boolean;
   browserValidation: boolean;

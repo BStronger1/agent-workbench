@@ -15,6 +15,12 @@ const required = ref("项目进度\n研究任务"),
   maxRepairs = ref(2),
   injectFailure = ref(false),
   interaction = ref(true);
+const workflow = ref("legacy"), acceptance = ref("direct"), inputValue = ref("研究任务"), pauseAfterPlan = ref(false), knowledgeMode = ref("lexical");
+const steps = computed(() => acceptance.value === "check" ? [
+  {action:"check",target:"selection-item",value:""}, {action:"click",target:"primary-action",value:""}, {action:"assert_text",target:"result",value:"已完成 1 项"}
+] : acceptance.value === "fill" ? [
+  {action:"fill",target:"task-input",value:inputValue.value}, {action:"click",target:"primary-action",value:""}, {action:"assert_text",target:"result",value:inputValue.value}
+] : []);
 const key = ref("设计风格"),
   value = ref("简洁、绿色主题，适合研究项目展示"),
   kind = ref("constraint");
@@ -70,6 +76,7 @@ const label = (s: string) =>
     FAILED: "未通过",
     BUDGET_EXCEEDED: "预算不足",
     INTERRUPTED: "运行中断",
+    AWAITING_APPROVAL: "等待确认验收计划",
   })[s] ?? s;
 async function api(path: string, method = "GET", body?: unknown) {
   const response = await fetch("/api/workbench" + path, {
@@ -140,7 +147,10 @@ async function generate() {
     const r = await api(`/projects/${current.value.id}/runs`, "POST", {
       prompt: prompt.value,
       maxRepairs: maxRepairs.value,
-      tokenBudget: 24000,
+      tokenBudget: workflow.value === "legacy" ? 24000 : 50000,
+      workflow: workflow.value,
+      steps: interaction.value ? steps.value : [],
+      pauseAfterPlan: pauseAfterPlan.value,
       requiredTexts: required.value.split("\n").filter(Boolean),
       checkInteraction: interaction.value,
       memoryStrategy: strategy.value,
@@ -196,9 +206,8 @@ async function readFile(event: Event) {
 async function search() {
   await action(async () => {
     if (current.value) {
-      const r = await api(
-        `/projects/${current.value.id}/knowledge?q=${encodeURIComponent(query.value)}`,
-      );
+      const r = knowledgeMode.value === "lexical" ? await api(`/projects/${current.value.id}/knowledge?q=${encodeURIComponent(query.value)}`)
+        : await api(`/projects/${current.value.id}/knowledge`, "POST", {query:query.value, answer:knowledgeMode.value === "rag"});
       answer.value = r.answer;
       sources.value = r.sources;
     }
@@ -209,6 +218,11 @@ async function makeReport() {
     if (current.value)
       report.value = await api(`/projects/${current.value.id}/report`);
   });
+}
+async function resumeRun() {
+  await action(async () => {if (current.value && activeRun.value) {
+    await api(`/projects/${current.value.id}/runs/${activeRun.value.id}/resume`,"POST",{}); await refresh();
+  }});
 }
 async function rollback() {
   await action(async () => {
@@ -395,10 +409,18 @@ onUnmounted(() => clearInterval(timer));
               rows="2"
               maxlength="808"
             ></textarea>
+            <div v-if="config?.aiEnabled && config?.mode === 'live'" class="form-row">
+              <label>执行方式<select v-model="workflow">
+                <option value="legacy">基础生成</option><option value="graph_single">单角色工作流</option><option value="graph_multi">规划、编码、评审协作</option>
+              </select></label>
+              <label>交互验收<select v-model="acceptance"><option value="direct">直接点击后结果改变</option><option value="check">勾选一项后显示数量 1</option><option value="fill">输入后显示输入内容</option></select></label>
+            </div>
+            <label v-if="acceptance === 'fill'">测试输入<input v-model="inputValue" maxlength="100" /></label>
+            <label v-if="workflow !== 'legacy'" class="check"><input type="checkbox" v-model="pauseAfterPlan" />生成前由我确认验收计划</label>
             <div class="form-row">
               <label
                 >记忆策略<select v-model="strategy">
-                  <option value="retrieval">项目记忆检索</option>
+                  <option value="retrieval">关键词记忆检索</option><option v-if="workflow !== 'legacy'" value="hybrid">语义与关键词混合检索</option>
                   <option value="window">最近 3 次需求</option>
                   <option value="none">不使用记忆</option>
                 </select></label
@@ -502,7 +524,9 @@ onUnmounted(() => clearInterval(timer));
                 {{ (activeRun.durationMs / 1000).toFixed(1) }}s</small
               >
             </div>
-            <iframe
+            <div v-if="activeRun?.plan?.summary" class="notice"><p>{{ activeRun.plan.summary }}<small>验收步骤 {{ activeRun.steps?.length ?? 0 }} 项 · 模型调用 {{ activeRun.calls ?? 0 }} 次</small><ol><li v-for="(step,i) in activeRun.steps" :key="i">{{ step.action }} · {{ step.target }} {{ step.value }}</li></ol></p></div>
+              <button v-if="activeRun && activeRun.workflow !== 'legacy' && activeRun.resumable && ['AWAITING_APPROVAL','INTERRUPTED'].includes(activeRun.status)" class="primary" :disabled="busy || running" @click="resumeRun">{{ activeRun.status === 'AWAITING_APPROVAL' ? '确认计划并继续' : '从检查点恢复' }}</button>
+              <iframe
               v-if="previewTab === 'preview' && artifactUrl"
               :key="artifactUrl + activeRun?.status"
               :src="artifactUrl"
@@ -615,6 +639,7 @@ onUnmounted(() => clearInterval(timer));
             <p class="muted">
               基于关键词与中文双字匹配，返回带段落来源的原文。
             </p>
+            <select v-model="knowledgeMode" aria-label="知识查询模式"><option value="lexical">原文关键词检索</option><option v-if="config?.aiEnabled" value="hybrid">语义与关键词混合检索</option><option v-if="config?.aiEnabled && config?.mode === 'live'" value="rag">AI 回答并引用来源</option></select>
             <input
               v-model="query"
               maxlength="1000"

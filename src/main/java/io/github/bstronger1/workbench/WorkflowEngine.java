@@ -13,6 +13,7 @@ public class WorkflowEngine {
     private final MemoryService memory;
     private final GenerationModel model;
     private final ArtifactValidator validator;
+    @org.springframework.beans.factory.annotation.Autowired private AiClient ai;
     private final String mode;
     private final double inputPrice, outputPrice;
     private final ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 2, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<>(12));
@@ -32,6 +33,11 @@ public class WorkflowEngine {
         if (p.runs.size() >= 50) throw new IllegalArgumentException("项目运行记录达到上限，请新建项目");
         if (p.runs.stream().anyMatch(r -> Set.of("RUNNING", "QUEUED").contains(r.status))) throw new IllegalArgumentException("项目已有运行中的任务");
         Run r = new Run(); r.prompt = Api.requireText(request.prompt(), 2000);
+        r.workflow = request.workflow() == null ? "legacy" : request.workflow();
+        if (!Set.of("legacy","graph_single","graph_multi").contains(r.workflow)) throw new IllegalArgumentException("未知工作流");
+        r.steps = request.steps() == null ? List.of() : request.steps(); validateSteps(r.steps);
+        r.pauseAfterPlan = Boolean.TRUE.equals(request.pauseAfterPlan());
+        if (!r.workflow.equals("legacy") && (ai == null || !ai.enabled() || credentials == null)) throw new IllegalArgumentException("请启用 AI 服务并保存个人模型配置");
         r.maxRepairs = request.maxRepairs() == null ? 2 : request.maxRepairs();
         r.tokenBudget = request.tokenBudget() == null ? 24000 : request.tokenBudget();
         if (r.maxRepairs < 0 || r.maxRepairs > 3 || r.tokenBudget < 1000 || r.tokenBudget > 50000) throw new IllegalArgumentException("修复次数或预算超出范围");
@@ -39,7 +45,8 @@ public class WorkflowEngine {
         if (r.requiredTexts.size() > 8) throw new IllegalArgumentException("最多设置 8 条文本验收");
         r.checkInteraction = !Boolean.FALSE.equals(request.checkInteraction());
         r.memoryStrategy = request.memoryStrategy() == null ? "retrieval" : request.memoryStrategy();
-        if (!Set.of("none", "window", "retrieval").contains(r.memoryStrategy)) throw new IllegalArgumentException("未知记忆策略");
+        if (!Set.of("none", "window", "retrieval", "hybrid").contains(r.memoryStrategy)) throw new IllegalArgumentException("未知记忆策略");
+        if (r.memoryStrategy.equals("hybrid") && r.workflow.equals("legacy")) throw new IllegalArgumentException("混合检索需要选择 AI 工作流");
         r.mode = credentials == null ? mode : "live";
         r.model = credentials != null ? credentials.model() : mode.equals("demo") ? "deterministic-template-v1" : model.name();
         r.memorySources = memory.context(p, r.prompt, r.memoryStrategy);
@@ -56,6 +63,7 @@ public class WorkflowEngine {
         executeWithCredentials(owner, projectId, r, demoFailure, null);
     }
     void executeWithCredentials(String owner, String projectId, Run r, boolean demoFailure, ProviderSettings.Credentials credentials) {
+        if (!r.workflow.equals("legacy")) { executeGraph(owner, projectId, r, credentials, false); return; }
         long start = System.nanoTime(); r.status = "RUNNING";
         event(owner, projectId, r, "memory", "已选取 " + r.memorySources.size() + " 条来源（" + r.memoryStrategy + "）");
         String html = null; List<String> errors = List.of();
@@ -63,7 +71,7 @@ public class WorkflowEngine {
             for (int i = 0; i <= r.maxRepairs; i++) {
                 if (Thread.currentThread().isInterrupted()) throw new InterruptedException();
                 // Conservative upper bound, not a tokenizer: UTF-8 bytes bound input tokens for supported byte BPE models.
-                int inputBound = (r.prompt + r.memorySources + (html == null ? "" : html) + errors + r.requiredTexts)
+                int inputBound = (r.prompt + r.memorySources + (html == null ? "" : html) + errors + r.requiredTexts + r.steps)
                         .getBytes(java.nio.charset.StandardCharsets.UTF_8).length + 2048;
                 if (r.mode.equals("live") && (!r.usageKnown || r.inputTokens + r.outputTokens + inputBound + 4096 > r.tokenBudget)) {
                     r.status = "BUDGET_EXCEEDED"; r.error = "保守预算检查停止了后续调用；可提高预算后重试。"; break;
@@ -91,6 +99,32 @@ public class WorkflowEngine {
             }
             finish(owner, projectId, r, r.status, r.error);
         }
+    }
+    public static void validateSteps(List<Step> steps) {
+        if (steps.size()>12) throw new IllegalArgumentException("最多 12 个验收步骤");
+        for (Step step:steps) if (step==null || !Set.of("check","fill","click","assert_text","assert_changed").contains(step.action()) || step.target()==null || !step.target().matches("[a-zA-Z0-9_-]{1,64}") || (step.value()!=null && step.value().length()>200) || (step.action().equals("assert_text") && (step.value()==null || step.value().isBlank()))) throw new IllegalArgumentException("验收步骤格式无效");
+        if (!steps.isEmpty() && (!steps.getLast().action().startsWith("assert_") || steps.stream().noneMatch(x->x.action().equals("click")))) throw new IllegalArgumentException("验收需要点击操作并以断言结束");
+    }
+    public Run resume(String owner,String projectId,String runId,ProviderSettings.Credentials credentials) {
+        if(credentials==null || ai==null || !ai.enabled()) throw new IllegalArgumentException("请启用原模型配置和 AI 服务");
+        Run r=store.update(owner,projectId,p->{
+            Run found=Api.findRun(p,runId);
+            if(found.workflow.equals("legacy") || !Set.of("AWAITING_APPROVAL","INTERRUPTED").contains(found.status)) throw new IllegalArgumentException("此任务不可恢复");
+            if(p.runs.stream().anyMatch(x->Set.of("RUNNING","QUEUED").contains(x.status))) throw new IllegalArgumentException("项目已有任务运行");
+            found.status="QUEUED";return found;
+        });
+        try {executor.execute(()->executeGraph(owner,projectId,r,credentials,true));}
+        catch(RejectedExecutionException e){finish(owner,projectId,r,"INTERRUPTED","队列已满，可稍后恢复");}
+        return r;
+    }
+    private void executeGraph(String owner,String projectId,Run r,ProviderSettings.Credentials credentials,boolean resume) {
+        r.status="RUNNING"; save(owner,projectId,r);
+        try {
+            if(!resume && r.memoryStrategy.equals("hybrid")) r.memorySources=ai.sources(ai.knowledge(store.get(owner,projectId),r.prompt,false,null));
+            ai.execute(owner,projectId,r,credentials,resume);
+            if(r.usageKnown && credentials.inputPrice()>0 && credentials.outputPrice()>0) r.estimatedCost=(r.inputTokens*credentials.inputPrice()+r.outputTokens*credentials.outputPrice())/1_000_000;
+        } catch(Exception e) {r.status="INTERRUPTED";r.resumable=true;r.usageKnown=false;r.error="AI 服务异常，已保留任务，请检查服务后恢复";}
+        finish(owner,projectId,r,r.status,r.error);
     }
     private void event(String owner, String projectId, Run r, String stage, String message) {
         r.events.add(new Event(now(), stage, message)); save(owner, projectId, r);

@@ -27,7 +27,7 @@ public class ArtifactValidator {
         Path task = store.root().resolve("qa").resolve(run.id).resolve("attempt-" + attempt);
         Files.createDirectories(task);
         Files.writeString(task.resolve("index.html"), html);
-        mapper.writeValue(task.resolve("contract.json").toFile(), Map.of("requiredTexts", run.requiredTexts, "checkInteraction", run.checkInteraction));
+        mapper.writeValue(task.resolve("contract.json").toFile(), Map.of("requiredTexts", run.requiredTexts, "checkInteraction", run.checkInteraction, "steps", run.steps));
         // Command is a server-owned JSON argv array, never a model-generated command or shell expression.
         List<String> command = new ArrayList<>(Arrays.asList(mapper.readValue(qaCommand, String[].class)));
         command.add(task.toString());

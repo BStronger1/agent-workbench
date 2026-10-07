@@ -1,0 +1,110 @@
+{
+  "timestamp": "2026-10-07T14:37:24.361Z",
+  "mode": "live",
+  "status": "incomplete",
+  "scope": "Paired single-role vs planner/coder/reviewer workflows on three development tasks with identical frozen contracts and no retrieval. Not a held-out benchmark; no claim of multi-agent superiority. Maximum 21 provider calls across 6 tasks.",
+  "limits": {
+    "tasks": 6,
+    "maxRepairsPerTask": 1,
+    "tokenBudgetPerTask": 50000,
+    "maxOutputTokensPerCall": 4096
+  },
+  "results": [
+    {
+      "caseId": "G-01",
+      "workflow": "graph_single",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "d18a98e6-dcc1-4f9f-8888-91a708f4991f",
+      "prompt": "制作中文研究任务进度页，点击按钮后已完成数量增加。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "none",
+      "status": "INTERRUPTED",
+      "createdAt": "2026-10-07T14:37:24.558308500Z",
+      "completedAt": "2026-10-07T14:37:27.139673800Z",
+      "error": "模型输出、服务调用或执行异常；保留检查点与调用用量，可检查后恢复",
+      "maxRepairs": 1,
+      "tokenBudget": 50000,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "calls": 1,
+      "contractHash": "070ed599456dbc30c4a17c7dd5de566d4b19c7d9f7fc66e77bf0584ec4b1ac0a",
+      "pauseAfterPlan": false,
+      "resumable": true,
+      "steps": [
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_changed",
+          "target": "result",
+          "value": ""
+        }
+      ],
+      "plan": {
+        "summary": "制作中文研究任务进度页，点击按钮后已完成数量增加。",
+        "steps": [
+          {
+            "action": "click",
+            "target": "primary-action",
+            "value": ""
+          },
+          {
+            "action": "assert_changed",
+            "target": "result",
+            "value": ""
+          }
+        ]
+      },
+      "usageKnown": false,
+      "durationMs": 2344,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "研究任务",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-07T14:37:24.789759+00:00",
+          "stage": "plan",
+          "message": "验收步骤已固定；生成和修复不能更改"
+        },
+        {
+          "at": "2026-10-07T14:37:24.797146+00:00",
+          "stage": "approval",
+          "message": "验收契约已确认"
+        },
+        {
+          "at": "2026-10-07T14:37:27.139673800Z",
+          "stage": "complete",
+          "message": "INTERRUPTED"
+        }
+      ],
+      "attempts": []
+    }
+  ],
+  "summary": {
+    "graph_single": {
+      "tasks": 1,
+      "passed": 0,
+      "calls": 1,
+      "inputTokens": null,
+      "outputTokens": null,
+      "meanDurationMs": 2344
+    },
+    "graph_multi": {
+      "tasks": 0,
+      "passed": 0,
+      "calls": 0,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "meanDurationMs": null
+    }
+  },
+  "model": "DMXAPI-deepseek-v4-flash"
+}
