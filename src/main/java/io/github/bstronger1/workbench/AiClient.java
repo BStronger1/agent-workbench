@@ -23,7 +23,7 @@ public class AiClient {
     public JsonNode post(String path,Object body) {
         if (!enabled()) throw new IllegalArgumentException("AI 服务尚未启用");
         try {
-            var request=HttpRequest.newBuilder(URI.create(url+path)).timeout(Duration.ofMinutes(15))
+            var request=HttpRequest.newBuilder(URI.create(url+path)).timeout(Duration.ofMinutes(20))
                 .header("X-AI-Token",token).header("Content-Type","application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(body))).build();
             var response=http.send(request,HttpResponse.BodyHandlers.ofString());

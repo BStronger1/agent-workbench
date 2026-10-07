@@ -21,7 +21,7 @@ public class ProjectStore {
             for (Path f : files.filter(p -> p.getFileName().toString().endsWith(".json")).toList()) {
                 Project p = mapper.readValue(f.toFile(), Project.class);
                 for (Run r : p.runs) if (Set.of("RUNNING", "QUEUED").contains(r.status)) {
-                    r.status = "INTERRUPTED"; r.error = "服务重启中断了任务，可重新运行。"; r.completedAt = now();
+                    r.status = "INTERRUPTED"; r.error = r.workflow.equals("legacy") ? "服务重启中断了任务，可重新运行。" : "服务重启中断了任务，可从检查点恢复；不确定的模型请求不会自动重放。"; r.completedAt = now();
                 }
                 projects.put(p.id, p); persist(p);
             }

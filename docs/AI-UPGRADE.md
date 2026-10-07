@@ -64,3 +64,12 @@ node qa/graph-live.mjs --live
 `python -m ai_service.training_export evidence/graph-live.json data/training-candidates.jsonl` 只导出真实验收通过的候选样本，按任务分组建议切分，防止同一任务的不同角色产物跨训练/验证集。所有样本仍标记待人工审校。
 
 尚未进行 LoRA/QLoRA 训练，不宣称微调效果。进入训练前需积累足够多样且经审校的任务，独立保留测试集，并选择具备训练许可的开放权重模型及可用算力；已有聊天 API 不等于训练权限。
+## 本次验证状态（2026-10-07）
+
+- CI 提交 95d4601：基础工作台构建/回归成功；13 项 Python 测试成功，包含真实 pgvector 数据隔离、更新失效删除，以及真实 ONNX Embedding 与数据库联合检索。
+- 六条中文检索开发样例：混合 Recall@3=5/6，词法 Recall@3=2/6；[原始结果](../evidence/retrieval-fixtures.json)。未做独立测试集和重复实验。
+- 新图流程的真实模型对照在首次请求因 HTTPS 连接异常中断，没有获得模型产物，剩余任务停止；[完整中断记录](../evidence/graph-live-network-failure.json)。请求用量未知，不能记为真实模型通过。
+- 本地前后端、Java→Python 接入及浏览器回归完成。turing SSH 当前无法建立连接，新版本尚未部署到该服务器；旧服务部署记录不代表本次升级上线。
+- 真实测试的临时个人模型配置已清除，公开文件不含密钥。
+
+新增回归覆盖 Java 重启后恢复入口保留、训练候选样本分组与失败排除。本地最终测试为 29 项 Java 和 12 项 Python；两项需要真实数据库的 Python 测试由 CI 执行。默认 AI 服务允许域名保持原范围；未扩展到更多服务商。

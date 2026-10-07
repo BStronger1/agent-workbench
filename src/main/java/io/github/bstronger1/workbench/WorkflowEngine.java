@@ -37,6 +37,7 @@ public class WorkflowEngine {
         if (!Set.of("legacy","graph_single","graph_multi").contains(r.workflow)) throw new IllegalArgumentException("未知工作流");
         r.steps = request.steps() == null ? List.of() : request.steps(); validateSteps(r.steps);
         r.pauseAfterPlan = Boolean.TRUE.equals(request.pauseAfterPlan());
+        r.resumable = !r.workflow.equals("legacy");
         if (!r.workflow.equals("legacy") && (ai == null || !ai.enabled() || credentials == null)) throw new IllegalArgumentException("请启用 AI 服务并保存个人模型配置");
         r.maxRepairs = request.maxRepairs() == null ? 2 : request.maxRepairs();
         r.tokenBudget = request.tokenBudget() == null ? 24000 : request.tokenBudget();
@@ -102,7 +103,7 @@ public class WorkflowEngine {
     }
     public static void validateSteps(List<Step> steps) {
         if (steps.size()>12) throw new IllegalArgumentException("最多 12 个验收步骤");
-        for (Step step:steps) if (step==null || !Set.of("check","fill","click","assert_text","assert_changed").contains(step.action()) || step.target()==null || !step.target().matches("[a-zA-Z0-9_-]{1,64}") || (step.value()!=null && step.value().length()>200) || (step.action().equals("assert_text") && (step.value()==null || step.value().isBlank()))) throw new IllegalArgumentException("验收步骤格式无效");
+        for (Step step:steps) if (step==null || step.action()==null || !Set.of("check","fill","click","assert_text","assert_changed").contains(step.action()) || step.target()==null || !step.target().matches("[a-zA-Z0-9_-]{1,64}") || (step.value()!=null && step.value().length()>200) || (step.action().equals("assert_text") && (step.value()==null || step.value().isBlank()))) throw new IllegalArgumentException("验收步骤格式无效");
         if (!steps.isEmpty() && (!steps.getLast().action().startsWith("assert_") || steps.stream().noneMatch(x->x.action().equals("click")))) throw new IllegalArgumentException("验收需要点击操作并以断言结束");
     }
     public Run resume(String owner,String projectId,String runId,ProviderSettings.Credentials credentials) {
