@@ -88,6 +88,9 @@ node evaluate.mjs
 
 Agent Workbench 是 [BStronger1](https://github.com/BStronger1) 开发的个人 AI 产品工作台，将应用工坊、项目知识、汇报和评测组织在同一项目空间中。
 
-新增验证：17 项 Python 测试（含实际 pgvector 与 Embedding）和 5 项 Node 契约/评测控制测试通过，部署端浏览器回归通过。六条中文检索样例的混合 Recall@3 为 5/6，关键词为 2/6；仅为开发样例。新版已部署内网 HTTPS；使用 DMXAPI-deepseek-v4-flash 完成 6 项同契约单角色/多角色真实任务（15 次调用，4/6 验收通过）及 2/2 项带引用 RAG 验证。失败记录完整保留，结果仅适用于这些开发场景。 [完整新评测](docs/GRAPH-LIVE-RESULTS.md)。
+新增验证：20 项 Python 测试（含实际 pgvector 与 Embedding）和 7 项 Node 契约/评测控制测试通过，部署端浏览器回归通过。六条中文检索样例的混合 Recall@3 为 5/6，关键词为 2/6；仅为开发样例。新版已部署内网 HTTPS；使用 DMXAPI-deepseek-v4-flash 完成 6 项同契约单角色/多角色真实任务（15 次调用，4/6 验收通过）及 2/2 项带引用 RAG 验证。失败记录完整保留，结果仅适用于这些开发场景。 [完整新评测](docs/GRAPH-LIVE-RESULTS.md)。
 
 项目采用 [MIT 许可](LICENSE)。依赖组件保留各自许可证，验证范围见 [项目说明](NOTICE.md)。
+
+
+原失败清单场景修复后，使用同模型、同契约定向复测两种角色模式均通过（2/2）；这是本地完整服务链路结果，本次修复的服务器同步待 SSH 恢复。[修复与复测证据](docs/CHECKLIST-REGRESSION.md)。

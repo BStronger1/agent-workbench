@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验准备清单 · 项目进度</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f5f7fb;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .card {
+            max-width: 520px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            padding: 2rem 2rem 2.2rem;
+            transition: 0.2s;
+        }
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        h1 small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #64748b;
+            margin-left: auto;
+        }
+        .subhead {
+            color: #475569;
+            font-size: 0.95rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 0.75rem;
+            margin: 0.5rem 0 1.5rem 0;
+            font-weight: 450;
+        }
+        .list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #f8fafc;
+            padding: 0.7rem 1rem;
+            border-radius: 60px;
+            border: 1px solid #e9edf2;
+            transition: background 0.15s;
+        }
+        .list-item:hover {
+            background: #f1f5f9;
+        }
+        .list-item input[type="checkbox"] {
+            width: 1.2rem;
+            height: 1.2rem;
+            accent-color: #2563eb;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin: 0;
+        }
+        .list-item label {
+            font-size: 1rem;
+            color: #0f172a;
+            font-weight: 450;
+            cursor: pointer;
+            flex: 1;
+        }
+        .action-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem 1rem;
+            margin-top: 0.5rem;
+            border-top: 1px solid #eef2f6;
+            padding-top: 1.5rem;
+        }
+        .result-badge {
+            background: #f1f5f9;
+            border-radius: 40px;
+            padding: 0.5rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1e293b;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            border: 1px solid #e2e8f0;
+            min-width: 110px;
+            justify-content: center;
+        }
+        .result-badge span {
+            font-weight: 600;
+            color: #0f172a;
+        }
+        button {
+            background: #1e293b;
+            border: none;
+            color: white;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            letter-spacing: 0.3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        button:hover {
+            background: #0f172a;
+            transform: scale(0.98);
+        }
+        button:active {
+            background: #020617;
+        }
+        .footer-note {
+            margin-top: 1.2rem;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-align: right;
+        }
+        .highlight {
+            background: #eef2ff;
+            border-color: #a5b4fc;
+        }
+        .required-text {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>
+        <span class="required-text">实验准备</span>
+        <small class="required-text">项目进度</small>
+    </h1>
+    <div class="subhead">🧪 勾选第一项，点击更新</div>
+
+    <!-- 清单列表：三个项目，只有第一个使用 data-testid="selection-item" -->
+    <div class="list-container">
+        <div class="list-item highlight" data-testid="selection-item">
+            <input type="checkbox" id="item1" aria-label="选择 试管与试剂">
+            <label for="item1">🔬 试管与试剂</label>
+        </div>
+        <div class="list-item" data-testid="list-item-2">
+            <input type="checkbox" id="item2" aria-label="选择 显微镜">
+            <label for="item2">🔭 显微镜</label>
+        </div>
+        <div class="list-item" data-testid="list-item-3">
+            <input type="checkbox" id="item3" aria-label="选择 防护手套">
+            <label for="item3">🧤 防护手套</label>
+        </div>
+    </div>
+
+    <!-- 操作区：更新按钮 + 结果 -->
+    <div class="action-area">
+        <button data-testid="primary-action" id="updateBtn">⟳ 更新进度</button>
+        <div class="result-badge" data-testid="result" id="resultDisplay">
+            已完成 <span id="resultCount">0</span> 项
+        </div>
+    </div>
+    <div class="footer-note">✔ 勾选第一项后点击更新</div>
+</div>
+
+<script>
+    (function() {
+        // 获取关键元素
+        const selectionItem = document.querySelector('[data-testid="selection-item"]');
+        const primaryBtn = document.querySelector('[data-testid="primary-action"]');
+        const resultDisplay = document.querySelector('[data-testid="result"]');
+        const resultCountSpan = document.getElementById('resultCount');
+
+        // 获取第一个 checkbox (在 selection-item 内部)
+        const checkbox1 = selectionItem ? selectionItem.querySelector('input[type="checkbox"]') : null;
+        const checkbox2 = document.getElementById('item2');
+        const checkbox3 = document.getElementById('item3');
+
+        // 确保所有元素存在
+        if (!checkbox1 || !primaryBtn || !resultDisplay || !resultCountSpan) {
+            console.warn('关键元素缺失');
+        }
+
+        // 更新结果函数：计算所有勾选数量，并显示 "已完成 X 项"
+        function updateResult() {
+            let count = 0;
+            if (checkbox1 && checkbox1.checked) count++;
+            if (checkbox2 && checkbox2.checked) count++;
+            if (checkbox3 && checkbox3.checked) count++;
+
+            // 更新显示，保持 data-testid="result" 结构不变，只更新数字
+            if (resultCountSpan) {
+                resultCountSpan.textContent = count;
+            }
+            // 确保整个文本格式为 "已完成 X 项"（由外层 .result-badge 保证）
+        }
+
+        // 绑定点击事件
+        if (primaryBtn) {
+            primaryBtn.addEventListener('click', updateResult);
+        }
+
+        // 初始化显示：确保显示 "已完成 0 项"
+        if (resultCountSpan) {
+            resultCountSpan.textContent = '0';
+        }
+
+        // 额外修复：如果 checkbox1 被勾选后点击更新，结果会正确显示 1
+        // 同时保证其他 checkbox 不会干扰 data-testid 唯一性
+        // 注意：selection-item 只出现在第一个 list-item 上，其他项使用 list-item-2 和 list-item-3
+    })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,310 @@
+{
+  "timestamp": "2026-10-07T16:37:48.774Z",
+  "mode": "live",
+  "status": "completed_with_failures",
+  "scope": "Paired single-role vs planner/coder/reviewer workflows on three development tasks with identical frozen contracts and no retrieval. Not a held-out benchmark; no claim of multi-agent superiority. Maximum 7 provider calls per paired scenario. A filtered rerun is a targeted regression, not a replacement for the original full evaluation.",
+  "limits": {
+    "tasks": 2,
+    "caseFilter": "G-02",
+    "maxRepairsPerTask": 1,
+    "tokenBudgetPerTask": 50000,
+    "maxOutputTokensPerCall": 4096
+  },
+  "results": [
+    {
+      "caseId": "G-02",
+      "workflow": "graph_single",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "9da00162-c07c-4e0f-aff0-97f39d9fe6c3",
+      "prompt": "制作中文实验准备清单，先勾选第一项再点击更新，结果精确显示已完成 1 项。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "none",
+      "status": "FAILED",
+      "createdAt": "2026-10-07T16:37:49.025828900Z",
+      "completedAt": "2026-10-07T16:40:03.967685400Z",
+      "error": "验收未通过，保留全部尝试记录",
+      "maxRepairs": 1,
+      "tokenBudget": 50000,
+      "inputTokens": 4492,
+      "outputTokens": 5487,
+      "calls": 2,
+      "contractHash": "3aaa11a82c8538c0cf92d2ddb89960c2f5382740da07419c01f2bbdd67ff7036",
+      "pauseAfterPlan": false,
+      "resumable": false,
+      "steps": [
+        {
+          "action": "check",
+          "target": "selection-item",
+          "value": ""
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "已完成 1 项"
+        }
+      ],
+      "plan": {
+        "summary": "制作中文实验准备清单，先勾选第一项再点击更新，结果精确显示已完成 1 项。",
+        "steps": [
+          {
+            "action": "check",
+            "target": "selection-item",
+            "value": ""
+          },
+          {
+            "action": "click",
+            "target": "primary-action",
+            "value": ""
+          },
+          {
+            "action": "assert_text",
+            "target": "result",
+            "value": "已完成 1 项"
+          }
+        ]
+      },
+      "usageKnown": true,
+      "durationMs": 134765,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "实验准备",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-07T16:37:49.178930+00:00",
+          "stage": "plan",
+          "message": "验收步骤已固定；生成和修复不能更改"
+        },
+        {
+          "at": "2026-10-07T16:37:49.182930+00:00",
+          "stage": "approval",
+          "message": "验收契约已确认"
+        },
+        {
+          "at": "2026-10-07T16:39:07.707939+00:00",
+          "stage": "generate",
+          "message": "编码角色第 1 次生成"
+        },
+        {
+          "at": "2026-10-07T16:39:08.872833+00:00",
+          "stage": "validate",
+          "message": "FAILED"
+        },
+        {
+          "at": "2026-10-07T16:40:02.794669+00:00",
+          "stage": "repair",
+          "message": "编码角色第 2 次生成"
+        },
+        {
+          "at": "2026-10-07T16:40:03.916670+00:00",
+          "stage": "validate",
+          "message": "FAILED"
+        },
+        {
+          "at": "2026-10-07T16:40:03.920670+00:00",
+          "stage": "complete",
+          "message": "FAILED"
+        },
+        {
+          "at": "2026-10-07T16:40:03.967685400Z",
+          "stage": "complete",
+          "message": "FAILED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>实验准备清单 · 项目进度</title>\n    <style>\n        * {\n            box-sizing: border-box;\n            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;\n        }\n        body {\n            background: #f5f7fc;\n            min-height: 100vh;\n            margin: 0;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            padding: 1.5rem;\n        }\n        .card {\n            max-width: 600px;\n            width: 100%;\n            background: white;\n            border-radius: 32px;\n            box-shadow: 0 12px 30px rgba(0,0,0,0.08);\n            padding: 2rem 2rem 2.5rem;\n            transition: 0.2s;\n        }\n        h1 {\n            font-size: 1.9rem;\n            font-weight: 600;\n            letter-spacing: -0.01em;\n            margin: 0 0 0.25rem 0;\n            color: #0b1b33;\n            display: flex;\n            align-items: center;\n            gap: 0.5rem;\n        }\n        h1 small {\n            font-size: 1rem;\n            font-weight: 400;\n            color: #4a5b7a;\n            margin-left: auto;\n            background: #eef2f9;\n            padding: 0.2rem 0.9rem;\n            border-radius: 40px;\n        }\n        .subhead {\n            font-size: 0.95rem;\n            color: #4a5b7a;\n            margin: 0 0 1.8rem 0;\n            border-left: 4px solid #3b6eff;\n            padding-left: 1rem;\n            background: #f0f4ff;\n            border-radius: 0 12px 12px 0;\n            line-height: 1.4;\n        }\n        .list-section {\n            margin: 1.5rem 0 2rem 0;\n        }\n        .list-item {\n            display: flex;\n            align-items: center;\n            gap: 0.75rem;\n            padding: 0.75rem 0.5rem;\n            border-bottom: 1px solid #e9edf4;\n            transition: background 0.1s;\n        }\n        .list-item:last-of-type {\n            border-bottom: none;\n        }\n        .list-item label {\n            display: flex;\n            align-items: center;\n            gap: 0.75rem;\n            flex: 1;\n            cursor: pointer;\n            font-size: 1.05rem;\n            color: #1f2a44;\n            font-weight: 450;\n        }\n        .list-item input[type=\"checkbox\"] {\n            width: 1.2rem;\n            height: 1.2rem;\n            accent-color: #2b5cf5;\n            cursor: pointer;\n            margin: 0;\n            flex-shrink: 0;\n        }\n        .action-bar {\n            display: flex;\n            justify-content: flex-end;\n            margin: 1.8rem 0 1.2rem 0;\n        }\n        .primary-btn {\n            background: #1a3b8a;\n            border: none;\n            color: white;\n            font-weight: 500;\n            font-size: 1.1rem;\n            padding: 0.7rem 2.2rem;\n            border-radius: 60px;\n            box-shadow: 0 4px 8px rgba(26, 59, 138, 0.2);\n            cursor: pointer;\n            transition: 0.15s;\n            letter-spacing: 0.3px;\n            display: inline-flex;\n            align-items: center;\n            gap: 0.4rem;\n        }\n        .primary-btn:hover {\n            background: #0f2b6b;\n            transform: scale(1.01);\n            box-shadow: 0 6px 14px rgba(26, 59, 138, 0.25);\n        }\n        .primary-btn:active {\n            transform: scale(0.97);\n        }\n        .result-panel {\n            background: #f2f6fe;\n            border-radius: 24px;\n            padding: 1rem 1.5rem;\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            flex-wrap: wrap;\n            gap: 0.5rem 1rem;\n            border: 1px solid #dce3f0;\n            margin-top: 0.5rem;\n        }\n        .result-label {\n            font-weight: 500;\n            color: #1f2a44;\n            display: flex;\n            align-items: center;\n            gap: 0.4rem;\n        }\n        .result-value {\n            font-size: 1.4rem;\n            font-weight: 600;\n            color: #0b1b33;\n            background: white;\n            padding: 0.1rem 1.2rem;\n            border-radius: 40px;\n            box-shadow: 0 1px 4px rgba(0,0,0,0.02);\n            min-width: 6rem;\n            text-align: center;\n        }\n        .footer-note {\n            margin-top: 1.2rem;\n            font-size: 0.8rem;\n            color: #6b7a98;\n            text-align: right;\n            border-top: 1px dashed #dce3f0;\n            padding-top: 1rem;\n        }\n        .badge {\n            background: #eef2f9;\n            padding: 0.2rem 0.8rem;\n            border-radius: 40px;\n            font-size: 0.8rem;\n            color: #1f2a44;\n        }\n        [data-testid=\"selection-item\"] {\n            /* only first item gets this attribute */\n        }\n        /* ensure other items never get data-testid=\"selection-item\" */\n    </style>\n</head>\n<body>\n<div class=\"card\">\n    <h1>\n        🧪 实验准备\n        <small>项目进度</small>\n    </h1>\n    <div class=\"subhead\">📋 勾选第一项，点击更新 → 精确显示 “已完成 1 项”</div>\n\n    <!-- 清单列表：第一项具有 data-testid=\"selection-item\"，其他项使用独立 ID -->\n    <div class=\"list-section\">\n        <!-- 第一项：唯一 data-testid=\"selection-item\" -->\n        <div class=\"list-item\" data-testid=\"selection-item\">\n            <label>\n                <input type=\"checkbox\" class=\"item-check\" data-index=\"0\">\n                <span>🔬 显微镜校准</span>\n            </label>\n        </div>\n        <!-- 第二项：使用 data-testid=\"item-2\" 避免重复 -->\n        <div class=\"list-item\" data-testid=\"item-2\">\n            <label>\n                <input type=\"checkbox\" class=\"item-check\" data-index=\"1\">\n                <span>🧴 试剂瓶标签</span>\n            </label>\n        </div>\n        <!-- 第三项：data-testid=\"item-3\" -->\n        <div class=\"list-item\" data-testid=\"item-3\">\n            <label>\n                <input type=\"checkbox\" class=\"item-check\" data-index=\"2\">\n                <span>📊 数据记录表</span>\n            </label>\n        </div>\n        <!-- 第四项：data-testid=\"item-4\" -->\n        <div class=\"list-item\" data-testid=\"item-4\">\n            <label>\n                <input type=\"checkbox\" class=\"item-check\" data-index=\"3\">\n                <span>⚗️ 蒸馏水制备</span>\n            </label>\n        </div>\n    </div>\n\n    <!-- 更新按钮：data-testid=\"primary-action\" -->\n    <div class=\"action-bar\">\n        <button class=\"primary-btn\" data-testid=\"primary-action\">⟳ 更新进度</button>\n    </div>\n\n    <!-- 结果区域：data-testid=\"result\" 显示 \"已完成 1 项\" 等 -->\n    <div class=\"result-panel\" data-testid=\"result\">\n        <span class=\"result-label\">📌 当前完成</span>\n        <span class=\"result-value\" id=\"resultDisplay\">已完成 0 项</span>\n    </div>\n    <div class=\"footer-note\">\n        <span class=\"badge\">✔ 勾选第一项 → 点击更新</span>\n    </div>\n</div>\n\n<script>\n    (function() {\n        // 获取所有复选框 (class=\"item-check\")\n        const checkboxes = document.querySelectorAll('.item-check');\n        // 结果展示元素\n        const resultDisplay = document.getElementById('resultDisplay');\n        // 更新按钮\n        const updateBtn = document.querySelector('[data-testid=\"primary-action\"]');\n\n        // 辅助：计算勾选数量并更新显示 (不依赖外部)\n        function updateResultText() {\n            let checkedCount = 0;\n            for (let cb of checkboxes) {\n                if (cb.checked) checkedCount++;\n            }\n            // 精确显示 \"已完成 X 项\"\n            resultDisplay.textContent = `已完成 ${checkedCount} 项`;\n        }\n\n        // 点击更新按钮：重新统计并更新 (同时满足 assert_text 会读取 data-testid=\"result\" 内的文本)\n        function handleUpdate() {\n            updateResultText();\n        }\n\n        // 绑定更新按钮点击事件\n        if (updateBtn) {\n            updateBtn.addEventListener('click', handleUpdate);\n        }\n\n        // 额外：如果用户直接勾选/取消，不自动更新，但为了体验，点击更新才刷新。\n        // 但为了测试步骤：先勾选第一项，再点击更新，结果必须显示 \"已完成 1 项\"\n        // 我们确保初始状态：所有复选框未选中 (默认未选中)\n        // 同时，如果用户手动勾选后点击更新，依然精确统计。\n\n        // 初始显示 \"已完成 0 项\" (符合默认)\n        // 但为了保险，调用一次更新保证同步 (但初始无勾选)\n        // 注意：页面加载时没有任何勾选，显示 \"已完成 0 项\"\n        // 但测试要求：先勾选第一项，再点击更新 → 显示 \"已完成 1 项\"\n        // 所以初始显示 0 项是正确的。\n\n        // 额外：为防止复选框默认状态受浏览器自动填充，强制初始未选中\n        for (let cb of checkboxes) {\n            cb.checked = false;\n        }\n        // 确保显示 0 项\n        updateResultText();\n\n        // 但测试步骤中，用户会手动勾选第一项 (data-testid=\"selection-item\" 内的复选框)\n        // 然后点击更新。我们的事件绑定已经就绪。\n\n        // 同时，为了 robustness，如果用户通过 label 点击改变了复选框，但未点击更新，结果不变。\n        // 这符合设计：只有点击更新才刷新结果。\n\n        // 但为了测试通过，我们确保点击更新时读取的是实时复选框状态。\n        // 注意：复选框的 change 事件不影响结果，只有点击更新才触发。\n\n        // 另外，data-testid=\"result\" 整个容器包含文本，但 assert_text 会检查其可见文本。\n        // 我们的 resultDisplay 是 \"已完成 X 项\"，且位于 data-testid=\"result\" 内部。\n        // 但 data-testid=\"result\" 容器内还有 \"📌 当前完成\" 文字，所以完整文本是 \"📌 当前完成 已完成 X 项\"\n        // 但 assert_text 要求 \"已完成 1 项\"，该子串存在于 data-testid=\"result\" 的 textContent 中。\n        // 为了更精确，我们可以让 data-testid=\"result\" 只包含结果数字，但合同要求 data-testid=\"result\" 是目标，\n        // 且 assert_text 检查其文本。目前 data-testid=\"result\" 包含 \"📌 当前完成\" 和 \"已完成 X 项\"。\n        // 但 \"已完成 1 项\" 作为子串是存在的，所以断言通过。但为了更干净，我们可以调整结构，\n        // 但合同没有禁止额外文本，只要 requiredTexts 包含 \"实验准备\" 和 \"项目进度\" 即可。\n        // requiredTexts: [\"实验准备\", \"项目进度\"] 均已出现在 h1 和 small 中。\n        // 同时 checkInteraction 为 true，表示有勾选交互。\n\n        // 但为了确保 assert_text 匹配 \"已完成 1 项\" 精确出现在 data-testid=\"result\" 内，\n        // 我们让 data-testid=\"result\" 的文本包含 \"已完成 1 项\" 即可。\n        // 当前结构：<div class=\"result-panel\" data-testid=\"result\">\n        //   <span class=\"result-label\">📌 当前完成</span>\n        //   <span class=\"result-value\" id=\"resultDisplay\">已完成 0 项</span>\n        // </div>\n        // textContent 是 \"📌 当前完成已完成 0 项\" (无空格，但浏览器渲染有空格)\n        // 当更新后变为 \"📌 当前完成已完成 1 项\"，包含子串 \"已完成 1 项\"。\n        // 断言通过。\n\n        // 但为了更严谨，我们可以让 data-testid=\"result\" 只包裹结果数值，但合同里 target 是 \"result\"，\n        // 且步骤中 assert_text 针对该元素。保持现有结构没问题。\n\n        // 额外：确保第一项复选框的容器 data-testid=\"selection-item\" 只出现在第一项。\n        // 已经通过 data-testid 属性分配。\n\n        // 同时，其他项使用 data-testid=\"item-2\" 等，不会冲突。\n\n        // 最后，requiredTexts 中的 \"实验准备\" 在 h1 中，\"项目进度\" 在 small 中。\n        // 均可见。\n\n        // 修复：如果用户误操作，点击更新后始终精确显示。\n        // 无外部依赖，完全自包含。\n\n        // 额外：为防止复选框被隐藏，所有可见。\n\n        console.log('实验准备清单已加载，请勾选第一项并点击更新。');\n    })();\n</script>\n</body>\n</html>",
+          "errors": [
+            "Action check on unique target selection-item could not be completed. Check the element type, visibility and interaction handler."
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "9da00162-c07c-4e0f-aff0-97f39d9fe6c3/attempt-0/screenshot.png",
+          "durationMs": 1172
+        },
+        {
+          "number": 1,
+          "html": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>实验准备清单 · 项目进度</title>\n    <style>\n        * {\n            box-sizing: border-box;\n            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;\n        }\n        body {\n            background: #f5f7fc;\n            min-height: 100vh;\n            margin: 0;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            padding: 1.5rem;\n        }\n        .card {\n            max-width: 600px;\n            width: 100%;\n            background: white;\n            border-radius: 32px;\n            box-shadow: 0 12px 30px rgba(0,0,0,0.08);\n            padding: 2rem 2rem 2.5rem;\n            transition: 0.2s;\n        }\n        h1 {\n            font-size: 1.9rem;\n            font-weight: 600;\n            letter-spacing: -0.01em;\n            margin: 0 0 0.25rem 0;\n            color: #0b1b33;\n            display: flex;\n            align-items: center;\n            gap: 0.5rem;\n        }\n        h1 small {\n            font-size: 1rem;\n            font-weight: 400;\n            color: #4a5b7a;\n            margin-left: auto;\n            background: #eef2f9;\n            padding: 0.2rem 0.9rem;\n            border-radius: 40px;\n        }\n        .subhead {\n            font-size: 0.95rem;\n            color: #4a5b7a;\n            margin: 0 0 1.8rem 0;\n            border-left: 4px solid #3b6eff;\n            padding-left: 1rem;\n            background: #f0f4ff;\n            border-radius: 0 12px 12px 0;\n            line-height: 1.4;\n        }\n        .list-section {\n            margin: 1.5rem 0 2rem 0;\n        }\n        .list-item {\n            display: flex;\n            align-items: center;\n            gap: 0.75rem;\n            padding: 0.75rem 0.5rem;\n            border-bottom: 1px solid #e9edf4;\n            transition: background 0.1s;\n        }\n        .list-item:last-of-type {\n            border-bottom: none;\n        }\n        .list-item label {\n            display: flex;\n            align-items: center;\n            gap: 0.75rem;\n            flex: 1;\n            cursor: pointer;\n            font-size: 1.05rem;\n            color: #1f2a44;\n            font-weight: 450;\n        }\n        .list-item input[type=\"checkbox\"] {\n            width: 1.2rem;\n            height: 1.2rem;\n            accent-color: #2b5cf5;\n            cursor: pointer;\n            margin: 0;\n            flex-shrink: 0;\n        }\n        .action-bar {\n            display: flex;\n            justify-content: flex-end;\n            margin: 1.8rem 0 1.2rem 0;\n        }\n        .primary-btn {\n            background: #1a3b8a;\n            border: none;\n            color: white;\n            font-weight: 500;\n            font-size: 1.1rem;\n            padding: 0.7rem 2.2rem;\n            border-radius: 60px;\n            box-shadow: 0 4px 8px rgba(26, 59, 138, 0.2);\n            cursor: pointer;\n            transition: 0.15s;\n            letter-spacing: 0.3px;\n            display: inline-flex;\n            align-items: center;\n            gap: 0.4rem;\n        }\n        .primary-btn:hover {\n            background: #0f2b6b;\n            transform: scale(1.01);\n            box-shadow: 0 6px 14px rgba(26, 59, 138, 0.25);\n        }\n        .primary-btn:active {\n            transform: scale(0.97);\n        }\n        .result-panel {\n            background: #f2f6fe;\n            border-radius: 24px;\n            padding: 1rem 1.5rem;\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            flex-wrap: wrap;\n            gap: 0.5rem 1rem;\n            border: 1px solid #dce3f0;\n            margin-top: 0.5rem;\n        }\n        .result-label {\n            font-weight: 500;\n            color: #1f2a44;\n            display: flex;\n            align-items: center;\n            gap: 0.4rem;\n        }\n        .result-value {\n            font-size: 1.4rem;\n            font-weight: 600;\n            color: #0b1b33;\n            background: white;\n            padding: 0.1rem 1.2rem;\n            border-radius: 40px;\n            box-shadow: 0 1px 4px rgba(0,0,0,0.02);\n            min-width: 6rem;\n            text-align: center;\n        }\n        .footer-note {\n            margin-top: 1.2rem;\n            font-size: 0.8rem;\n            color: #6b7a98;\n            text-align: right;\n            border-top: 1px dashed #dce3f0;\n            padding-top: 1rem;\n        }\n        .badge {\n            background: #eef2f9;\n            padding: 0.2rem 0.8rem;\n            border-radius: 40px;\n            font-size: 0.8rem;\n            color: #1f2a44;\n        }\n        /* 确保只有第一项有 data-testid=\"selection-item\" */\n        [data-testid=\"selection-item\"] {\n            /* 仅用于标识，无额外样式 */\n        }\n    </style>\n</head>\n<body>\n<div class=\"card\">\n    <h1>\n        🧪 实验准备\n        <small>项目进度</small>\n    </h1>\n    <div class=\"subhead\">📋 勾选第一项，点击更新 → 精确显示 “已完成 1 项”</div>\n\n    <!-- 清单列表：第一项具有 data-testid=\"selection-item\"，其他项使用独立 ID -->\n    <div class=\"list-section\">\n        <!-- 第一项：唯一 data-testid=\"selection-item\" -->\n        <div class=\"list-item\" data-testid=\"selection-item\">\n            <label>\n                <input type=\"checkbox\" class=\"item-check\" data-index=\"0\">\n                <span>🔬 显微镜校准</span>\n            </label>\n        </div>\n        <!-- 第二项：使用 data-testid=\"item-2\" 避免重复 -->\n        <div class=\"list-item\" data-testid=\"item-2\">\n            <label>\n                <input type=\"checkbox\" class=\"item-check\" data-index=\"1\">\n                <span>🧴 试剂瓶标签</span>\n            </label>\n        </div>\n        <!-- 第三项：data-testid=\"item-3\" -->\n        <div class=\"list-item\" data-testid=\"item-3\">\n            <label>\n                <input type=\"checkbox\" class=\"item-check\" data-index=\"2\">\n                <span>📊 数据记录表</span>\n            </label>\n        </div>\n        <!-- 第四项：data-testid=\"item-4\" -->\n        <div class=\"list-item\" data-testid=\"item-4\">\n            <label>\n                <input type=\"checkbox\" class=\"item-check\" data-index=\"3\">\n                <span>⚗️ 蒸馏水制备</span>\n            </label>\n        </div>\n    </div>\n\n    <!-- 更新按钮：data-testid=\"primary-action\" -->\n    <div class=\"action-bar\">\n        <button class=\"primary-btn\" data-testid=\"primary-action\">⟳ 更新进度</button>\n    </div>\n\n    <!-- 结果区域：data-testid=\"result\" 显示 \"已完成 X 项\" -->\n    <div class=\"result-panel\" data-testid=\"result\">\n        <span class=\"result-label\">📌 当前完成</span>\n        <span class=\"result-value\" id=\"resultDisplay\">已完成 0 项</span>\n    </div>\n    <div class=\"footer-note\">\n        <span class=\"badge\">✔ 勾选第一项 → 点击更新</span>\n    </div>\n</div>\n\n<script>\n    (function() {\n        // 获取所有复选框 (class=\"item-check\")\n        const checkboxes = document.querySelectorAll('.item-check');\n        // 结果展示元素\n        const resultDisplay = document.getElementById('resultDisplay');\n        // 更新按钮\n        const updateBtn = document.querySelector('[data-testid=\"primary-action\"]');\n\n        // 辅助：计算勾选数量并更新显示\n        function updateResultText() {\n            let checkedCount = 0;\n            for (let cb of checkboxes) {\n                if (cb.checked) checkedCount++;\n            }\n            // 精确显示 \"已完成 X 项\"\n            resultDisplay.textContent = `已完成 ${checkedCount} 项`;\n        }\n\n        // 点击更新按钮：重新统计并更新\n        function handleUpdate() {\n            updateResultText();\n        }\n\n        // 绑定更新按钮点击事件\n        if (updateBtn) {\n            updateBtn.addEventListener('click', handleUpdate);\n        }\n\n        // 强制初始未选中，并显示 \"已完成 0 项\"\n        for (let cb of checkboxes) {\n            cb.checked = false;\n        }\n        updateResultText();\n\n        // 确保复选框的 change 事件不会自动更新结果，只有点击更新按钮才刷新\n        // 这样完全符合测试步骤：先勾选第一项（手动），再点击更新按钮，结果变为 \"已完成 1 项\"\n\n        console.log('实验准备清单已加载，请勾选第一项并点击更新。');\n    })();\n</script>\n</body>\n</html>",
+          "errors": [
+            "Action check on unique target selection-item could not be completed. Check the element type, visibility and interaction handler."
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "9da00162-c07c-4e0f-aff0-97f39d9fe6c3/attempt-1/screenshot.png",
+          "durationMs": 1125
+        }
+      ]
+    },
+    {
+      "caseId": "G-02",
+      "workflow": "graph_multi",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "5b4dfb98-2ba0-4295-9ad2-977e32d4f40d",
+      "prompt": "制作中文实验准备清单，先勾选第一项再点击更新，结果精确显示已完成 1 项。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "none",
+      "status": "FAILED",
+      "createdAt": "2026-10-07T16:40:04.086655200Z",
+      "completedAt": "2026-10-07T16:42:40.561927500Z",
+      "error": "验收未通过，保留全部尝试记录",
+      "maxRepairs": 1,
+      "tokenBudget": 50000,
+      "inputTokens": 11144,
+      "outputTokens": 5899,
+      "calls": 5,
+      "contractHash": "3aaa11a82c8538c0cf92d2ddb89960c2f5382740da07419c01f2bbdd67ff7036",
+      "pauseAfterPlan": false,
+      "resumable": false,
+      "steps": [
+        {
+          "action": "check",
+          "target": "selection-item",
+          "value": ""
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "已完成 1 项"
+        }
+      ],
+      "plan": {
+        "summary": "制作中文实验准备清单，先勾选第一项再点击更新，结果精确显示已完成 1 项。",
+        "steps": [
+          {
+            "action": "check",
+            "target": "selection-item",
+            "value": ""
+          },
+          {
+            "action": "click",
+            "target": "primary-action",
+            "value": ""
+          },
+          {
+            "action": "assert_text",
+            "target": "result",
+            "value": "已完成 1 项"
+          }
+        ]
+      },
+      "usageKnown": true,
+      "durationMs": 156453,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "实验准备",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-07T16:40:09.887017+00:00",
+          "stage": "plan",
+          "message": "验收步骤已固定；生成和修复不能更改"
+        },
+        {
+          "at": "2026-10-07T16:40:09.892017+00:00",
+          "stage": "approval",
+          "message": "验收契约已确认"
+        },
+        {
+          "at": "2026-10-07T16:41:28.062398+00:00",
+          "stage": "generate",
+          "message": "编码角色第 1 次生成"
+        },
+        {
+          "at": "2026-10-07T16:41:29.137340+00:00",
+          "stage": "validate",
+          "message": "FAILED"
+        },
+        {
+          "at": "2026-10-07T16:41:41.231951+00:00",
+          "stage": "review",
+          "message": "{\"issues\": []}"
+        },
+        {
+          "at": "2026-10-07T16:42:28.446362+00:00",
+          "stage": "repair",
+          "message": "编码角色第 2 次生成"
+        },
+        {
+          "at": "2026-10-07T16:42:29.531409+00:00",
+          "stage": "validate",
+          "message": "FAILED"
+        },
+        {
+          "at": "2026-10-07T16:42:40.541371+00:00",
+          "stage": "review",
+          "message": "{\"issues\": [\"The target 'selection-item' is used on a <div> element, but the 'check' action expects a checkbox or input element. The checkbox inside the div is not directly targeted.\", \"The 'check' action on 'selection-item' fails because the element is a container, not a form control. The browser error confirms the check could not be completed.\", \"The required text '项目进度' is present but appears inside a <small> element, which may be less visible or overlooked; ensure it remains visible and not hidden.\", \"The data-testid 'selection-item' is unique in the HTML, but the interaction step expects to check it, which is not possible on a div. Consider targeting the checkbox directly.\", \"The 'click' action on 'primary-action' works correctly, but the preceding check failure prevents the full flow from executing.\", \"The result text '已完成 1 项' is dynamically updated via JavaScript, but the initial state shows '已完成 0 项'. The test may fail if the check step does not succeed.\", \"The list items have distinct data-testid values (selection-item, list-item-2, list-item-3), which is good, but the first item's testid is used for a non-interactive container.\", \"The browser error indicates the check action could not be completed, which blocks the subsequent click and assertion steps, causing the test to fail.\"]}"
+        },
+        {
+          "at": "2026-10-07T16:42:40.544369+00:00",
+          "stage": "complete",
+          "message": "FAILED"
+        },
+        {
+          "at": "2026-10-07T16:42:40.561927500Z",
+          "stage": "complete",
+          "message": "FAILED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>实验准备清单 · 项目进度</title>\n    <style>\n        * {\n            box-sizing: border-box;\n            margin: 0;\n            padding: 0;\n        }\n        body {\n            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;\n            background: #f5f7fb;\n            min-height: 100vh;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            padding: 1.5rem;\n        }\n        .card {\n            max-width: 520px;\n            width: 100%;\n            background: white;\n            border-radius: 28px;\n            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);\n            padding: 2rem 2rem 2.2rem;\n            transition: 0.2s;\n        }\n        h1 {\n            font-size: 1.9rem;\n            font-weight: 600;\n            letter-spacing: 0.5px;\n            color: #1e293b;\n            margin-bottom: 0.25rem;\n            display: flex;\n            align-items: center;\n            gap: 0.5rem;\n        }\n        h1 small {\n            font-size: 1rem;\n            font-weight: 400;\n            color: #64748b;\n            margin-left: auto;\n        }\n        .subhead {\n            color: #475569;\n            font-size: 0.95rem;\n            border-left: 4px solid #3b82f6;\n            padding-left: 0.75rem;\n            margin: 0.5rem 0 1.5rem 0;\n            font-weight: 450;\n        }\n        .list-container {\n            display: flex;\n            flex-direction: column;\n            gap: 0.6rem;\n            margin-bottom: 2rem;\n        }\n        .list-item {\n            display: flex;\n            align-items: center;\n            gap: 0.75rem;\n            background: #f8fafc;\n            padding: 0.7rem 1rem;\n            border-radius: 60px;\n            border: 1px solid #e9edf2;\n            transition: background 0.15s;\n        }\n        .list-item:hover {\n            background: #f1f5f9;\n        }\n        .list-item input[type=\"checkbox\"] {\n            width: 1.2rem;\n            height: 1.2rem;\n            accent-color: #2563eb;\n            cursor: pointer;\n            flex-shrink: 0;\n            margin: 0;\n        }\n        .list-item label {\n            font-size: 1rem;\n            color: #0f172a;\n            font-weight: 450;\n            cursor: pointer;\n            flex: 1;\n        }\n        .action-area {\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            flex-wrap: wrap;\n            gap: 0.8rem 1rem;\n            margin-top: 0.5rem;\n            border-top: 1px solid #eef2f6;\n            padding-top: 1.5rem;\n        }\n        .result-badge {\n            background: #f1f5f9;\n            border-radius: 40px;\n            padding: 0.5rem 1.2rem;\n            font-size: 1rem;\n            font-weight: 500;\n            color: #1e293b;\n            display: inline-flex;\n            align-items: center;\n            gap: 0.3rem;\n            border: 1px solid #e2e8f0;\n            min-width: 110px;\n            justify-content: center;\n        }\n        .result-badge span {\n            font-weight: 600;\n            color: #0f172a;\n        }\n        button {\n            background: #1e293b;\n            border: none;\n            color: white;\n            font-weight: 500;\n            font-size: 1rem;\n            padding: 0.6rem 1.8rem;\n            border-radius: 60px;\n            cursor: pointer;\n            transition: 0.15s;\n            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);\n            letter-spacing: 0.3px;\n            display: inline-flex;\n            align-items: center;\n            gap: 0.4rem;\n        }\n        button:hover {\n            background: #0f172a;\n            transform: scale(0.98);\n        }\n        button:active {\n            background: #020617;\n        }\n        .footer-note {\n            margin-top: 1.2rem;\n            font-size: 0.8rem;\n            color: #94a3b8;\n            text-align: right;\n        }\n        .highlight {\n            background: #eef2ff;\n            border-color: #a5b4fc;\n        }\n        /* 保证所有文本可见 */\n        .required-text {\n            display: inline;\n        }\n    </style>\n</head>\n<body>\n<div class=\"card\">\n    <!-- h1 包含“实验准备”和“项目进度”两个 requiredTexts -->\n    <h1>\n        <span class=\"required-text\">实验准备</span>\n        <small class=\"required-text\">项目进度</small>\n    </h1>\n    <div class=\"subhead\">🧪 勾选第一项，点击更新</div>\n\n    <!-- 清单列表：三个项目，只有第一个使用 data-testid=\"selection-item\" -->\n    <div class=\"list-container\">\n        <div class=\"list-item highlight\" data-testid=\"selection-item\">\n            <input type=\"checkbox\" id=\"item1\" data-testid=\"selection-item-checkbox\" aria-label=\"选择 试管与试剂\">\n            <label for=\"item1\">🔬 试管与试剂</label>\n        </div>\n        <div class=\"list-item\" data-testid=\"list-item-2\">\n            <input type=\"checkbox\" id=\"item2\" data-testid=\"checkbox-item2\" aria-label=\"选择 显微镜\">\n            <label for=\"item2\">🔭 显微镜</label>\n        </div>\n        <div class=\"list-item\" data-testid=\"list-item-3\">\n            <input type=\"checkbox\" id=\"item3\" data-testid=\"checkbox-item3\" aria-label=\"选择 防护手套\">\n            <label for=\"item3\">🧤 防护手套</label>\n        </div>\n    </div>\n\n    <!-- 操作区：更新按钮 + 结果 -->\n    <div class=\"action-area\">\n        <button data-testid=\"primary-action\" id=\"updateBtn\">⟳ 更新进度</button>\n        <div class=\"result-badge\" data-testid=\"result\" id=\"resultDisplay\">\n            <span id=\"resultCount\">0</span> 项已完成\n        </div>\n    </div>\n    <div class=\"footer-note\">✔ 勾选第一项后点击更新</div>\n</div>\n\n<script>\n    (function() {\n        // DOM 元素 —— 严格匹配 data-testid\n        const selectionItemCheckbox = document.querySelector('[data-testid=\"selection-item\"] input[type=\"checkbox\"]');\n        // 确认 selection-item 容器存在且 checkbox 唯一\n        const primaryBtn = document.querySelector('[data-testid=\"primary-action\"]');\n        const resultDisplay = document.querySelector('[data-testid=\"result\"]');\n        const resultCountSpan = document.getElementById('resultCount');\n\n        // 其他 checkbox (用于计数但不干扰 contract)\n        const checkbox2 = document.getElementById('item2');\n        const checkbox3 = document.getElementById('item3');\n\n        // 确保所有元素存在\n        if (!selectionItemCheckbox || !primaryBtn || !resultDisplay || !resultCountSpan) {\n            console.warn('关键元素缺失，请检查结构');\n        }\n\n        // 更新函数：计算所有勾选数量，但 contract 只要求第一项勾选后显示“已完成 1 项”\n        // 但为了精确符合测试，我们只根据第一项勾选状态显示数量？\n        // 但 contract 要求“先勾选第一项再点击更新，结果精确显示已完成 1 项”\n        // 同时其他项可能被用户勾选，但测试步骤只勾选第一项。\n        // 为了通用正确性，我们计算所有已勾选数量，但测试只勾第一项，结果就是1。\n        // 但若用户额外勾选其他项，会显示>1，但测试步骤只勾第一项，所以没问题。\n        // 同时保证“已完成 X 项”格式。\n        function updateResult() {\n            let count = 0;\n            if (selectionItemCheckbox && selectionItemCheckbox.checked) count++;\n            if (checkbox2 && checkbox2.checked) count++;\n            if (checkbox3 && checkbox3.checked) count++;\n            resultCountSpan.textContent = count;\n            // 结果文本类似 \"已完成 1 项\" 由外层保证，但 data-testid=\"result\" 包含整个文本\n            // 为了 assert_text 能匹配 \"已完成 1 项\"，我们确保整个 innerText 包含该字符串\n            // 但 resultDisplay 内部结构是 <span id=\"resultCount\">1</span> 项已完成\n            // 最终文本为 \"1 项已完成\" —— 不符合 \"已完成 1 项\"\n            // 调整顺序：改为 \"已完成 <span>1</span> 项\"\n            // 但之前已经写了固定结构，现在用JS修改innerHTML以符合断言\n            // 但为了不破坏 data-testid=\"result\" 内容，我们重构显示格式\n            // 直接设置 resultDisplay.innerHTML = `已完成 ${count} 项`;\n            // 但需要保留 data-testid 属性，且不丢失样式。\n            // 更稳健：保留 resultCountSpan 但修改其父级文本顺序\n            // 最简单：完全替换 innerHTML，但保留 data-testid\n            // 但之前有 class result-badge，我们保留类，只改内容\n            resultDisplay.innerHTML = `已完成 <span id=\"resultCount\" style=\"font-weight:600;\">${count}</span> 项`;\n            // 重新获取 span 引用 (但后续更新需要)\n            // 更新全局引用\n            const newSpan = document.getElementById('resultCount');\n            if (newSpan) {\n                // 将全局变量重新指向新的span (以便下次更新)\n                window._resultCountSpan = newSpan;\n            }\n        }\n\n        // 将更新函数绑定到 primary-action 点击\n        primaryBtn.addEventListener('click', function(e) {\n            updateResult();\n        });\n\n        // 额外：为了保险，初始显示 0 项已完成 (格式 \"已完成 0 项\")\n        // 但初始时 resultDisplay 内容可能为 \"0 项已完成\"，我们统一格式\n        // 页面加载后立即格式化一次\n        window.addEventListener('DOMContentLoaded', function() {\n            // 确保显示 \"已完成 0 项\"\n            resultDisplay.innerHTML = `已完成 <span id=\"resultCount\" style=\"font-weight:600;\">0</span> 项`;\n            // 更新全局引用\n            window._resultCountSpan = document.getElementById('resultCount');\n            // 同时保证 checkbox 状态与显示同步 (初始无勾选)\n        });\n\n        // 如果用户手动勾选第一项后点击更新，结果会更新。\n        // 同时保证其他 checkbox 不会意外获得 selection-item 的 data-testid\n        // 已经确保只有第一个 list-item 有 data-testid=\"selection-item\"\n\n        // 额外：点击更新时，如果第一项勾选，显示1；如果未勾选，显示0。\n        // 测试步骤：先勾选第一项，再点击更新 → 显示1\n        // 完全符合\n\n        // 为了修复可能存在的初始文本问题，再次执行一次格式化 (以防DOM未加载完成)\n        if (document.readyState === 'loading') {\n            document.addEventListener('DOMContentLoaded', function() {\n                resultDisplay.innerHTML = `已完成 <span id=\"resultCount\" style=\"font-weight:600;\">0</span> 项`;\n            });\n        } else {\n            // 直接执行\n            resultDisplay.innerHTML = `已完成 <span id=\"resultCount\" style=\"font-weight:600;\">0</span> 项`;\n        }\n\n        // 确保点击更新时使用最新的 resultCount span\n        // 重写 updateResult 使用动态查询\n        // 但上面已经定义了 updateResult，现在覆盖增强\n        const originalUpdate = updateResult;\n        updateResult = function() {\n            let count = 0;\n            if (selectionItemCheckbox && selectionItemCheckbox.checked) count++;\n            if (checkbox2 && checkbox2.checked) count++;\n            if (checkbox3 && checkbox3.checked) count++;\n            // 重新设置 resultDisplay 内容\n            const resultEl = document.querySelector('[data-testid=\"result\"]');\n            if (resultEl) {\n                resultEl.innerHTML = `已完成 <span id=\"resultCount\" style=\"font-weight:600;\">${count}</span> 项`;\n            }\n        };\n        // 绑定新函数\n        primaryBtn.removeEventListener('click', originalUpdate);\n        primaryBtn.addEventListener('click', updateResult);\n\n        // 再次初始化显示\n        if (document.querySelector('[data-testid=\"result\"]')) {\n            const initRes = document.querySelector('[data-testid=\"result\"]');\n            initRes.innerHTML = `已完成 <span id=\"resultCount\" style=\"font-weight:600;\">0</span> 项`;\n        }\n    })();\n</script>\n\n<!-- 确保 requiredTexts 可见：实验准备、项目进度 已经出现在 h1 中 -->\n<!-- 并且清单第一项 data-testid=\"selection-item\" 只对应一个元素 -->\n<!-- 其他项使用 data-testid=\"list-item-2\" 和 \"list-item-3\" 避免重复 -->\n<!-- 按钮 data-testid=\"primary-action\" 唯一 -->\n<!-- 结果 data-testid=\"result\" 唯一 -->\n</body>\n</html>",
+          "errors": [
+            "Action check on unique target selection-item could not be completed. Check the element type, visibility and interaction handler."
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "5b4dfb98-2ba0-4295-9ad2-977e32d4f40d/attempt-0/screenshot.png",
+          "durationMs": 1078
+        },
+        {
+          "number": 1,
+          "html": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>实验准备清单 · 项目进度</title>\n    <style>\n        * {\n            box-sizing: border-box;\n            margin: 0;\n            padding: 0;\n        }\n        body {\n            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;\n            background: #f5f7fb;\n            min-height: 100vh;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            padding: 1.5rem;\n        }\n        .card {\n            max-width: 520px;\n            width: 100%;\n            background: white;\n            border-radius: 28px;\n            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);\n            padding: 2rem 2rem 2.2rem;\n            transition: 0.2s;\n        }\n        h1 {\n            font-size: 1.9rem;\n            font-weight: 600;\n            letter-spacing: 0.5px;\n            color: #1e293b;\n            margin-bottom: 0.25rem;\n            display: flex;\n            align-items: center;\n            gap: 0.5rem;\n        }\n        h1 small {\n            font-size: 1rem;\n            font-weight: 400;\n            color: #64748b;\n            margin-left: auto;\n        }\n        .subhead {\n            color: #475569;\n            font-size: 0.95rem;\n            border-left: 4px solid #3b82f6;\n            padding-left: 0.75rem;\n            margin: 0.5rem 0 1.5rem 0;\n            font-weight: 450;\n        }\n        .list-container {\n            display: flex;\n            flex-direction: column;\n            gap: 0.6rem;\n            margin-bottom: 2rem;\n        }\n        .list-item {\n            display: flex;\n            align-items: center;\n            gap: 0.75rem;\n            background: #f8fafc;\n            padding: 0.7rem 1rem;\n            border-radius: 60px;\n            border: 1px solid #e9edf2;\n            transition: background 0.15s;\n        }\n        .list-item:hover {\n            background: #f1f5f9;\n        }\n        .list-item input[type=\"checkbox\"] {\n            width: 1.2rem;\n            height: 1.2rem;\n            accent-color: #2563eb;\n            cursor: pointer;\n            flex-shrink: 0;\n            margin: 0;\n        }\n        .list-item label {\n            font-size: 1rem;\n            color: #0f172a;\n            font-weight: 450;\n            cursor: pointer;\n            flex: 1;\n        }\n        .action-area {\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            flex-wrap: wrap;\n            gap: 0.8rem 1rem;\n            margin-top: 0.5rem;\n            border-top: 1px solid #eef2f6;\n            padding-top: 1.5rem;\n        }\n        .result-badge {\n            background: #f1f5f9;\n            border-radius: 40px;\n            padding: 0.5rem 1.2rem;\n            font-size: 1rem;\n            font-weight: 500;\n            color: #1e293b;\n            display: inline-flex;\n            align-items: center;\n            gap: 0.3rem;\n            border: 1px solid #e2e8f0;\n            min-width: 110px;\n            justify-content: center;\n        }\n        .result-badge span {\n            font-weight: 600;\n            color: #0f172a;\n        }\n        button {\n            background: #1e293b;\n            border: none;\n            color: white;\n            font-weight: 500;\n            font-size: 1rem;\n            padding: 0.6rem 1.8rem;\n            border-radius: 60px;\n            cursor: pointer;\n            transition: 0.15s;\n            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);\n            letter-spacing: 0.3px;\n            display: inline-flex;\n            align-items: center;\n            gap: 0.4rem;\n        }\n        button:hover {\n            background: #0f172a;\n            transform: scale(0.98);\n        }\n        button:active {\n            background: #020617;\n        }\n        .footer-note {\n            margin-top: 1.2rem;\n            font-size: 0.8rem;\n            color: #94a3b8;\n            text-align: right;\n        }\n        .highlight {\n            background: #eef2ff;\n            border-color: #a5b4fc;\n        }\n        .required-text {\n            display: inline;\n        }\n    </style>\n</head>\n<body>\n<div class=\"card\">\n    <h1>\n        <span class=\"required-text\">实验准备</span>\n        <small class=\"required-text\">项目进度</small>\n    </h1>\n    <div class=\"subhead\">🧪 勾选第一项，点击更新</div>\n\n    <!-- 清单列表：三个项目，只有第一个使用 data-testid=\"selection-item\" -->\n    <div class=\"list-container\">\n        <div class=\"list-item highlight\" data-testid=\"selection-item\">\n            <input type=\"checkbox\" id=\"item1\" aria-label=\"选择 试管与试剂\">\n            <label for=\"item1\">🔬 试管与试剂</label>\n        </div>\n        <div class=\"list-item\" data-testid=\"list-item-2\">\n            <input type=\"checkbox\" id=\"item2\" aria-label=\"选择 显微镜\">\n            <label for=\"item2\">🔭 显微镜</label>\n        </div>\n        <div class=\"list-item\" data-testid=\"list-item-3\">\n            <input type=\"checkbox\" id=\"item3\" aria-label=\"选择 防护手套\">\n            <label for=\"item3\">🧤 防护手套</label>\n        </div>\n    </div>\n\n    <!-- 操作区：更新按钮 + 结果 -->\n    <div class=\"action-area\">\n        <button data-testid=\"primary-action\" id=\"updateBtn\">⟳ 更新进度</button>\n        <div class=\"result-badge\" data-testid=\"result\" id=\"resultDisplay\">\n            已完成 <span id=\"resultCount\">0</span> 项\n        </div>\n    </div>\n    <div class=\"footer-note\">✔ 勾选第一项后点击更新</div>\n</div>\n\n<script>\n    (function() {\n        // 获取关键元素\n        const selectionItem = document.querySelector('[data-testid=\"selection-item\"]');\n        const primaryBtn = document.querySelector('[data-testid=\"primary-action\"]');\n        const resultDisplay = document.querySelector('[data-testid=\"result\"]');\n        const resultCountSpan = document.getElementById('resultCount');\n\n        // 获取第一个 checkbox (在 selection-item 内部)\n        const checkbox1 = selectionItem ? selectionItem.querySelector('input[type=\"checkbox\"]') : null;\n        const checkbox2 = document.getElementById('item2');\n        const checkbox3 = document.getElementById('item3');\n\n        // 确保所有元素存在\n        if (!checkbox1 || !primaryBtn || !resultDisplay || !resultCountSpan) {\n            console.warn('关键元素缺失');\n        }\n\n        // 更新结果函数：计算所有勾选数量，并显示 \"已完成 X 项\"\n        function updateResult() {\n            let count = 0;\n            if (checkbox1 && checkbox1.checked) count++;\n            if (checkbox2 && checkbox2.checked) count++;\n            if (checkbox3 && checkbox3.checked) count++;\n\n            // 更新显示，保持 data-testid=\"result\" 结构不变，只更新数字\n            if (resultCountSpan) {\n                resultCountSpan.textContent = count;\n            }\n            // 确保整个文本格式为 \"已完成 X 项\"（由外层 .result-badge 保证）\n        }\n\n        // 绑定点击事件\n        if (primaryBtn) {\n            primaryBtn.addEventListener('click', updateResult);\n        }\n\n        // 初始化显示：确保显示 \"已完成 0 项\"\n        if (resultCountSpan) {\n            resultCountSpan.textContent = '0';\n        }\n\n        // 额外修复：如果 checkbox1 被勾选后点击更新，结果会正确显示 1\n        // 同时保证其他 checkbox 不会干扰 data-testid 唯一性\n        // 注意：selection-item 只出现在第一个 list-item 上，其他项使用 list-item-2 和 list-item-3\n    })();\n</script>\n\n</body>\n</html>",
+          "errors": [
+            "Action check on unique target selection-item could not be completed. Check the element type, visibility and interaction handler."
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "5b4dfb98-2ba0-4295-9ad2-977e32d4f40d/attempt-1/screenshot.png",
+          "durationMs": 1079
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "graph_single": {
+      "tasks": 1,
+      "passed": 0,
+      "calls": 2,
+      "inputTokens": 4492,
+      "outputTokens": 5487,
+      "meanDurationMs": 134765
+    },
+    "graph_multi": {
+      "tasks": 1,
+      "passed": 0,
+      "calls": 5,
+      "inputTokens": 11144,
+      "outputTokens": 5899,
+      "meanDurationMs": 156453
+    }
+  },
+  "model": "DMXAPI-deepseek-v4-flash"
+}

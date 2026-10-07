@@ -1,0 +1,70 @@
+{
+  "scope": "Targeted local Windows Java -> LangGraph -> Chromium regression for G-02. Original full-evaluation results unchanged; no claim of full six-case rerun.",
+  "finalCodeCommit": "be9bd54",
+  "contractHashesUnchanged": true,
+  "temporaryProviderConfigurationsRemaining": 0,
+  "attempts": [
+    {
+      "report": "graph-checklist-uniqueness-only.json",
+      "workflow": "graph_single",
+      "runId": "9da00162-c07c-4e0f-aff0-97f39d9fe6c3",
+      "attempt": 0,
+      "browserStatus": "FAILED",
+      "errors": [
+        "Action check on unique target selection-item could not be completed. Check the element type, visibility and interaction handler."
+      ],
+      "artifact": "evidence/checklist-artifacts/9da00162-c07c-4e0f-aff0-97f39d9fe6c3/attempt-0"
+    },
+    {
+      "report": "graph-checklist-uniqueness-only.json",
+      "workflow": "graph_single",
+      "runId": "9da00162-c07c-4e0f-aff0-97f39d9fe6c3",
+      "attempt": 1,
+      "browserStatus": "FAILED",
+      "errors": [
+        "Action check on unique target selection-item could not be completed. Check the element type, visibility and interaction handler."
+      ],
+      "artifact": "evidence/checklist-artifacts/9da00162-c07c-4e0f-aff0-97f39d9fe6c3/attempt-1"
+    },
+    {
+      "report": "graph-checklist-uniqueness-only.json",
+      "workflow": "graph_multi",
+      "runId": "5b4dfb98-2ba0-4295-9ad2-977e32d4f40d",
+      "attempt": 0,
+      "browserStatus": "FAILED",
+      "errors": [
+        "Action check on unique target selection-item could not be completed. Check the element type, visibility and interaction handler."
+      ],
+      "artifact": "evidence/checklist-artifacts/5b4dfb98-2ba0-4295-9ad2-977e32d4f40d/attempt-0"
+    },
+    {
+      "report": "graph-checklist-uniqueness-only.json",
+      "workflow": "graph_multi",
+      "runId": "5b4dfb98-2ba0-4295-9ad2-977e32d4f40d",
+      "attempt": 1,
+      "browserStatus": "FAILED",
+      "errors": [
+        "Action check on unique target selection-item could not be completed. Check the element type, visibility and interaction handler."
+      ],
+      "artifact": "evidence/checklist-artifacts/5b4dfb98-2ba0-4295-9ad2-977e32d4f40d/attempt-1"
+    },
+    {
+      "report": "graph-checklist-fix.json",
+      "workflow": "graph_single",
+      "runId": "147380c7-5be6-4d2c-a11e-1b3afdc81111",
+      "attempt": 0,
+      "browserStatus": "PASSED",
+      "errors": [],
+      "artifact": "evidence/checklist-artifacts/147380c7-5be6-4d2c-a11e-1b3afdc81111/attempt-0"
+    },
+    {
+      "report": "graph-checklist-fix.json",
+      "workflow": "graph_multi",
+      "runId": "f9ca83db-95b0-46f6-a84c-4f3bf5bcb302",
+      "attempt": 0,
+      "browserStatus": "PASSED",
+      "errors": [],
+      "artifact": "evidence/checklist-artifacts/f9ca83db-95b0-46f6-a84c-4f3bf5bcb302/attempt-0"
+    }
+  ]
+}

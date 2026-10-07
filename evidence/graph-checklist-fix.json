@@ -1,0 +1,261 @@
+{
+  "timestamp": "2026-10-07T16:45:06.836Z",
+  "mode": "live",
+  "status": "passed",
+  "scope": "Paired single-role vs planner/coder/reviewer workflows on three development tasks with identical frozen contracts and no retrieval. Not a held-out benchmark; no claim of multi-agent superiority. Maximum 7 provider calls per paired scenario. A filtered rerun is a targeted regression, not a replacement for the original full evaluation.",
+  "limits": {
+    "tasks": 2,
+    "caseFilter": "G-02",
+    "maxRepairsPerTask": 1,
+    "tokenBudgetPerTask": 50000,
+    "maxOutputTokensPerCall": 4096
+  },
+  "results": [
+    {
+      "caseId": "G-02",
+      "workflow": "graph_single",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "147380c7-5be6-4d2c-a11e-1b3afdc81111",
+      "prompt": "制作中文实验准备清单，先勾选第一项再点击更新，结果精确显示已完成 1 项。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-07T16:45:06.967308200Z",
+      "completedAt": "2026-10-07T16:45:32.053866800Z",
+      "error": "",
+      "maxRepairs": 1,
+      "tokenBudget": 50000,
+      "inputTokens": 446,
+      "outputTokens": 956,
+      "calls": 1,
+      "contractHash": "3aaa11a82c8538c0cf92d2ddb89960c2f5382740da07419c01f2bbdd67ff7036",
+      "pauseAfterPlan": false,
+      "resumable": false,
+      "steps": [
+        {
+          "action": "check",
+          "target": "selection-item",
+          "value": ""
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "已完成 1 项"
+        }
+      ],
+      "plan": {
+        "summary": "制作中文实验准备清单，先勾选第一项再点击更新，结果精确显示已完成 1 项。",
+        "steps": [
+          {
+            "action": "check",
+            "target": "selection-item",
+            "value": ""
+          },
+          {
+            "action": "click",
+            "target": "primary-action",
+            "value": ""
+          },
+          {
+            "action": "assert_text",
+            "target": "result",
+            "value": "已完成 1 项"
+          }
+        ]
+      },
+      "usageKnown": true,
+      "durationMs": 24985,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "实验准备",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-07T16:45:07.081160+00:00",
+          "stage": "plan",
+          "message": "验收步骤已固定；生成和修复不能更改"
+        },
+        {
+          "at": "2026-10-07T16:45:07.084188+00:00",
+          "stage": "approval",
+          "message": "验收契约已确认"
+        },
+        {
+          "at": "2026-10-07T16:45:30.786418+00:00",
+          "stage": "generate",
+          "message": "编码角色第 1 次生成"
+        },
+        {
+          "at": "2026-10-07T16:45:32.018868+00:00",
+          "stage": "validate",
+          "message": "PASSED"
+        },
+        {
+          "at": "2026-10-07T16:45:32.021887+00:00",
+          "stage": "complete",
+          "message": "PASSED"
+        },
+        {
+          "at": "2026-10-07T16:45:32.053866800Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>实验准备清单</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n            max-width: 600px;\n            margin: 40px auto;\n            padding: 0 20px;\n            background: #f5f7fa;\n        }\n        h1 {\n            color: #2c3e50;\n            border-bottom: 2px solid #3498db;\n            padding-bottom: 10px;\n        }\n        .container {\n            background: white;\n            border-radius: 12px;\n            padding: 24px;\n            box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n        }\n        .list-item {\n            display: flex;\n            align-items: center;\n            padding: 12px 0;\n            border-bottom: 1px solid #eee;\n        }\n        .list-item:last-child {\n            border-bottom: none;\n        }\n        .list-item label {\n            margin-left: 10px;\n            font-size: 16px;\n            color: #333;\n            cursor: pointer;\n        }\n        .list-item input[type=\"checkbox\"] {\n            width: 20px;\n            height: 20px;\n            cursor: pointer;\n        }\n        .actions {\n            margin-top: 20px;\n            display: flex;\n            gap: 12px;\n            align-items: center;\n        }\n        button {\n            background: #3498db;\n            color: white;\n            border: none;\n            padding: 10px 24px;\n            border-radius: 8px;\n            font-size: 16px;\n            cursor: pointer;\n            transition: background 0.2s;\n        }\n        button:hover {\n            background: #2980b9;\n        }\n        .result-area {\n            margin-top: 20px;\n            padding: 16px;\n            background: #e8f4f8;\n            border-radius: 8px;\n            font-size: 18px;\n            color: #2c3e50;\n            font-weight: 500;\n        }\n        .section-title {\n            font-size: 14px;\n            color: #7f8c8d;\n            margin-bottom: 8px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <h1>实验准备</h1>\n        <div class=\"section-title\">项目进度</div>\n        <div id=\"list-container\">\n            <div class=\"list-item\">\n                <input type=\"checkbox\" data-testid=\"selection-item\" id=\"item1\">\n                <label for=\"item1\">试管与烧杯</label>\n            </div>\n            <div class=\"list-item\">\n                <input type=\"checkbox\" id=\"item2\">\n                <label for=\"item2\">显微镜</label>\n            </div>\n            <div class=\"list-item\">\n                <input type=\"checkbox\" id=\"item3\">\n                <label for=\"item3\">实验记录本</label>\n            </div>\n        </div>\n        <div class=\"actions\">\n            <button data-testid=\"primary-action\" id=\"updateBtn\">更新进度</button>\n        </div>\n        <div class=\"result-area\" data-testid=\"result\" id=\"resultDisplay\">请勾选项目后点击更新</div>\n    </div>\n\n    <script>\n        (function() {\n            const updateBtn = document.getElementById('updateBtn');\n            const resultDisplay = document.getElementById('resultDisplay');\n            const checkboxes = document.querySelectorAll('input[type=\"checkbox\"]');\n\n            function updateResult() {\n                let checkedCount = 0;\n                for (let cb of checkboxes) {\n                    if (cb.checked) checkedCount++;\n                }\n                if (checkedCount === 0) {\n                    resultDisplay.textContent = '请勾选项目后点击更新';\n                } else {\n                    resultDisplay.textContent = '已完成 ' + checkedCount + ' 项';\n                }\n            }\n\n            updateBtn.addEventListener('click', updateResult);\n        })();\n    </script>\n</body>\n</html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "147380c7-5be6-4d2c-a11e-1b3afdc81111/attempt-0/screenshot.png",
+          "durationMs": 1234
+        }
+      ]
+    },
+    {
+      "caseId": "G-02",
+      "workflow": "graph_multi",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "f9ca83db-95b0-46f6-a84c-4f3bf5bcb302",
+      "prompt": "制作中文实验准备清单，先勾选第一项再点击更新，结果精确显示已完成 1 项。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-07T16:45:32.418580100Z",
+      "completedAt": "2026-10-07T16:46:13.225699900Z",
+      "error": "",
+      "maxRepairs": 1,
+      "tokenBudget": 50000,
+      "inputTokens": 2335,
+      "outputTokens": 1327,
+      "calls": 3,
+      "contractHash": "3aaa11a82c8538c0cf92d2ddb89960c2f5382740da07419c01f2bbdd67ff7036",
+      "pauseAfterPlan": false,
+      "resumable": false,
+      "steps": [
+        {
+          "action": "check",
+          "target": "selection-item",
+          "value": ""
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "已完成 1 项"
+        }
+      ],
+      "plan": {
+        "summary": "制作中文实验准备清单，先勾选第一项再点击更新，结果精确显示已完成 1 项。",
+        "steps": [
+          {
+            "action": "check",
+            "target": "selection-item",
+            "value": ""
+          },
+          {
+            "action": "click",
+            "target": "primary-action",
+            "value": ""
+          },
+          {
+            "action": "assert_text",
+            "target": "result",
+            "value": "已完成 1 项"
+          }
+        ]
+      },
+      "usageKnown": true,
+      "durationMs": 40797,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "实验准备",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-07T16:45:37.224976+00:00",
+          "stage": "plan",
+          "message": "验收步骤已固定；生成和修复不能更改"
+        },
+        {
+          "at": "2026-10-07T16:45:37.227765+00:00",
+          "stage": "approval",
+          "message": "验收契约已确认"
+        },
+        {
+          "at": "2026-10-07T16:46:01.099223+00:00",
+          "stage": "generate",
+          "message": "编码角色第 1 次生成"
+        },
+        {
+          "at": "2026-10-07T16:46:02.552252+00:00",
+          "stage": "validate",
+          "message": "PASSED"
+        },
+        {
+          "at": "2026-10-07T16:46:13.210964+00:00",
+          "stage": "review",
+          "message": "{\"issues\": [\"data-testid=\\\"selection-item\\\" 只出现在第一个复选框上，但步骤要求勾选 'selection-item'，这符合预期，但其他复选框使用了不同的 data-testid（如 other-item-1），如果后续步骤需要操作其他项，则可能不匹配。当前无问题。\", \"requiredTexts 中 '实验准备' 和 '项目进度' 均存在于页面中，但 '项目进度' 位于 div.progress-label 中，文本可见，无问题。\", \"checkInteraction 为 true，步骤要求先勾选再点击更新，HTML 中复选框和按钮均存在且可交互，无问题。\", \"assert_text 目标 data-testid=\\\"result\\\" 对应 span#resultDisplay，初始文本为 '未开始'，点击更新后若勾选第一项则显示 '已完成 1 项'，符合预期。\", \"无重复 data-testid 问题，每个 data-testid 值唯一。\", \"无浏览器错误报告。\"]}"
+        },
+        {
+          "at": "2026-10-07T16:46:13.214354+00:00",
+          "stage": "complete",
+          "message": "PASSED"
+        },
+        {
+          "at": "2026-10-07T16:46:13.225699900Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>实验准备清单</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n            max-width: 600px;\n            margin: 40px auto;\n            padding: 20px;\n            background: #f5f7fa;\n        }\n        h1 {\n            color: #2c3e50;\n            text-align: center;\n            margin-bottom: 30px;\n        }\n        .list-container {\n            background: white;\n            border-radius: 12px;\n            padding: 20px;\n            box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n        }\n        .list-item {\n            display: flex;\n            align-items: center;\n            padding: 12px 0;\n            border-bottom: 1px solid #eee;\n        }\n        .list-item:last-child {\n            border-bottom: none;\n        }\n        .list-item label {\n            margin-left: 10px;\n            font-size: 16px;\n            color: #333;\n            cursor: pointer;\n        }\n        .list-item input[type=\"checkbox\"] {\n            width: 20px;\n            height: 20px;\n            cursor: pointer;\n        }\n        .action-area {\n            margin-top: 20px;\n            display: flex;\n            align-items: center;\n            gap: 16px;\n        }\n        button {\n            padding: 10px 24px;\n            background: #3498db;\n            color: white;\n            border: none;\n            border-radius: 8px;\n            font-size: 16px;\n            cursor: pointer;\n            transition: background 0.2s;\n        }\n        button:hover {\n            background: #2980b9;\n        }\n        .result {\n            font-size: 18px;\n            font-weight: 600;\n            color: #27ae60;\n            min-width: 120px;\n        }\n        .progress-label {\n            font-size: 14px;\n            color: #7f8c8d;\n            margin-top: 8px;\n        }\n    </style>\n</head>\n<body>\n    <h1>实验准备</h1>\n    <div class=\"list-container\">\n        <div class=\"list-item\">\n            <input type=\"checkbox\" id=\"item1\" data-testid=\"selection-item\" class=\"check-item\">\n            <label for=\"item1\">试管与烧杯</label>\n        </div>\n        <div class=\"list-item\">\n            <input type=\"checkbox\" id=\"item2\" class=\"check-item\" data-testid=\"other-item-1\">\n            <label for=\"item2\">电子天平</label>\n        </div>\n        <div class=\"list-item\">\n            <input type=\"checkbox\" id=\"item3\" class=\"check-item\" data-testid=\"other-item-2\">\n            <label for=\"item3\">pH 试纸</label>\n        </div>\n        <div class=\"list-item\">\n            <input type=\"checkbox\" id=\"item4\" class=\"check-item\" data-testid=\"other-item-3\">\n            <label for=\"item4\">蒸馏水</label>\n        </div>\n    </div>\n    <div class=\"action-area\">\n        <button id=\"updateBtn\" data-testid=\"primary-action\">更新进度</button>\n        <span id=\"resultDisplay\" data-testid=\"result\" class=\"result\">未开始</span>\n    </div>\n    <div class=\"progress-label\">项目进度</div>\n\n    <script>\n        (function() {\n            const updateBtn = document.getElementById('updateBtn');\n            const resultDisplay = document.getElementById('resultDisplay');\n\n            function updateProgress() {\n                const checkboxes = document.querySelectorAll('.check-item');\n                let checkedCount = 0;\n                checkboxes.forEach(cb => {\n                    if (cb.checked) checkedCount++;\n                });\n                if (checkedCount === 0) {\n                    resultDisplay.textContent = '未开始';\n                } else {\n                    resultDisplay.textContent = '已完成 ' + checkedCount + ' 项';\n                }\n            }\n\n            updateBtn.addEventListener('click', updateProgress);\n\n            // 初始状态：未开始\n            resultDisplay.textContent = '未开始';\n        })();\n    </script>\n</body>\n</html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "f9ca83db-95b0-46f6-a84c-4f3bf5bcb302/attempt-0/screenshot.png",
+          "durationMs": 1453
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "graph_single": {
+      "tasks": 1,
+      "passed": 1,
+      "calls": 1,
+      "inputTokens": 446,
+      "outputTokens": 956,
+      "meanDurationMs": 24985
+    },
+    "graph_multi": {
+      "tasks": 1,
+      "passed": 1,
+      "calls": 3,
+      "inputTokens": 2335,
+      "outputTokens": 1327,
+      "meanDurationMs": 40797
+    }
+  },
+  "model": "DMXAPI-deepseek-v4-flash"
+}

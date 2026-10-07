@@ -1,5 +1,7 @@
 # LangGraph 与 RAG 真实模型验证
 
+**后续修复：** 原失败清单场景已完成控件唯一性与类型修复，同模型、同契约定向复测单角色和多角色均通过（2/2）。此次在本地完整链路验证，turing 同步待 SSH 恢复；不合并为新的六任务成功率。见 [清单修复报告](CHECKLIST-REGRESSION.md)。
+
 测试日期：2026-10-08（Asia/Singapore）。运行于实际 Linux HTTPS 部署，模型标识为 `DMXAPI-deepseek-v4-flash`。
 
 ## 方法与范围

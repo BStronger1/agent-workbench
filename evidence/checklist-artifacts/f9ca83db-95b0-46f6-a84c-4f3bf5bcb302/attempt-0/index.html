@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验准备清单</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .list-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        .list-item label {
+            margin-left: 10px;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+        }
+        .list-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .action-area {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        button {
+            padding: 10px 24px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .result {
+            font-size: 18px;
+            font-weight: 600;
+            color: #27ae60;
+            min-width: 120px;
+        }
+        .progress-label {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>实验准备</h1>
+    <div class="list-container">
+        <div class="list-item">
+            <input type="checkbox" id="item1" data-testid="selection-item" class="check-item">
+            <label for="item1">试管与烧杯</label>
+        </div>
+        <div class="list-item">
+            <input type="checkbox" id="item2" class="check-item" data-testid="other-item-1">
+            <label for="item2">电子天平</label>
+        </div>
+        <div class="list-item">
+            <input type="checkbox" id="item3" class="check-item" data-testid="other-item-2">
+            <label for="item3">pH 试纸</label>
+        </div>
+        <div class="list-item">
+            <input type="checkbox" id="item4" class="check-item" data-testid="other-item-3">
+            <label for="item4">蒸馏水</label>
+        </div>
+    </div>
+    <div class="action-area">
+        <button id="updateBtn" data-testid="primary-action">更新进度</button>
+        <span id="resultDisplay" data-testid="result" class="result">未开始</span>
+    </div>
+    <div class="progress-label">项目进度</div>
+
+    <script>
+        (function() {
+            const updateBtn = document.getElementById('updateBtn');
+            const resultDisplay = document.getElementById('resultDisplay');
+
+            function updateProgress() {
+                const checkboxes = document.querySelectorAll('.check-item');
+                let checkedCount = 0;
+                checkboxes.forEach(cb => {
+                    if (cb.checked) checkedCount++;
+                });
+                if (checkedCount === 0) {
+                    resultDisplay.textContent = '未开始';
+                } else {
+                    resultDisplay.textContent = '已完成 ' + checkedCount + ' 项';
+                }
+            }
+
+            updateBtn.addEventListener('click', updateProgress);
+
+            // 初始状态：未开始
+            resultDisplay.textContent = '未开始';
+        })();
+    </script>
+</body>
+</html>

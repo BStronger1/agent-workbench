@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验准备清单</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: #f5f7fa;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        .list-item label {
+            margin-left: 10px;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+        }
+        .list-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .result-area {
+            margin-top: 20px;
+            padding: 16px;
+            background: #e8f4f8;
+            border-radius: 8px;
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        .section-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>实验准备</h1>
+        <div class="section-title">项目进度</div>
+        <div id="list-container">
+            <div class="list-item">
+                <input type="checkbox" data-testid="selection-item" id="item1">
+                <label for="item1">试管与烧杯</label>
+            </div>
+            <div class="list-item">
+                <input type="checkbox" id="item2">
+                <label for="item2">显微镜</label>
+            </div>
+            <div class="list-item">
+                <input type="checkbox" id="item3">
+                <label for="item3">实验记录本</label>
+            </div>
+        </div>
+        <div class="actions">
+            <button data-testid="primary-action" id="updateBtn">更新进度</button>
+        </div>
+        <div class="result-area" data-testid="result" id="resultDisplay">请勾选项目后点击更新</div>
+    </div>
+
+    <script>
+        (function() {
+            const updateBtn = document.getElementById('updateBtn');
+            const resultDisplay = document.getElementById('resultDisplay');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            function updateResult() {
+                let checkedCount = 0;
+                for (let cb of checkboxes) {
+                    if (cb.checked) checkedCount++;
+                }
+                if (checkedCount === 0) {
+                    resultDisplay.textContent = '请勾选项目后点击更新';
+                } else {
+                    resultDisplay.textContent = '已完成 ' + checkedCount + ' 项';
+                }
+            }
+
+            updateBtn.addEventListener('click', updateResult);
+        })();
+    </script>
+</body>
+</html>

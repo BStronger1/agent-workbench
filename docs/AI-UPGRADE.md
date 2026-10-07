@@ -81,3 +81,6 @@ node qa/graph-live.mjs --live
 启动顺序：`bash deploy/start-postgres.sh` → `bash deploy/start-ai.sh` → `bash deploy/start.sh`；停止顺序相反。脚本使用现有初始化数据库，不自动创建或覆盖数据。这些进程跨 SSH 断开运行，但未配置整机重启后的自动启动。
 
 更新前的 JAR 和业务数据备份在私有部署目录 `releases/pre-ai-backup`；回滚时停 Java 和 AI 服务，恢复旧 JAR，保留数据，关闭 `AI_SERVICE_URL` 后启动基础工作台。数据库备份应使用 `pg_dump`，不要把运行中数据目录当作一致性备份。
+
+
+原失败清单场景修复后，使用同模型、同契约定向复测两种角色模式均通过（2/2）；这是本地完整服务链路结果，本次修复的服务器同步待 SSH 恢复。[修复与复测证据](CHECKLIST-REGRESSION.md)。
