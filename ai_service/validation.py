@@ -33,6 +33,15 @@ def static_errors(html, contract):
         for selector in ["button[data-testid=primary-action]", "[data-testid=result]"]:
             if not soup.select_one(selector):
                 errors.append("Missing " + selector)
+    # A test ID identifies one element, not a list/group. Catch duplicates before
+    # paying for browser startup, but allow zero static matches for JS-created UI.
+    for target in dict.fromkeys(step["target"] for step in contract.get("steps", [])):
+        count = len(soup.find_all(attrs={"data-testid": target}))
+        if count > 1:
+            errors.append(
+                f"Target {target} must match exactly one element; found {count}. "
+                "Keep this data-testid only on the intended element; use distinct IDs for other list items."
+            )
     return list(dict.fromkeys(errors))
 
 

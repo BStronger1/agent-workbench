@@ -1,11 +1,15 @@
 import { request } from "playwright";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { requireEvaluationMode } from "./eval-policy.mjs";
+const caseId = process.argv.find(x => x.startsWith("--case="))?.slice(7);
+const outputName = process.argv.find(x => x.startsWith("--output="))?.slice(9) ?? "graph-live.json";
+if (caseId && !["G-01", "G-02", "G-03"].includes(caseId)) throw new Error("Unknown case");
+if (!/^[a-z0-9-]+\.json$/.test(outputName)) throw new Error("Invalid output filename");
 const fixtures = [
  {id:"G-01",prompt:"制作中文研究任务进度页，点击按钮后已完成数量增加。",requiredTexts:["研究任务","项目进度"],steps:[{action:"click",target:"primary-action",value:""},{action:"assert_changed",target:"result",value:""}]},
  {id:"G-02",prompt:"制作中文实验准备清单，先勾选第一项再点击更新，结果精确显示已完成 1 项。",requiredTexts:["实验准备","项目进度"],steps:[{action:"check",target:"selection-item",value:""},{action:"click",target:"primary-action",value:""},{action:"assert_text",target:"result",value:"已完成 1 项"}]},
  {id:"G-03",prompt:"制作中文阅读任务记录页，输入任务内容后提交，结果区域精确显示输入内容。",requiredTexts:["阅读任务","项目进度"],steps:[{action:"fill",target:"task-input",value:"阅读论文"},{action:"click",target:"primary-action",value:""},{action:"assert_text",target:"result",value:"阅读论文"}]}
-].flatMap(t=>["graph_single","graph_multi"].map(workflow=>({...t,workflow})));
+].filter(t=>!caseId || t.id===caseId).flatMap(t=>["graph_single","graph_multi"].map(workflow=>({...t,workflow})));
 function summary(rows) {
  return Object.fromEntries(["graph_single","graph_multi"].map(w=>{const r=rows.filter(x=>x.workflow===w);const known=r.every(x=>x.usageKnown);return [w,{tasks:r.length,passed:r.filter(x=>x.status==="PASSED").length,calls:r.reduce((a,x)=>a+x.calls,0),inputTokens:known?r.reduce((a,x)=>a+x.inputTokens,0):null,outputTokens:known?r.reduce((a,x)=>a+x.outputTokens,0):null,meanDurationMs:r.length?r.reduce((a,x)=>a+x.durationMs,0)/r.length:null}]}));
 }
@@ -39,16 +43,17 @@ const report = {
   mode: "live",
   status: "running",
   scope:
-    "Paired single-role vs planner/coder/reviewer workflows on three development tasks with identical frozen contracts and no retrieval. Not a held-out benchmark; no claim of multi-agent superiority. Maximum 21 provider calls across 6 tasks.",
+    "Paired single-role vs planner/coder/reviewer workflows on three development tasks with identical frozen contracts and no retrieval. Not a held-out benchmark; no claim of multi-agent superiority. Maximum 7 provider calls per paired scenario. A filtered rerun is a targeted regression, not a replacement for the original full evaluation.",
   limits: {
-    tasks: 6,
+    tasks: fixtures.length,
+    caseFilter: caseId ?? null,
     maxRepairsPerTask: 1,
     tokenBudgetPerTask: 50000,
     maxOutputTokensPerCall: 4096,
   },
   results: [],
 };
-const output = new URL("../evidence/graph-live.json", import.meta.url);
+const output = new URL("../evidence/" + outputName, import.meta.url);
 let temporaryProvider = false,
   started = false;
 async function api(path, data) {

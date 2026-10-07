@@ -1,4 +1,4 @@
-import { executeSteps } from "./contract.mjs";
+import { executeSteps, ContractError } from "./contract.mjs";
 import { chromium } from "playwright";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -57,7 +57,7 @@ try {
       errors.push("验收文本不可见：" + text);
   if (contract.steps?.length) {
     try { await executeSteps(page, contract.steps); }
-    catch { errors.push("结构化交互步骤或断言失败"); }
+    catch (error) { errors.push(error instanceof ContractError ? error.message : "结构化交互步骤或断言失败"); }
   } else if (contract.checkInteraction) {
     const button = page.getByTestId("primary-action"),
       result = page.getByTestId("result");
