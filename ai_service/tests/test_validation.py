@@ -41,3 +41,25 @@ def test_static_check_allows_js_created_targets_but_rejects_duplicate_assertions
     assert any(
         "Target result must match exactly one element; found 2." in e for e in errors
     )
+
+
+def test_check_target_requires_checkbox_but_associated_labels_remain_valid():
+    prefix = '<!DOCTYPE html><title>x</title><meta name="viewport"><h1>x</h1>'
+    contract = {
+        "requiredTexts": [],
+        "checkInteraction": False,
+        "steps": [{"action": "check", "target": "item"}],
+    }
+    errors = static_errors(
+        prefix + '<div data-testid="item"><input type="checkbox"></div>', contract
+    )
+    assert any(
+        "Step check target item is <div>, not a checkbox/radio." in e for e in errors
+    )
+    for html in [
+        '<input type="checkbox" data-testid="item">',
+        '<label data-testid="item"><input type="checkbox"></label>',
+        '<label for="c" data-testid="item">Check</label><input id="c" type="checkbox">',
+        '<div role="checkbox" aria-checked="false" data-testid="item"></div>',
+    ]:
+        assert static_errors(prefix + html, contract) == []

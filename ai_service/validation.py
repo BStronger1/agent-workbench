@@ -42,6 +42,33 @@ def static_errors(html, contract):
                 f"Target {target} must match exactly one element; found {count}. "
                 "Keep this data-testid only on the intended element; use distinct IDs for other list items."
             )
+    for step in contract.get("steps", []):
+        if step["action"] != "check":
+            continue
+        matches = soup.find_all(attrs={"data-testid": step["target"]})
+        if len(matches) != 1:
+            continue
+        element = matches[0]
+        control = element
+        # Playwright supports associated labels as well as native/ARIA controls.
+        if element.name == "label":
+            control = (
+                soup.find(id=element.get("for"))
+                if element.get("for")
+                else element.find("input")
+            )
+        checkable = control is not None and (
+            (
+                control.name == "input"
+                and control.get("type", "").lower() in ("checkbox", "radio")
+            )
+            or control.get("role", "").lower() in ("checkbox", "radio")
+        )
+        if not checkable:
+            errors.append(
+                f"Step check target {step['target']} is <{element.name}>, not a checkbox/radio. "
+                "Move data-testid onto the actual checkbox input, not the surrounding list item or card."
+            )
     return list(dict.fromkeys(errors))
 
 

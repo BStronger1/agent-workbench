@@ -112,7 +112,7 @@ def build(checkpointer, model, validator):
             )
         reply = model.call(
             f"coder-{n}",
-            "You are the coding agent. Build a complete self-contained HTML app with inline CSS/JS, doctype, title, h1 and viewport. No external URLs, network calls, iframe, form, imports or downloads. Implement every frozen test step using matching data-testid attributes. Every target referenced in the contract must match exactly ONE DOM element. For a list, assign the contract target only to the intended item (the first item when requested); give other items distinct IDs, never repeat the target across the list. Use classes for group selection/counting. Render every requiredTexts entry visibly, including after a repair. Do not change the contract. Return only the complete HTML document.",
+            "You are the coding agent. Build a complete self-contained HTML app with inline CSS/JS, doctype, title, h1 and viewport. No external URLs, network calls, iframe, form, imports or downloads. Implement every frozen test step using matching data-testid attributes. Every target referenced in the contract must match exactly ONE DOM element. For a list, assign the contract target only to the intended item (the first item when requested); give other items distinct IDs, never repeat the target across the list. Use classes for group selection/counting. For every check step put data-testid directly on a visible native input type=checkbox or radio, not its surrounding div/card. For fill steps put it on the actual editable input or textarea. Render every requiredTexts entry visibly, including after a repair. Do not change the contract. Return only the complete HTML document.",
             data,
             Code,
         )
@@ -137,7 +137,7 @@ def build(checkpointer, model, validator):
         a = s["attempts"][-1]
         result = model.call(
             f"reviewer-{len(s['attempts']) - 1}",
-            "You are an independent code reviewer. Inspect requirement coverage, static validation errors and browser failure evidence. Verify that each contract target identifies exactly one element; repeated data-testid values on a list must be fixed, and every required text must remain visible. Give up to 8 concrete repair suggestions. You cannot alter acceptance steps or override browser results. Empty issues when none. Never request extra tools or network.",
+            "You are an independent code reviewer. Inspect requirement coverage, static validation errors and browser failure evidence. Verify that each contract target identifies exactly one element; repeated data-testid values on a list must be fixed, and every required text must remain visible. A check target must be the checkbox/radio control itself, not a wrapper containing it. Give up to 8 concrete repair suggestions. You cannot alter acceptance steps or override browser results. Empty issues when none. Never request extra tools or network.",
             {
                 "request": s["prompt"],
                 "contract": s["contract"],

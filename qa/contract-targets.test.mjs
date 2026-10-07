@@ -19,6 +19,11 @@ test('unique checkbox targets retain group counting and exact assertions',async(
  const b=await chromium.launch({headless:true,chromiumSandbox:process.platform==='linux'});
  try{
   const p=await b.newPage();
+  await p.setContent('<div data-testid="item"><input type="checkbox"></div>');
+  await assert.rejects(executeSteps(p,[{action:'check',target:'item'}]),/target item is <div>, not a checkbox/);
+  await p.setContent('<label data-testid="item"><input type="checkbox"></label>');
+  await executeSteps(p,[{action:'check',target:'item'}]);
+  assert.equal(await p.locator('input').isChecked(),true);
   await p.setContent(`<input class="item" type="checkbox" data-testid="selection-item"><input class="item" type="checkbox" data-testid="other-item"><button data-testid="primary-action">更新</button><p data-testid="result">已完成 0 项</p><script>document.querySelector('button').onclick=()=>document.querySelector('p').textContent='已完成 '+document.querySelectorAll('.item:checked').length+' 项'</script>`);
   const steps=[{action:'check',target:'selection-item'},{action:'click',target:'primary-action'},{action:'assert_text',target:'result',value:'已完成 1 项'}];
   await executeSteps(p,steps);

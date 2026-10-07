@@ -22,6 +22,13 @@ export async function executeSteps(page, steps) {
   }
   for (const step of steps) {
     const target = await uniqueTarget(page, step.target, step.action);
+    if (step.action === 'check') {
+      const info = await target.evaluate(e => {
+        const c = e.tagName === 'LABEL' ? e.control : e;
+        return {tag:e.tagName.toLowerCase(), checkable:!!c && ((c.tagName === 'INPUT' && ['checkbox','radio'].includes(c.type)) || ['checkbox','radio'].includes(c.getAttribute('role')))};
+      });
+      if (!info.checkable) throw new ContractError(`Step check target ${step.target} is <${info.tag}>, not a checkbox/radio. Move data-testid onto the actual checkbox input, not the surrounding list item or card.`);
+    }
     try {
       if (step.action === 'check') await target.check();
       if (step.action === 'fill') await target.fill(step.value ?? '');
