@@ -44,8 +44,11 @@ test("summary separates repair and missing usage", () => {
   rows[0].usageKnown = true;
   rows[0].status = "FAILED";
   rows[0].attempts = [rows[0].attempts[0]];
-  rows[0].events = [{stage:"repair"}];
+  rows[0].events = [{stage:"generate"}, {stage:"repair"}];
   assert.equal(evaluationSummary(rows).repairAttempted, 1);
   assert.equal(evaluationSummary(rows).outputTokens, null);
+  rows[0].attempts.push({browserStatus:"FAILED",errors:["button"]});
+  assert.equal(evaluationSummary(rows).usageKnown, true);
+  assert.equal(evaluationSummary(rows).outputTokens, 40);
   assert.equal(evaluationSummary([]).meanDurationMs, null);
 });

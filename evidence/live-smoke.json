@@ -1,0 +1,453 @@
+{
+  "timestamp": "2026-10-07T12:32:30.750Z",
+  "mode": "live",
+  "status": "completed_with_failures",
+  "scope": "Six live workflow probes on three development scenarios with isolated project histories; not a held-out benchmark or evidence of memory effectiveness. Repair is tested only when natural failures occur.",
+  "limits": {
+    "tasks": 6,
+    "maxRepairsPerTask": 1,
+    "tokenBudgetPerTask": 24000,
+    "maxOutputTokensPerCall": 4096
+  },
+  "results": [
+    {
+      "caseId": "WB-001",
+      "split": "dev",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "a1b97e89-b1be-48af-9c96-0c3d72c4b023",
+      "prompt": "制作一个研究任务看板，支持点击按钮更新完成数量。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-07T12:32:31.411960673Z",
+      "completedAt": "2026-10-07T12:33:17.193046053Z",
+      "error": null,
+      "maxRepairs": 1,
+      "tokenBudget": 24000,
+      "inputTokens": 160,
+      "outputTokens": 1625,
+      "usageKnown": true,
+      "durationMs": 45735,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "研究任务",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-07T12:32:31.460138994Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-07T12:32:31.510352459Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-07T12:33:11.054102706Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-07T12:33:17.193121802Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>研究任务看板</title><style>body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f0f2f5;margin:0;padding:20px;min-height:100vh;display:flex;justify-content:center;align-items:center}.board{max-width:800px;width:100%;background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:30px}h1{color:#1a1a2e;font-size:28px;margin:0 0 8px 0;text-align:center}.subtitle{text-align:center;color:#6b7280;margin:0 0 24px 0;font-size:14px}.stats{display:flex;justify-content:space-around;margin-bottom:28px;gap:16px}.stat-card{background:#f8fafc;border-radius:12px;padding:16px 24px;text-align:center;flex:1;border:1px solid #e5e7eb}.stat-card .label{font-size:13px;color:#6b7280;margin-bottom:4px}.stat-card .value{font-size:32px;font-weight:700;color:#1a1a2e}.task-list{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}.task-item{display:flex;align-items:center;padding:14px 18px;background:#f9fafb;border-radius:10px;border-left:4px solid #6366f1;transition:background 0.2s}.task-item.completed{background:#eef2ff;border-left-color:#22c55e;opacity:0.85}.task-item .task-name{flex:1;font-size:15px;color:#1f2937}.task-item .task-status{font-size:13px;color:#6b7280;background:#e5e7eb;padding:2px 10px;border-radius:20px}.task-item.completed .task-status{background:#bbf7d0;color:#166534}.actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}button{background:#6366f1;color:#fff;border:none;padding:12px 32px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:background 0.2s,transform 0.1s}button:hover{background:#4f46e5}button:active{transform:scale(0.97)}button.secondary{background:#e5e7eb;color:#374151}button.secondary:hover{background:#d1d5db}.result-area{margin-top:24px;padding:16px;background:#f0fdf4;border-radius:10px;text-align:center;font-size:15px;color:#166534;border:1px solid #bbf7d0;min-height:24px;display:flex;align-items:center;justify-content:center}</style></head><body><div class=\"board\"><h1>研究任务看板</h1><p class=\"subtitle\">项目进度 · 实时追踪</p><div class=\"stats\"><div class=\"stat-card\"><div class=\"label\">总任务</div><div class=\"value\" id=\"totalCount\">5</div></div><div class=\"stat-card\"><div class=\"label\">已完成</div><div class=\"value\" id=\"completedCount\">2</div></div><div class=\"stat-card\"><div class=\"label\">完成率</div><div class=\"value\" id=\"completionRate\">40%</div></div></div><div class=\"task-list\" id=\"taskList\"><div class=\"task-item completed\" data-id=\"1\"><span class=\"task-name\">文献综述</span><span class=\"task-status\">已完成</span></div><div class=\"task-item\" data-id=\"2\"><span class=\"task-name\">实验设计</span><span class=\"task-status\">进行中</span></div><div class=\"task-item completed\" data-id=\"3\"><span class=\"task-name\">数据收集</span><span class=\"task-status\">已完成</span></div><div class=\"task-item\" data-id=\"4\"><span class=\"task-name\">数据分析</span><span class=\"task-status\">进行中</span></div><div class=\"task-item\" data-id=\"5\"><span class=\"task-name\">论文撰写</span><span class=\"task-status\">进行中</span></div></div><div class=\"actions\"><button data-testid=\"primary-action\" id=\"completeBtn\">✓ 完成下一项任务</button><button class=\"secondary\" id=\"resetBtn\">↺ 重置进度</button></div><div data-testid=\"result\" id=\"resultMessage\" class=\"result-area\">点击按钮更新任务完成数量</div></div><script>(function(){const taskItems=document.querySelectorAll('.task-item');const totalCount=document.getElementById('totalCount');const completedCount=document.getElementById('completedCount');const completionRate=document.getElementById('completionRate');const resultMsg=document.getElementById('resultMessage');const completeBtn=document.getElementById('completeBtn');const resetBtn=document.getElementById('resetBtn');function updateStats(){const total=taskItems.length;let completed=0;taskItems.forEach(item=>{if(item.classList.contains('completed')){completed++;}});const rate=total>0?Math.round((completed/total)*100):0;totalCount.textContent=total;completedCount.textContent=completed;completionRate.textContent=rate+'%';}function updateResult(text){resultMsg.textContent=text;}function completeNextTask(){let nextTask=null;for(let i=0;i<taskItems.length;i++){if(!taskItems[i].classList.contains('completed')){nextTask=taskItems[i];break;}}if(nextTask){nextTask.classList.add('completed');const statusSpan=nextTask.querySelector('.task-status');statusSpan.textContent='已完成';updateStats();const taskName=nextTask.querySelector('.task-name').textContent;updateResult('✅ 任务「'+taskName+'」已完成！');}else{updateResult('🎉 所有研究任务都已完成！太棒了！');}}function resetProgress(){taskItems.forEach(item=>{item.classList.remove('completed');const statusSpan=item.querySelector('.task-status');const name=item.querySelector('.task-name').textContent;if(name==='文献综述'||name==='数据收集'){statusSpan.textContent='已完成';item.classList.add('completed');}else{statusSpan.textContent='进行中';}});updateStats();updateResult('🔄 已重置为初始进度（2项已完成）');}completeBtn.addEventListener('click',completeNextTask);resetBtn.addEventListener('click',resetProgress);updateStats();})();</script></div></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "a1b97e89-b1be-48af-9c96-0c3d72c4b023/attempt-0/screenshot.png",
+          "durationMs": 45647
+        }
+      ]
+    },
+    {
+      "caseId": "WB-003",
+      "split": "dev",
+      "strategy": "retrieval",
+      "injectedFailure": false,
+      "id": "a488207e-d723-4567-963c-3036c7a9b388",
+      "prompt": "制作一个研究任务看板，支持点击按钮更新完成数量。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-07T12:33:18.089106336Z",
+      "completedAt": "2026-10-07T12:34:22.058031204Z",
+      "error": null,
+      "maxRepairs": 1,
+      "tokenBudget": 24000,
+      "inputTokens": 239,
+      "outputTokens": 1658,
+      "usageKnown": true,
+      "durationMs": 63928,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "研究任务",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "f469ab5a-ecc4-469d-843a-5445d07a396a",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2.0454545454545454
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-07T12:33:18.129533727Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-07T12:33:18.165857980Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-07T12:34:20.938790467Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-07T12:34:22.058057024Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>研究任务看板</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f2f5;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}.board{background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.08);padding:32px;max-width:600px;width:100%}h1{font-size:24px;color:#1a1a2e;margin-bottom:8px;text-align:center}h2{font-size:18px;color:#555;font-weight:400;margin-bottom:24px;text-align:center}.progress-section{background:#f8f9ff;border-radius:12px;padding:20px;margin-bottom:24px}.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.progress-header span{font-size:14px;color:#666;font-weight:500}.progress-bar{height:10px;background:#e0e0e0;border-radius:10px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,#6c63ff,#a78bfa);border-radius:10px;transition:width 0.4s ease;width:0%}.task-list{list-style:none;margin-bottom:24px}.task-item{display:flex;align-items:center;padding:12px 16px;background:#fafafa;border-radius:10px;margin-bottom:8px;transition:background 0.2s}.task-item.completed{background:#e8f5e9;text-decoration:line-through;color:#888}.task-item .task-icon{margin-right:12px;font-size:18px}.task-item .task-name{flex:1;font-size:15px}.task-item .task-status{font-size:13px;color:#999}.btn-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}button{background:#6c63ff;color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:16px;font-weight:500;cursor:pointer;transition:background 0.2s,transform 0.1s;box-shadow:0 2px 8px rgba(108,99,255,0.3)}button:hover{background:#5a52e0}button:active{transform:scale(0.97)}button.secondary{background:#e8e8e8;color:#333;box-shadow:none}button.secondary:hover{background:#ddd}.result-area{margin-top:20px;padding:16px;background:#f0f2f5;border-radius:10px;text-align:center;font-size:15px;color:#333;min-height:52px;display:flex;align-items:center;justify-content:center}</style></head><body><div class=\"board\"><h1>📋 研究任务看板</h1><h2>项目进度 · 任务记录</h2><div class=\"progress-section\"><div class=\"progress-header\"><span>项目进度</span><span id=\"progress-text\">0 / 5</span></div><div class=\"progress-bar\"><div class=\"progress-fill\" id=\"progress-fill\"></div></div></div><ul class=\"task-list\" id=\"task-list\"><li class=\"task-item\" data-task-id=\"0\"><span class=\"task-icon\">📌</span><span class=\"task-name\">文献综述</span><span class=\"task-status\">待完成</span></li><li class=\"task-item\" data-task-id=\"1\"><span class=\"task-icon\">🔬</span><span class=\"task-name\">实验设计</span><span class=\"task-status\">待完成</span></li><li class=\"task-item\" data-task-id=\"2\"><span class=\"task-icon\">📊</span><span class=\"task-name\">数据收集</span><span class=\"task-status\">待完成</span></li><li class=\"task-item\" data-task-id=\"3\"><span class=\"task-icon\">✍️</span><span class=\"task-name\">论文撰写</span><span class=\"task-status\">待完成</span></li><li class=\"task-item\" data-task-id=\"4\"><span class=\"task-icon\">✅</span><span class=\"task-name\">最终审核</span><span class=\"task-status\">待完成</span></li></ul><div class=\"btn-group\"><button data-testid=\"primary-action\" id=\"complete-btn\">✅ 完成下一个任务</button><button class=\"secondary\" id=\"reset-btn\">🔄 重置任务</button></div><div data-testid=\"result\" id=\"result-display\" class=\"result-area\">点击按钮更新完成数量</div></div><script>(function(){const tasks=[{id:0,name:'文献综述',done:false},{id:1,name:'实验设计',done:false},{id:2,name:'数据收集',done:false},{id:3,name:'论文撰写',done:false},{id:4,name:'最终审核',done:false}];const taskListEl=document.getElementById('task-list');const progressFill=document.getElementById('progress-fill');const progressText=document.getElementById('progress-text');const resultDisplay=document.getElementById('result-display');const completeBtn=document.getElementById('complete-btn');const resetBtn=document.getElementById('reset-btn');function renderTasks(){const items=taskListEl.querySelectorAll('.task-item');items.forEach((item,index)=>{const task=tasks[index];const statusEl=item.querySelector('.task-status');if(task.done){item.classList.add('completed');statusEl.textContent='已完成';}else{item.classList.remove('completed');statusEl.textContent='待完成';}});}function updateProgress(){const doneCount=tasks.filter(t=>t.done).length;const total=tasks.length;const percent=total>0?(doneCount/total)*100:0;progressFill.style.width=percent+'%';progressText.textContent=doneCount+' / '+total;return doneCount;}function updateResult(message){resultDisplay.textContent=message;}function completeNextTask(){const nextTask=tasks.find(t=>!t.done);if(!nextTask){updateResult('🎉 所有研究任务已完成！');return false;}nextTask.done=true;renderTasks();const doneCount=updateProgress();updateResult('✅ 已完成「'+nextTask.name+'」，当前完成 '+doneCount+'/'+tasks.length);return true;}function resetAllTasks(){tasks.forEach(t=>t.done=false);renderTasks();updateProgress();updateResult('🔄 已重置所有任务，点击按钮开始');}completeBtn.addEventListener('click',function(){completeNextTask();});resetBtn.addEventListener('click',function(){resetAllTasks();});updateProgress();updateResult('点击「完成下一个任务」按钮更新进度');})();</script></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "a488207e-d723-4567-963c-3036c7a9b388/attempt-0/screenshot.png",
+          "durationMs": 63874
+        }
+      ]
+    },
+    {
+      "caseId": "WB-004",
+      "split": "dev",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "2a455883-8a5a-4785-b980-9467fed9ccf3",
+      "prompt": "制作一个阅读进度记录，支持点击按钮更新完成数量。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-07T12:34:23.037543006Z",
+      "completedAt": "2026-10-07T12:35:02.672712412Z",
+      "error": null,
+      "maxRepairs": 1,
+      "tokenBudget": 24000,
+      "inputTokens": 159,
+      "outputTokens": 1535,
+      "usageKnown": true,
+      "durationMs": 39603,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "阅读进度",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-07T12:34:23.069499186Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-07T12:34:23.108263208Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-07T12:35:01.438675078Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-07T12:35:02.672742232Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>阅读进度记录</title><style>body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);min-height:100vh;display:flex;justify-content:center;align-items:center;margin:0;padding:20px;box-sizing:border-box}.container{background:white;border-radius:20px;padding:40px;box-shadow:0 10px 40px rgba(0,0,0,0.1);max-width:500px;width:100%;text-align:center}h1{color:#2c3e50;font-size:2rem;margin-bottom:10px;font-weight:700}.subtitle{color:#7f8c8d;margin-bottom:30px;font-size:1rem}.progress-section{background:#f8f9fa;border-radius:15px;padding:25px;margin-bottom:25px}.progress-label{display:flex;justify-content:space-between;margin-bottom:12px;font-weight:600;color:#34495e}.progress-bar{width:100%;height:14px;background:#e0e0e0;border-radius:10px;overflow:hidden;margin-bottom:8px}.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#6c63ff,#a29bfe);border-radius:10px;transition:width 0.5s ease}.progress-text{font-size:0.9rem;color:#636e72}.stats{display:flex;justify-content:space-around;margin:25px 0;gap:15px}.stat-card{background:#f8f9fa;border-radius:12px;padding:15px;flex:1;min-width:80px}.stat-number{font-size:1.8rem;font-weight:700;color:#6c63ff;display:block}.stat-label{font-size:0.8rem;color:#7f8c8d;margin-top:5px}.btn-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}.btn{background:#6c63ff;color:white;border:none;padding:12px 28px;border-radius:30px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(108,99,255,0.3)}.btn:hover{background:#5a52d5;transform:translateY(-2px);box-shadow:0 6px 20px rgba(108,99,255,0.4)}.btn:active{transform:translateY(0)}.btn-secondary{background:#e0e0e0;color:#555;box-shadow:none}.btn-secondary:hover{background:#d0d0d0;box-shadow:0 4px 12px rgba(0,0,0,0.1)}.result-box{background:#fff3cd;border:1px solid #ffc107;border-radius:12px;padding:15px;margin-top:20px;color:#856404;font-weight:500;font-size:1rem;min-height:24px;display:flex;align-items:center;justify-content:center}.footer{color:#b0b0b0;font-size:0.8rem;margin-top:30px}</style></head><body><div class=\"container\"><h1>📚 阅读进度</h1><p class=\"subtitle\">记录你的阅读旅程</p><div class=\"progress-section\"><div class=\"progress-label\"><span>项目进度</span><span id=\"progressPercent\">0%</span></div><div class=\"progress-bar\"><div class=\"progress-fill\" id=\"progressFill\"></div></div><div class=\"progress-text\" id=\"progressDetail\">已完成 0 / 10 章</div></div><div class=\"stats\"><div class=\"stat-card\"><span class=\"stat-number\" id=\"completedCount\">0</span><span class=\"stat-label\">已完成</span></div><div class=\"stat-card\"><span class=\"stat-number\">10</span><span class=\"stat-label\">总章节</span></div><div class=\"stat-card\"><span class=\"stat-number\" id=\"remainingCount\">10</span><span class=\"stat-label\">剩余</span></div></div><div class=\"btn-group\"><button class=\"btn\" data-testid=\"primary-action\" id=\"completeBtn\">✅ 完成一章</button><button class=\"btn btn-secondary\" id=\"resetBtn\">🔄 重置</button></div><div class=\"result-box\" data-testid=\"result\" id=\"resultDisplay\">点击按钮开始记录阅读进度</div><div class=\"footer\">坚持阅读，每天进步一点点</div></div><script>(function(){const totalChapters=10;let completed=0;const completedCountEl=document.getElementById('completedCount');const remainingCountEl=document.getElementById('remainingCount');const progressFill=document.getElementById('progressFill');const progressPercent=document.getElementById('progressPercent');const progressDetail=document.getElementById('progressDetail');const resultDisplay=document.getElementById('resultDisplay');const completeBtn=document.getElementById('completeBtn');const resetBtn=document.getElementById('resetBtn');function updateUI(){const percent=Math.round((completed/totalChapters)*100);completedCountEl.textContent=completed;remainingCountEl.textContent=totalChapters-completed;progressFill.style.width=percent+'%';progressPercent.textContent=percent+'%';progressDetail.textContent='已完成 '+completed+' / '+totalChapters+' 章';}function updateResult(message){resultDisplay.textContent=message;}function completeChapter(){if(completed<totalChapters){completed++;updateUI();if(completed===totalChapters){updateResult('🎉 恭喜！你已经完成了全部 '+totalChapters+' 章的阅读！');}else{updateResult('✅ 已完成第 '+completed+' 章，继续加油！还剩 '+(totalChapters-completed)+' 章。');}}else{updateResult('🎊 你已经读完了所有章节！点击「重置」重新开始。');}}function resetProgress(){completed=0;updateUI();updateResult('🔄 已重置，从第 1 章重新开始吧！');}completeBtn.addEventListener('click',completeChapter);resetBtn.addEventListener('click',resetProgress);updateUI();updateResult('点击「完成一章」开始记录你的阅读进度');})();</script></div></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "2a455883-8a5a-4785-b980-9467fed9ccf3/attempt-0/screenshot.png",
+          "durationMs": 39545
+        }
+      ]
+    },
+    {
+      "caseId": "WB-006",
+      "split": "dev",
+      "strategy": "retrieval",
+      "injectedFailure": false,
+      "id": "d9d5c574-ad60-4381-b2f8-162d8d0ea8ff",
+      "prompt": "制作一个阅读进度记录，支持点击按钮更新完成数量。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "retrieval",
+      "status": "PASSED",
+      "createdAt": "2026-10-07T12:35:03.611372978Z",
+      "completedAt": "2026-10-07T12:35:51.341640944Z",
+      "error": null,
+      "maxRepairs": 1,
+      "tokenBudget": 24000,
+      "inputTokens": 239,
+      "outputTokens": 1867,
+      "usageKnown": true,
+      "durationMs": 47702,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "阅读进度",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "15376b4b-44f1-4a8e-bfa1-fb50561f173c",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2.090909090909091
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-07T12:35:03.639000464Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-07T12:35:03.669161556Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-07T12:35:50.116956743Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-07T12:35:51.341669914Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>阅读进度记录</title><style>body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;max-width:600px;margin:40px auto;padding:20px;background:#f7f9fc;color:#333;line-height:1.6}h1{color:#2c3e50;border-bottom:3px solid #3498db;padding-bottom:10px;text-align:center}.progress-container{background:white;border-radius:12px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.08);margin-top:20px}.progress-bar-bg{background:#e9ecef;border-radius:20px;height:24px;overflow:hidden;margin:15px 0}.progress-bar-fill{background:linear-gradient(90deg,#3498db,#2ecc71);height:100%;border-radius:20px;transition:width 0.5s ease;width:0%}.stats{display:flex;justify-content:space-between;font-size:1.1rem;margin:10px 0;color:#555}.book-list{list-style:none;padding:0;margin:20px 0}.book-item{display:flex;align-items:center;padding:10px 12px;margin:6px 0;background:#f8f9fa;border-radius:8px;transition:background 0.2s}.book-item.completed{background:#e8f5e9;text-decoration:line-through;color:#6c757d}.book-check{width:20px;height:20px;margin-right:12px;accent-color:#2ecc71;cursor:pointer}.book-title{flex:1}.btn-group{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}.btn{flex:1;padding:12px 20px;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:transform 0.1s,box-shadow 0.2s;min-width:120px}.btn:active{transform:scale(0.97)}.btn-primary{background:#3498db;color:white;box-shadow:0 2px 8px rgba(52,152,219,0.3)}.btn-primary:hover{background:#2980b9}.btn-success{background:#2ecc71;color:white;box-shadow:0 2px 8px rgba(46,204,113,0.3)}.btn-success:hover{background:#27ae60}.btn-warning{background:#f39c12;color:white;box-shadow:0 2px 8px rgba(243,156,18,0.3)}.btn-warning:hover{background:#e67e22}.result-box{background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px 16px;margin-top:15px;text-align:center;font-weight:500;color:#856404}.footer{text-align:center;margin-top:30px;color:#aaa;font-size:0.85rem}</style></head><body><h1>📚 阅读进度记录</h1><div class=\"progress-container\"><h2 style=\"margin-top:0;color:#2c3e50;font-size:1.3rem\">项目进度</h2><div class=\"stats\"><span>已完成：<span id=\"completedCount\">0</span> 本</span><span>总计：<span id=\"totalCount\">5</span> 本</span></div><div class=\"progress-bar-bg\"><div class=\"progress-bar-fill\" id=\"progressFill\"></div></div><ul class=\"book-list\" id=\"bookList\"><li class=\"book-item\" data-id=\"0\"><input type=\"checkbox\" class=\"book-check\" data-id=\"0\"><span class=\"book-title\">《三体》</span></li><li class=\"book-item\" data-id=\"1\"><input type=\"checkbox\" class=\"book-check\" data-id=\"1\"><span class=\"book-title\">《百年孤独》</span></li><li class=\"book-item\" data-id=\"2\"><input type=\"checkbox\" class=\"book-check\" data-id=\"2\"><span class=\"book-title\">《活着》</span></li><li class=\"book-item\" data-id=\"3\"><input type=\"checkbox\" class=\"book-check\" data-id=\"3\"><span class=\"book-title\">《小王子》</span></li><li class=\"book-item\" data-id=\"4\"><input type=\"checkbox\" class=\"book-check\" data-id=\"4\"><span class=\"book-title\">《人类简史》</span></li></ul><div class=\"btn-group\"><button class=\"btn btn-primary\" data-testid=\"primary-action\">✅ 标记完成</button><button class=\"btn btn-success\" id=\"addBookBtn\">➕ 新增书籍</button><button class=\"btn btn-warning\" id=\"resetBtn\">🔄 重置进度</button></div><div class=\"result-box\" data-testid=\"result\" id=\"resultDisplay\">当前进度：0 / 5 本已完成</div></div><div class=\"footer\">点击复选框或「标记完成」按钮更新进度</div><script>(function(){const books=[{title:'《三体》',completed:false},{title:'《百年孤独》',completed:false},{title:'《活着》',completed:false},{title:'《小王子》',completed:false},{title:'《人类简史》',completed:false}];const bookListEl=document.getElementById('bookList');const completedCountEl=document.getElementById('completedCount');const totalCountEl=document.getElementById('totalCount');const progressFill=document.getElementById('progressFill');const resultDisplay=document.getElementById('resultDisplay');const primaryBtn=document.querySelector('[data-testid=\"primary-action\"]');const addBookBtn=document.getElementById('addBookBtn');const resetBtn=document.getElementById('resetBtn');let nextId=books.length;function renderBooks(){bookListEl.innerHTML='';books.forEach((book,index)=>{const li=document.createElement('li');li.className='book-item'+(book.completed?' completed':'');li.dataset.id=index;const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.className='book-check';checkbox.dataset.id=index;checkbox.checked=book.completed;checkbox.addEventListener('change',function(e){e.stopPropagation();books[index].completed=this.checked;updateProgress();renderBooks();});const span=document.createElement('span');span.className='book-title';span.textContent=book.title;li.appendChild(checkbox);li.appendChild(span);bookListEl.appendChild(li);});updateProgress();}function updateProgress(){const completed=books.filter(b=>b.completed).length;const total=books.length;completedCountEl.textContent=completed;totalCountEl.textContent=total;const percent=total>0?(completed/total)*100:0;progressFill.style.width=percent+'%';resultDisplay.textContent='当前进度：'+completed+' / '+total+' 本已完成';}function markNextUncompleted(){const idx=books.findIndex(b=>!b.completed);if(idx!==-1){books[idx].completed=true;renderBooks();resultDisplay.textContent='✅ 已标记「'+books[idx].title+'」为完成！';}else{resultDisplay.textContent='🎉 所有书籍都已读完！'}}function addBook(){const newTitle='《新书'+(nextId+1)+'》';books.push({title:newTitle,completed:false});nextId++;renderBooks();resultDisplay.textContent='📖 已添加「'+newTitle+'」';}function resetProgress(){books.forEach(b=>b.completed=false);renderBooks();resultDisplay.textContent='🔄 进度已重置';}primaryBtn.addEventListener('click',markNextUncompleted);addBookBtn.addEventListener('click',addBook);resetBtn.addEventListener('click',resetProgress);renderBooks();})();</script></body></html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "d9d5c574-ad60-4381-b2f8-162d8d0ea8ff/attempt-0/screenshot.png",
+          "durationMs": 47645
+        }
+      ]
+    },
+    {
+      "caseId": "WB-007",
+      "split": "dev",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "2c293445-9b30-4f2b-a605-9f29b4544781",
+      "prompt": "制作一个实验准备清单，支持点击按钮更新完成数量。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "none",
+      "status": "FAILED",
+      "createdAt": "2026-10-07T12:35:52.311023743Z",
+      "completedAt": "2026-10-07T12:36:56.750507488Z",
+      "error": "达到修复次数上限，仍未通过验收。",
+      "maxRepairs": 1,
+      "tokenBudget": 24000,
+      "inputTokens": 1503,
+      "outputTokens": 2336,
+      "usageKnown": true,
+      "durationMs": 64416,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "实验准备",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-07T12:35:52.334100367Z",
+          "stage": "memory",
+          "message": "已选取 0 条来源（none）"
+        },
+        {
+          "at": "2026-10-07T12:35:52.355965806Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-07T12:36:22.171157345Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-07T12:36:25.293768717Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-07T12:36:53.644747440Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-07T12:36:56.750537757Z",
+          "stage": "complete",
+          "message": "FAILED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>实验准备清单</title><style>body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f0f4f8;margin:0;padding:20px;display:flex;justify-content:center;align-items:center;min-height:100vh}.container{background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,0.12);padding:30px 40px;max-width:600px;width:100%}h1{color:#1a3a5c;text-align:center;margin-top:0;margin-bottom:8px;font-size:28px}.subtitle{text-align:center;color:#5a7a9a;margin-bottom:24px;font-size:14px}.progress-section{background:#e8f0fe;border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center}.progress-label{font-weight:600;color:#1a3a5c;font-size:16px}.progress-count{background:#1a73e8;color:#fff;border-radius:20px;padding:4px 16px;font-weight:700;font-size:18px}.checklist{list-style:none;padding:0;margin:0 0 24px 0}.checklist li{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #e8edf2;transition:background 0.2s}.checklist li:last-child{border-bottom:none}.checklist li:hover{background:#f8fafc}.checklist input[type=checkbox]{width:20px;height:20px;margin-right:14px;cursor:pointer;accent-color:#1a73e8;flex-shrink:0}.checklist label{font-size:16px;color:#2c3e50;cursor:pointer;flex-grow:1;user-select:none}.checklist input[type=checkbox]:checked+label{text-decoration:line-through;color:#8a9aa8}.action-area{display:flex;justify-content:center;margin-top:8px}button{background:#1a73e8;color:#fff;border:none;border-radius:8px;padding:12px 32px;font-size:16px;font-weight:600;cursor:pointer;transition:background 0.2s,transform 0.1s;box-shadow:0 2px 8px rgba(26,115,232,0.3)}button:hover{background:#1557b0}button:active{transform:scale(0.97)}.result-area{text-align:center;margin-top:16px;font-size:15px;color:#4a6a8a;min-height:24px}</style></head><body><div class=\"container\"><h1>实验准备</h1><div class=\"subtitle\">点击复选框标记已完成项</div><div class=\"progress-section\"><span class=\"progress-label\">项目进度</span><span class=\"progress-count\" id=\"progressCount\">0/5</span></div><ul class=\"checklist\" id=\"checklist\"><li><input type=\"checkbox\" id=\"item1\"><label for=\"item1\">准备实验器材（试管、烧杯、量筒）</label></li><li><input type=\"checkbox\" id=\"item2\"><label for=\"item2\">配制标准溶液（0.1M NaOH）</label></li><li><input type=\"checkbox\" id=\"item3\"><label for=\"item3\">校准pH计与温度计</label></li><li><input type=\"checkbox\" id=\"item4\"><label for=\"item4\">穿戴防护装备（护目镜、手套）</label></li><li><input type=\"checkbox\" id=\"item5\"><label for=\"item5\">检查通风橱与紧急喷淋装置</label></li></ul><div class=\"action-area\"><button data-testid=\"primary-action\" id=\"updateBtn\">更新完成数量</button></div><div data-testid=\"result\" id=\"resultDisplay\">当前完成：0 项</div></div><script>(function(){const checkboxes=document.querySelectorAll('#checklist input[type=checkbox]');const progressCount=document.getElementById('progressCount');const resultDisplay=document.getElementById('resultDisplay');const updateBtn=document.getElementById('updateBtn');function updateProgress(){let completed=0;checkboxes.forEach(cb=>{if(cb.checked)completed++;});const total=checkboxes.length;progressCount.textContent=completed+'/'+total;resultDisplay.textContent='当前完成：'+completed+' 项';}updateBtn.addEventListener('click',updateProgress);checkboxes.forEach(cb=>{cb.addEventListener('change',updateProgress);});updateProgress();})();</script></div></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "2c293445-9b30-4f2b-a605-9f29b4544781/attempt-0/screenshot.png",
+          "durationMs": 32919
+        },
+        {
+          "number": 1,
+          "html": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>实验准备清单</title><style>body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f0f4f8;margin:0;padding:20px;display:flex;justify-content:center;align-items:center;min-height:100vh}.container{background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,0.12);padding:30px 40px;max-width:600px;width:100%}h1{color:#1a3a5c;text-align:center;margin-top:0;margin-bottom:8px;font-size:28px}.subtitle{text-align:center;color:#5a7a9a;margin-bottom:24px;font-size:14px}.progress-section{background:#e8f0fe;border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center}.progress-label{font-weight:600;color:#1a3a5c;font-size:16px}.progress-count{background:#1a73e8;color:#fff;border-radius:20px;padding:4px 16px;font-weight:700;font-size:18px}.checklist{list-style:none;padding:0;margin:0 0 24px 0}.checklist li{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #e8edf2;transition:background 0.2s}.checklist li:last-child{border-bottom:none}.checklist li:hover{background:#f8fafc}.checklist input[type=checkbox]{width:20px;height:20px;margin-right:14px;cursor:pointer;accent-color:#1a73e8;flex-shrink:0}.checklist label{font-size:16px;color:#2c3e50;cursor:pointer;flex-grow:1;user-select:none}.checklist input[type=checkbox]:checked+label{text-decoration:line-through;color:#8a9aa8}.action-area{display:flex;justify-content:center;margin-top:8px}button{background:#1a73e8;color:#fff;border:none;border-radius:8px;padding:12px 32px;font-size:16px;font-weight:600;cursor:pointer;transition:background 0.2s,transform 0.1s;box-shadow:0 2px 8px rgba(26,115,232,0.3)}button:hover{background:#1557b0}button:active{transform:scale(0.97)}.result-area{text-align:center;margin-top:16px;font-size:15px;color:#4a6a8a;min-height:24px}</style></head><body><div class=\"container\"><h1>实验准备</h1><div class=\"subtitle\">点击复选框标记已完成项</div><div class=\"progress-section\"><span class=\"progress-label\">项目进度</span><span class=\"progress-count\" id=\"progressCount\">0/5</span></div><ul class=\"checklist\" id=\"checklist\"><li><input type=\"checkbox\" id=\"item1\"><label for=\"item1\">准备实验器材（试管、烧杯、量筒）</label></li><li><input type=\"checkbox\" id=\"item2\"><label for=\"item2\">配制标准溶液（0.1M NaOH）</label></li><li><input type=\"checkbox\" id=\"item3\"><label for=\"item3\">校准pH计与温度计</label></li><li><input type=\"checkbox\" id=\"item4\"><label for=\"item4\">穿戴防护装备（护目镜、手套）</label></li><li><input type=\"checkbox\" id=\"item5\"><label for=\"item5\">检查通风橱与紧急喷淋装置</label></li></ul><div class=\"action-area\"><button data-testid=\"primary-action\" id=\"updateBtn\">更新完成数量</button></div><div data-testid=\"result\" id=\"resultDisplay\">当前完成：0 项</div></div><script>(function(){const checkboxes=document.querySelectorAll('#checklist input[type=checkbox]');const progressCount=document.getElementById('progressCount');const resultDisplay=document.getElementById('resultDisplay');const updateBtn=document.getElementById('updateBtn');function updateProgress(){let completed=0;checkboxes.forEach(cb=>{if(cb.checked)completed++;});const total=checkboxes.length;progressCount.textContent=completed+'/'+total;resultDisplay.textContent='当前完成：'+completed+' 项';}updateBtn.addEventListener('click',updateProgress);checkboxes.forEach(cb=>{cb.addEventListener('change',updateProgress);});updateProgress();})();</script></div></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "2c293445-9b30-4f2b-a605-9f29b4544781/attempt-1/screenshot.png",
+          "durationMs": 31423
+        }
+      ]
+    },
+    {
+      "caseId": "WB-009",
+      "split": "dev",
+      "strategy": "retrieval",
+      "injectedFailure": false,
+      "id": "bd0c81b8-df8e-42fc-99c6-ee0517ad9398",
+      "prompt": "制作一个实验准备清单，支持点击按钮更新完成数量。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "retrieval",
+      "status": "FAILED",
+      "createdAt": "2026-10-07T12:36:57.092729956Z",
+      "completedAt": "2026-10-07T12:38:37.001446070Z",
+      "error": "达到修复次数上限，仍未通过验收。",
+      "maxRepairs": 1,
+      "tokenBudget": 24000,
+      "inputTokens": 2024,
+      "outputTokens": 3078,
+      "usageKnown": true,
+      "durationMs": 99891,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "实验准备",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [
+        {
+          "id": "0c783f7f-39bf-43c4-a25b-f9bbfa791aec",
+          "title": "constraint · 项目约束",
+          "excerpt": "使用中文标题，保留项目进度与任务记录。",
+          "score": 2
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-07T12:36:57.110618556Z",
+          "stage": "memory",
+          "message": "已选取 1 条来源（retrieval）"
+        },
+        {
+          "at": "2026-10-07T12:36:57.133342004Z",
+          "stage": "generate",
+          "message": "开始生成"
+        },
+        {
+          "at": "2026-10-07T12:37:52.720991101Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-07T12:37:55.898030184Z",
+          "stage": "repair",
+          "message": "根据验收失败原因修复，第 1 轮"
+        },
+        {
+          "at": "2026-10-07T12:38:33.089669197Z",
+          "stage": "validate",
+          "message": "检查结构、资源边界及浏览器交互"
+        },
+        {
+          "at": "2026-10-07T12:38:37.001509540Z",
+          "stage": "complete",
+          "message": "FAILED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>实验准备清单</title><style>body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;max-width:700px;margin:40px auto;padding:0 20px;background:#f5f7fa;color:#333}h1{color:#2c3e50;border-bottom:3px solid #3498db;padding-bottom:10px;display:inline-block}.progress-section{background:white;border-radius:12px;padding:20px;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,0.1)}.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.progress-header h2{margin:0;color:#2c3e50;font-size:1.3em}.progress-count{font-size:1.2em;font-weight:bold;color:#3498db}.progress-bar{height:12px;background:#e0e6ed;border-radius:6px;overflow:hidden;margin-bottom:20px}.progress-fill{height:100%;background:linear-gradient(90deg,#3498db,#2ecc71);border-radius:6px;transition:width 0.4s ease;width:0%}.task-list{list-style:none;padding:0;margin:0}.task-item{display:flex;align-items:center;padding:12px 15px;margin:6px 0;background:#f8f9fa;border-radius:8px;transition:all 0.2s;border-left:4px solid #bdc3c7}.task-item.completed{background:#e8f8f0;border-left-color:#2ecc71;opacity:0.85}.task-item.completed .task-text{text-decoration:line-through;color:#7f8c8d}.task-checkbox{margin-right:15px;width:20px;height:20px;cursor:pointer;accent-color:#2ecc71}.task-text{flex:1;font-size:1em}.action-area{text-align:center;margin:25px 0}.primary-btn{background:#3498db;color:white;border:none;padding:14px 36px;font-size:1.1em;border-radius:30px;cursor:pointer;transition:background 0.2s,transform 0.1s;box-shadow:0 4px 12px rgba(52,152,219,0.3)}.primary-btn:hover{background:#2980b9}.primary-btn:active{transform:scale(0.97)}.result-area{margin-top:20px;padding:15px;background:white;border-radius:10px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:1.05em;color:#555}.result-area span{font-weight:bold;color:#2c3e50}.footer{text-align:center;margin-top:30px;color:#95a5a6;font-size:0.85em}</style></head><body><h1>🧪 实验准备</h1><div class=\"progress-section\"><div class=\"progress-header\"><h2>📋 项目进度</h2><span class=\"progress-count\" id=\"progressCount\">0 / 6</span></div><div class=\"progress-bar\"><div class=\"progress-fill\" id=\"progressFill\"></div></div><ul class=\"task-list\" id=\"taskList\"><li class=\"task-item\" data-id=\"1\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task1\"><label class=\"task-text\" for=\"task1\">准备试管与烧杯</label></li><li class=\"task-item\" data-id=\"2\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task2\"><label class=\"task-text\" for=\"task2\">校准电子天平</label></li><li class=\"task-item\" data-id=\"3\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task3\"><label class=\"task-text\" for=\"task3\">配制缓冲溶液</label></li><li class=\"task-item\" data-id=\"4\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task4\"><label class=\"task-text\" for=\"task4\">检查pH计电极</label></li><li class=\"task-item\" data-id=\"5\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task5\"><label class=\"task-text\" for=\"task5\">标记样品管</label></li><li class=\"task-item\" data-id=\"6\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task6\"><label class=\"task-text\" for=\"task6\">整理实验记录本</label></li></ul></div><div class=\"action-area\"><button class=\"primary-btn\" data-testid=\"primary-action\" id=\"updateBtn\">✅ 更新完成数量</button></div><div class=\"result-area\" data-testid=\"result\" id=\"resultDisplay\">当前已完成 <span id=\"completedSpan\">0</span> 项准备任务</div><div class=\"footer\">点击复选框标记任务，然后点击按钮更新进度</div><script>(function(){const checkboxes=document.querySelectorAll('.task-checkbox');const updateBtn=document.getElementById('updateBtn');const resultDisplay=document.getElementById('resultDisplay');const completedSpan=document.getElementById('completedSpan');const progressCount=document.getElementById('progressCount');const progressFill=document.getElementById('progressFill');const taskItems=document.querySelectorAll('.task-item');function updateProgress(){let completed=0;checkboxes.forEach(cb=>{if(cb.checked) completed++;});const total=checkboxes.length;progressCount.textContent=completed+' / '+total;const percent=total>0?(completed/total)*100:0;progressFill.style.width=percent+'%';taskItems.forEach(item=>{const cb=item.querySelector('.task-checkbox');if(cb.checked){item.classList.add('completed');}else{item.classList.remove('completed');}});}function updateResult(){let completed=0;checkboxes.forEach(cb=>{if(cb.checked) completed++;});completedSpan.textContent=completed;resultDisplay.innerHTML='当前已完成 <span id=\"completedSpan\">'+completed+'</span> 项准备任务';}checkboxes.forEach(cb=>{cb.addEventListener('change',function(){updateProgress();});});updateBtn.addEventListener('click',function(){updateResult();});updateProgress();updateResult();})();</script></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "bd0c81b8-df8e-42fc-99c6-ee0517ad9398/attempt-0/screenshot.png",
+          "durationMs": 58747
+        },
+        {
+          "number": 1,
+          "html": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>实验准备清单</title><style>body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;max-width:700px;margin:40px auto;padding:0 20px;background:#f5f7fa;color:#333}h1{color:#2c3e50;border-bottom:3px solid #3498db;padding-bottom:10px;display:inline-block}.progress-section{background:white;border-radius:12px;padding:20px;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,0.1)}.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.progress-header h2{margin:0;color:#2c3e50;font-size:1.3em}.progress-count{font-size:1.2em;font-weight:bold;color:#3498db}.progress-bar{height:12px;background:#e0e6ed;border-radius:6px;overflow:hidden;margin-bottom:20px}.progress-fill{height:100%;background:linear-gradient(90deg,#3498db,#2ecc71);border-radius:6px;transition:width 0.4s ease;width:0%}.task-list{list-style:none;padding:0;margin:0}.task-item{display:flex;align-items:center;padding:12px 15px;margin:6px 0;background:#f8f9fa;border-radius:8px;transition:all 0.2s;border-left:4px solid #bdc3c7}.task-item.completed{background:#e8f8f0;border-left-color:#2ecc71;opacity:0.85}.task-item.completed .task-text{text-decoration:line-through;color:#7f8c8d}.task-checkbox{margin-right:15px;width:20px;height:20px;cursor:pointer;accent-color:#2ecc71}.task-text{flex:1;font-size:1em}.action-area{text-align:center;margin:25px 0}.primary-btn{background:#3498db;color:white;border:none;padding:14px 36px;font-size:1.1em;border-radius:30px;cursor:pointer;transition:background 0.2s,transform 0.1s;box-shadow:0 4px 12px rgba(52,152,219,0.3)}.primary-btn:hover{background:#2980b9}.primary-btn:active{transform:scale(0.97)}.result-area{margin-top:20px;padding:15px;background:white;border-radius:10px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:1.05em;color:#555}.result-area span{font-weight:bold;color:#2c3e50}.footer{text-align:center;margin-top:30px;color:#95a5a6;font-size:0.85em}</style></head><body><h1>🧪 实验准备</h1><div class=\"progress-section\"><div class=\"progress-header\"><h2>📋 项目进度</h2><span class=\"progress-count\" id=\"progressCount\">0 / 6</span></div><div class=\"progress-bar\"><div class=\"progress-fill\" id=\"progressFill\"></div></div><ul class=\"task-list\" id=\"taskList\"><li class=\"task-item\" data-id=\"1\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task1\"><label class=\"task-text\" for=\"task1\">准备试管与烧杯</label></li><li class=\"task-item\" data-id=\"2\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task2\"><label class=\"task-text\" for=\"task2\">校准电子天平</label></li><li class=\"task-item\" data-id=\"3\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task3\"><label class=\"task-text\" for=\"task3\">配制缓冲溶液</label></li><li class=\"task-item\" data-id=\"4\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task4\"><label class=\"task-text\" for=\"task4\">检查pH计电极</label></li><li class=\"task-item\" data-id=\"5\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task5\"><label class=\"task-text\" for=\"task5\">标记样品管</label></li><li class=\"task-item\" data-id=\"6\"><input type=\"checkbox\" class=\"task-checkbox\" id=\"task6\"><label class=\"task-text\" for=\"task6\">整理实验记录本</label></li></ul></div><div class=\"action-area\"><button class=\"primary-btn\" data-testid=\"primary-action\" id=\"updateBtn\">✅ 更新完成数量</button></div><div class=\"result-area\" data-testid=\"result\" id=\"resultDisplay\">当前已完成 <span id=\"completedSpan\">0</span> 项准备任务</div><div class=\"footer\">点击复选框标记任务，然后点击按钮更新进度</div><script>(function(){const checkboxes=document.querySelectorAll('.task-checkbox');const updateBtn=document.getElementById('updateBtn');const resultDisplay=document.getElementById('resultDisplay');const completedSpan=document.getElementById('completedSpan');const progressCount=document.getElementById('progressCount');const progressFill=document.getElementById('progressFill');const taskItems=document.querySelectorAll('.task-item');function updateProgress(){let completed=0;checkboxes.forEach(cb=>{if(cb.checked) completed++;});const total=checkboxes.length;progressCount.textContent=completed+' / '+total;const percent=total>0?(completed/total)*100:0;progressFill.style.width=percent+'%';taskItems.forEach(item=>{const cb=item.querySelector('.task-checkbox');if(cb.checked){item.classList.add('completed');}else{item.classList.remove('completed');}});}function updateResult(){let completed=0;checkboxes.forEach(cb=>{if(cb.checked) completed++;});completedSpan.textContent=completed;resultDisplay.innerHTML='当前已完成 <span id=\"completedSpan\">'+completed+'</span> 项准备任务';}checkboxes.forEach(cb=>{cb.addEventListener('change',function(){updateProgress();});});updateBtn.addEventListener('click',function(){updateResult();});updateProgress();updateResult();})();</script></body></html>",
+          "errors": [
+            "点击主按钮后结果未发生可见变化"
+          ],
+          "browserStatus": "FAILED",
+          "screenshot": "bd0c81b8-df8e-42fc-99c6-ee0517ad9398/attempt-1/screenshot.png",
+          "durationMs": 41072
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "count": 6,
+    "firstPass": 4,
+    "finalPass": 4,
+    "repairAttempted": 2,
+    "repairSucceeded": 0,
+    "meanAttempts": 1.3333333333333333,
+    "meanDurationMs": 60212.5,
+    "usageKnown": true,
+    "inputTokens": 4324,
+    "outputTokens": 12099
+  },
+  "model": "DMXAPI-deepseek-v4-flash",
+  "summaryNote": "Usage sums provider-reported tokens when every generation/repair event has a recorded reply, including browser-validation failures. Not a billing reconciliation."
+}

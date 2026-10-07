@@ -10,7 +10,9 @@ Java 21 · Spring Boot · Vue 3 · TypeScript · Playwright
 - 实现项目约束、决策与经验的版本化管理，采用中文双字和关键词检索上下文，支持无记忆、近期需求、检索记忆三种策略及来源追溯。
 - 实现用户自选模型与 AES-256-GCM 加密的 API Key 配置，为任务加入有限队列、Token 预算检查及供应商用量记录；完成 25 项后端测试、浏览器端到端验证和 36 项确定性演示验收，部署 Linux 内网 HTTPS 服务。
 
-当前边界：真实模型适配器已实现但尚未配置密钥实测；36 项演示结果属于工作流功能验证，不能写成真实模型效果提升。最新测试结果见 EVALUATION.md。
+- 使用 `DMXAPI-deepseek-v4-flash` 完成 6 个真实任务、8 次生成/修复调用，按原定验收通过 4/6；定位生成清单的勾选前置条件与单击验收的不一致，保留两项失败修复证据。
+
+当前边界：本次为小规模开发场景测试，不代表通用成功率；本轮未出现成功修复案例，也未证明记忆收益。详见 LIVE-RESULTS.md。
 
 ## English
 
@@ -18,4 +20,4 @@ Java 21 · Spring Boot · Vue 3 · TypeScript · Playwright
 
 - Implemented an LLM app-generation workflow with retrieved project context, Playwright acceptance checks and failure feedback into up to three model repair attempts with version rollback.
 - Built versioned constraints, decisions and lessons with Chinese-bigram/keyword retrieval, source references and no-memory/recent-request/retrieved-memory strategies.
-- Added user-configured models, AES-256-GCM encrypted keys, bounded queues and token-budget checks; verified 25 backend tests, browser checks and 36 deterministic demo cases with private Linux HTTPS deployment. Actual model quality remains unverified until real API testing.
+- Added user-configured models, AES-256-GCM encrypted keys, bounded queues and token-budget checks; verified 25 backend tests, browser checks and 36 deterministic demo cases with private Linux HTTPS deployment. Ran six real API tasks with DMXAPI-deepseek-v4-flash (eight generation/repair calls, 4/6 accepted); retained two failed repair cases caused by checkbox prerequisites that did not satisfy the one-click acceptance contract.

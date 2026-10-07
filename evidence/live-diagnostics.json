@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-07",
+  "scope": "Post-hoc replay of failed final artifacts; no extra model calls and no change to original acceptance results.",
+  "results": [
+    {
+      "caseId": "WB-007",
+      "originalContractStatus": "FAILED",
+      "initialResult": "当前完成：0 项",
+      "afterDirectClick": "当前完成：0 项",
+      "afterSelectAndClick": "当前完成：1 项",
+      "directClickChangesResult": false,
+      "selectionThenClickChangesResult": true,
+      "pageErrors": []
+    },
+    {
+      "caseId": "WB-009",
+      "originalContractStatus": "FAILED",
+      "initialResult": "当前已完成 0 项准备任务",
+      "afterDirectClick": "当前已完成 0 项准备任务",
+      "afterSelectAndClick": "当前已完成 1 项准备任务",
+      "directClickChangesResult": false,
+      "selectionThenClickChangesResult": true,
+      "pageErrors": []
+    }
+  ]
+}

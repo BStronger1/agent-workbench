@@ -10,7 +10,11 @@ export function requireEvaluationMode(config, liveRequested) {
 
 export function evaluationSummary(rows) {
   // Failed provider calls can be charged without returning usable usage metadata.
-  const known = rows.length > 0 && rows.every((r) => r.usageKnown && r.status === "PASSED");
+  const known = rows.length > 0 && rows.every((r) => {
+    const calls = r.events?.filter(e => e.stage === "generate" || e.stage === "repair").length;
+    const allRepliesAccounted = calls === undefined ? r.status === "PASSED" : calls > 0 && calls === r.attempts.length;
+    return r.usageKnown && allRepliesAccounted;
+  });
   return {
     count: rows.length,
     firstPass: rows.filter(
