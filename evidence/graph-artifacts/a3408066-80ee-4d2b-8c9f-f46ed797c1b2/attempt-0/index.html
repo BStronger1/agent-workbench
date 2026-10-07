@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究任务进度页</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            padding: 40px 36px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 32px;
+            letter-spacing: 0.3px;
+        }
+        .progress-card {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 24px 20px;
+            margin-bottom: 28px;
+            border: 1px solid #e2e8f0;
+        }
+        .progress-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+        .progress-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: #2b6cb0;
+            line-height: 1.2;
+        }
+        .progress-number span {
+            font-size: 24px;
+            font-weight: 500;
+            color: #718096;
+        }
+        .btn {
+            display: inline-block;
+            background: #3182ce;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 6px rgba(49,130,206,0.2);
+            letter-spacing: 0.5px;
+        }
+        .btn:hover {
+            background: #2b6cb0;
+        }
+        .btn:active {
+            transform: scale(0.97);
+        }
+        .btn:focus-visible {
+            outline: 3px solid #90cdf4;
+            outline-offset: 2px;
+        }
+        .result-area {
+            margin-top: 24px;
+            padding: 16px 12px;
+            background: #edf2f7;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #2d3748;
+            border: 1px dashed #cbd5e0;
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .result-text {
+            font-weight: 500;
+        }
+        .result-text strong {
+            color: #2b6cb0;
+        }
+        .footer-note {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>研究任务</h1>
+        <p class="subtitle">项目进度</p>
+
+        <div class="progress-card">
+            <div class="progress-label">已完成任务</div>
+            <div class="progress-number" id="result" data-testid="result">0 <span>/ 10</span></div>
+        </div>
+
+        <button class="btn" id="primary-action" data-testid="primary-action">完成一项任务</button>
+
+        <div class="result-area">
+            <span class="result-text" id="status-message">当前进度：<strong id="progress-value">0</strong> 项任务已完成</span>
+        </div>
+
+        <div class="footer-note">点击按钮增加已完成数量</div>
+    </div>
+
+    <script>
+        (function() {
+            const resultEl = document.getElementById('result');
+            const progressValueEl = document.getElementById('progress-value');
+            const actionBtn = document.getElementById('primary-action');
+
+            let completedCount = 0;
+            const totalTasks = 10;
+
+            function updateDisplay() {
+                // 更新主数字显示
+                resultEl.innerHTML = completedCount + ' <span>/ ' + totalTasks + '</span>';
+                // 更新状态文字
+                progressValueEl.textContent = completedCount;
+            }
+
+            function handleCompleteTask() {
+                if (completedCount < totalTasks) {
+                    completedCount++;
+                    updateDisplay();
+                } else {
+                    // 如果已经全部完成，可以给出提示（但依然保持状态）
+                    // 这里简单震动一下按钮作为反馈
+                    actionBtn.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        actionBtn.style.transform = '';
+                    }, 150);
+                }
+            }
+
+            actionBtn.addEventListener('click', handleCompleteTask);
+
+            // 初始显示
+            updateDisplay();
+        })();
+    </script>
+</body>
+</html>

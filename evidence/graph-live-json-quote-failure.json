@@ -1,0 +1,216 @@
+{
+  "timestamp": "2026-10-07T15:59:07.661Z",
+  "mode": "live",
+  "status": "incomplete",
+  "scope": "Paired single-role vs planner/coder/reviewer workflows on three development tasks with identical frozen contracts and no retrieval. Not a held-out benchmark; no claim of multi-agent superiority. Maximum 21 provider calls across 6 tasks.",
+  "limits": {
+    "tasks": 6,
+    "maxRepairsPerTask": 1,
+    "tokenBudgetPerTask": 50000,
+    "maxOutputTokensPerCall": 4096
+  },
+  "results": [
+    {
+      "caseId": "G-01",
+      "workflow": "graph_single",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "26fcc6b6-fccb-4228-9155-9fb54bbfca11",
+      "prompt": "制作中文研究任务进度页，点击按钮后已完成数量增加。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "none",
+      "status": "PASSED",
+      "createdAt": "2026-10-07T15:59:08.003264091Z",
+      "completedAt": "2026-10-07T16:00:05.945820585Z",
+      "error": "",
+      "maxRepairs": 1,
+      "tokenBudget": 50000,
+      "inputTokens": 298,
+      "outputTokens": 1340,
+      "calls": 1,
+      "contractHash": "070ed599456dbc30c4a17c7dd5de566d4b19c7d9f7fc66e77bf0584ec4b1ac0a",
+      "pauseAfterPlan": false,
+      "resumable": false,
+      "steps": [
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_changed",
+          "target": "result",
+          "value": ""
+        }
+      ],
+      "plan": {
+        "summary": "制作中文研究任务进度页，点击按钮后已完成数量增加。",
+        "steps": [
+          {
+            "action": "click",
+            "target": "primary-action",
+            "value": ""
+          },
+          {
+            "action": "assert_changed",
+            "target": "result",
+            "value": ""
+          }
+        ]
+      },
+      "usageKnown": true,
+      "durationMs": 57661,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "研究任务",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-07T15:59:08.457552+00:00",
+          "stage": "plan",
+          "message": "验收步骤已固定；生成和修复不能更改"
+        },
+        {
+          "at": "2026-10-07T15:59:08.532031+00:00",
+          "stage": "approval",
+          "message": "验收契约已确认"
+        },
+        {
+          "at": "2026-10-07T16:00:04.453758+00:00",
+          "stage": "generate",
+          "message": "编码角色第 1 次生成"
+        },
+        {
+          "at": "2026-10-07T16:00:05.752821+00:00",
+          "stage": "validate",
+          "message": "PASSED"
+        },
+        {
+          "at": "2026-10-07T16:00:05.818503+00:00",
+          "stage": "complete",
+          "message": "PASSED"
+        },
+        {
+          "at": "2026-10-07T16:00:05.945838964Z",
+          "stage": "complete",
+          "message": "PASSED"
+        }
+      ],
+      "attempts": [
+        {
+          "number": 0,
+          "html": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>研究任务进度页</title>\n    <style>\n        * {\n            box-sizing: border-box;\n            margin: 0;\n            padding: 0;\n        }\n        body {\n            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;\n            background: #f0f4f8;\n            min-height: 100vh;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            padding: 20px;\n        }\n        .container {\n            background: white;\n            border-radius: 24px;\n            box-shadow: 0 12px 40px rgba(0,0,0,0.08);\n            padding: 40px 48px;\n            max-width: 520px;\n            width: 100%;\n            text-align: center;\n        }\n        h1 {\n            font-size: 28px;\n            font-weight: 600;\n            color: #1a202c;\n            margin-bottom: 8px;\n        }\n        .subtitle {\n            color: #4a5568;\n            font-size: 16px;\n            margin-bottom: 32px;\n            border-bottom: 2px solid #e2e8f0;\n            padding-bottom: 16px;\n        }\n        .progress-section {\n            background: #f7fafc;\n            border-radius: 16px;\n            padding: 24px;\n            margin-bottom: 28px;\n        }\n        .progress-label {\n            font-size: 18px;\n            font-weight: 500;\n            color: #2d3748;\n            margin-bottom: 12px;\n        }\n        .progress-number {\n            font-size: 48px;\n            font-weight: 700;\n            color: #2b6cb0;\n            line-height: 1.2;\n        }\n        .progress-detail {\n            color: #718096;\n            font-size: 14px;\n            margin-top: 8px;\n        }\n        .btn {\n            background: #3182ce;\n            color: white;\n            border: none;\n            border-radius: 40px;\n            padding: 14px 40px;\n            font-size: 18px;\n            font-weight: 600;\n            cursor: pointer;\n            transition: background 0.2s, transform 0.1s;\n            box-shadow: 0 4px 12px rgba(49,130,206,0.3);\n            display: inline-block;\n        }\n        .btn:hover {\n            background: #2b6cb0;\n        }\n        .btn:active {\n            transform: scale(0.97);\n        }\n        .btn:focus-visible {\n            outline: 3px solid #90cdf4;\n            outline-offset: 2px;\n        }\n        .result-area {\n            margin-top: 24px;\n            padding: 16px;\n            background: #edf2f7;\n            border-radius: 12px;\n            font-size: 16px;\n            color: #2d3748;\n            min-height: 56px;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n        .result-text {\n            font-weight: 500;\n        }\n        .highlight {\n            color: #2b6cb0;\n            font-weight: 700;\n        }\n        @media (max-width: 480px) {\n            .container {\n                padding: 24px 20px;\n            }\n            h1 {\n                font-size: 24px;\n            }\n            .progress-number {\n                font-size: 40px;\n            }\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <h1>研究任务</h1>\n        <div class=\"subtitle\">项目进度</div>\n\n        <div class=\"progress-section\">\n            <div class=\"progress-label\">已完成任务</div>\n            <div class=\"progress-number\" id=\"progressDisplay\">0</div>\n            <div class=\"progress-detail\">点击下方按钮增加进度</div>\n        </div>\n\n        <button class=\"btn\" id=\"primaryActionBtn\" data-testid=\"primary-action\">完成一项任务</button>\n\n        <div class=\"result-area\" data-testid=\"result\" id=\"resultArea\">\n            <span class=\"result-text\">当前已完成 <span class=\"highlight\" id=\"resultCount\">0</span> 项研究任务</span>\n        </div>\n    </div>\n\n    <script>\n        (function() {\n            let completedCount = 0;\n\n            const progressDisplay = document.getElementById('progressDisplay');\n            const resultCount = document.getElementById('resultCount');\n            const primaryBtn = document.getElementById('primaryActionBtn');\n\n            function updateUI() {\n                progressDisplay.textContent = completedCount;\n                resultCount.textContent = completedCount;\n            }\n\n            function handlePrimaryAction() {\n                completedCount += 1;\n                updateUI();\n            }\n\n            primaryBtn.addEventListener('click', handlePrimaryAction);\n\n            // 初始渲染\n            updateUI();\n        })();\n    </script>\n</body>\n</html>",
+          "errors": [],
+          "browserStatus": "PASSED",
+          "screenshot": "26fcc6b6-fccb-4228-9155-9fb54bbfca11/attempt-0/screenshot.png",
+          "durationMs": 1231
+        }
+      ]
+    },
+    {
+      "caseId": "G-01",
+      "workflow": "graph_multi",
+      "strategy": "none",
+      "injectedFailure": false,
+      "id": "0bf4849d-9a87-409e-9e89-b6c76488a1a9",
+      "prompt": "制作中文研究任务进度页，点击按钮后已完成数量增加。",
+      "mode": "live",
+      "model": "DMXAPI-deepseek-v4-flash",
+      "memoryStrategy": "none",
+      "status": "INTERRUPTED",
+      "createdAt": "2026-10-07T16:00:06.713883864Z",
+      "completedAt": "2026-10-07T16:01:09.367218001Z",
+      "error": "模型输出、服务调用或执行异常；保留检查点与调用用量，可检查后恢复",
+      "maxRepairs": 1,
+      "tokenBudget": 50000,
+      "inputTokens": 699,
+      "outputTokens": 1283,
+      "calls": 2,
+      "contractHash": "070ed599456dbc30c4a17c7dd5de566d4b19c7d9f7fc66e77bf0584ec4b1ac0a",
+      "pauseAfterPlan": true,
+      "resumable": true,
+      "steps": [
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_changed",
+          "target": "result",
+          "value": ""
+        }
+      ],
+      "plan": {
+        "summary": "制作一个中文研究任务进度页面，包含“研究任务”和“项目进度”文本，并实现一个按钮，点击后已完成任务数量增加。",
+        "steps": [
+          {
+            "action": "click",
+            "target": "primary-action",
+            "value": ""
+          },
+          {
+            "action": "assert_changed",
+            "target": "result",
+            "value": ""
+          }
+        ]
+      },
+      "usageKnown": true,
+      "durationMs": 61973,
+      "estimatedCost": null,
+      "requiredTexts": [
+        "研究任务",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "memorySources": [],
+      "events": [
+        {
+          "at": "2026-10-07T16:00:17.299955+00:00",
+          "stage": "plan",
+          "message": "验收步骤已固定；生成和修复不能更改"
+        },
+        {
+          "at": "2026-10-07T16:00:17.957046+00:00",
+          "stage": "approval",
+          "message": "验收契约已确认"
+        },
+        {
+          "at": "2026-10-07T16:01:09.367232240Z",
+          "stage": "complete",
+          "message": "INTERRUPTED"
+        }
+      ],
+      "attempts": []
+    }
+  ],
+  "summary": {
+    "graph_single": {
+      "tasks": 1,
+      "passed": 1,
+      "calls": 1,
+      "inputTokens": 298,
+      "outputTokens": 1340,
+      "meanDurationMs": 57661
+    },
+    "graph_multi": {
+      "tasks": 1,
+      "passed": 0,
+      "calls": 2,
+      "inputTokens": 699,
+      "outputTokens": 1283,
+      "meanDurationMs": 61973
+    }
+  },
+  "model": "DMXAPI-deepseek-v4-flash",
+  "approvalCheckpoint": {
+    "runId": "0bf4849d-9a87-409e-9e89-b6c76488a1a9",
+    "calls": 1,
+    "contractHash": "070ed599456dbc30c4a17c7dd5de566d4b19c7d9f7fc66e77bf0584ec4b1ac0a"
+  }
+}

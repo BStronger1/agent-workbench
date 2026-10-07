@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "checks": [
+    "failure detected",
+    "repair verified",
+    "memory used",
+    "document retrieval",
+    "report export",
+    "cross-owner isolation",
+    "CSRF rejection",
+    "oversized request rejected",
+    "mobile overflow",
+    "no console errors"
+  ],
+  "runId": "b3e7b0d5-c805-4684-8517-b6a2801319c3",
+  "mode": "demo"
+}

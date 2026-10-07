@@ -112,7 +112,7 @@ def build(checkpointer, model, validator):
             )
         reply = model.call(
             f"coder-{n}",
-            'You are the coding agent. Build a complete self-contained HTML app with inline CSS/JS, doctype, title, h1 and viewport. No external URLs, network calls, iframe, form, imports or downloads. Implement every frozen test step using matching data-testid attributes. Do not change the contract. Return {"html":"..."}.',
+            "You are the coding agent. Build a complete self-contained HTML app with inline CSS/JS, doctype, title, h1 and viewport. No external URLs, network calls, iframe, form, imports or downloads. Implement every frozen test step using matching data-testid attributes. Do not change the contract. Return only the complete HTML document.",
             data,
             Code,
         )

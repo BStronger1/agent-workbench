@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究任务进度页</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            padding: 40px 48px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        .subtitle {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 32px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 16px;
+        }
+        .progress-section {
+            background: #f7fafc;
+            border-radius: 16px;
+            padding: 24px 20px;
+            margin-bottom: 28px;
+        }
+        .progress-label {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+        .progress-number {
+            font-size: 56px;
+            font-weight: 700;
+            color: #2b6cb0;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        .progress-bar-bg {
+            background: #e2e8f0;
+            border-radius: 12px;
+            height: 12px;
+            overflow: hidden;
+            margin: 16px 0 8px;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #3182ce, #63b3ed);
+            border-radius: 12px;
+            transition: width 0.3s ease;
+        }
+        .progress-text {
+            font-size: 14px;
+            color: #718096;
+        }
+        .btn {
+            background: #3182ce;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 14px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(49,130,206,0.3);
+            letter-spacing: 1px;
+        }
+        .btn:hover {
+            background: #2b6cb0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(49,130,206,0.35);
+        }
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(49,130,206,0.25);
+        }
+        .btn:focus-visible {
+            outline: 3px solid #90cdf4;
+            outline-offset: 2px;
+        }
+        .result-area {
+            margin-top: 24px;
+            padding: 16px;
+            background: #edf2f7;
+            border-radius: 12px;
+            font-size: 16px;
+            color: #2d3748;
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .result-area span {
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+        .footer-note {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>研究任务</h1>
+        <div class="subtitle">项目进度 · 持续跟踪</div>
+
+        <div class="progress-section">
+            <div class="progress-label">已完成任务</div>
+            <div class="progress-number" id="result" data-testid="result">0</div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressFill" style="width: 0%;"></div>
+            </div>
+            <div class="progress-text" id="progressText">0 / 10 项</div>
+        </div>
+
+        <button class="btn" id="primary-action" data-testid="primary-action">完成一项任务</button>
+
+        <div class="result-area" id="statusMessage">
+            📋 当前进度：<span id="statusCount">0</span> / 10 已完成
+        </div>
+
+        <div class="footer-note">每点击一次，已完成数量 +1</div>
+    </div>
+
+    <script>
+        (function() {
+            const MAX = 10;
+            let completed = 0;
+
+            const resultEl = document.getElementById('result');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const statusCount = document.getElementById('statusCount');
+            const primaryBtn = document.getElementById('primary-action');
+
+            function updateUI() {
+                const percent = Math.min((completed / MAX) * 100, 100);
+                resultEl.textContent = completed;
+                progressFill.style.width = percent + '%';
+                progressText.textContent = completed + ' / ' + MAX + ' 项';
+                statusCount.textContent = completed;
+
+                if (completed >= MAX) {
+                    primaryBtn.disabled = true;
+                    primaryBtn.style.opacity = '0.5';
+                    primaryBtn.style.cursor = 'not-allowed';
+                    primaryBtn.textContent = '全部完成 ✓';
+                } else {
+                    primaryBtn.disabled = false;
+                    primaryBtn.style.opacity = '1';
+                    primaryBtn.style.cursor = 'pointer';
+                    primaryBtn.textContent = '完成一项任务';
+                }
+            }
+
+            function handleComplete() {
+                if (completed < MAX) {
+                    completed++;
+                    updateUI();
+                }
+            }
+
+            primaryBtn.addEventListener('click', handleComplete);
+
+            // 初始渲染
+            updateUI();
+        })();
+    </script>
+</body>
+</html>

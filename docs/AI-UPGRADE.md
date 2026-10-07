@@ -64,12 +64,20 @@ node qa/graph-live.mjs --live
 `python -m ai_service.training_export evidence/graph-live.json data/training-candidates.jsonl` 只导出真实验收通过的候选样本，按任务分组建议切分，防止同一任务的不同角色产物跨训练/验证集。所有样本仍标记待人工审校。
 
 尚未进行 LoRA/QLoRA 训练，不宣称微调效果。进入训练前需积累足够多样且经审校的任务，独立保留测试集，并选择具备训练许可的开放权重模型及可用算力；已有聊天 API 不等于训练权限。
-## 本次验证状态（2026-10-07）
+## 本次验证状态（2026-10-08）
 
-- CI 提交 95d4601：基础工作台构建/回归成功；13 项 Python 测试成功，包含真实 pgvector 数据隔离、更新失效删除，以及真实 ONNX Embedding 与数据库联合检索。
-- 六条中文检索开发样例：混合 Recall@3=5/6，词法 Recall@3=2/6；[原始结果](../evidence/retrieval-fixtures.json)。未做独立测试集和重复实验。
-- 新图流程的真实模型对照在首次请求因 HTTPS 连接异常中断，没有获得模型产物，剩余任务停止；[完整中断记录](../evidence/graph-live-network-failure.json)。请求用量未知，不能记为真实模型通过。
-- 本地前后端、Java→Python 接入及浏览器回归完成。turing SSH 当前无法建立连接，新版本尚未部署到该服务器；旧服务部署记录不代表本次升级上线。
-- 真实测试的临时个人模型配置已清除，公开文件不含密钥。
+新版已部署内网 HTTPS；使用 DMXAPI-deepseek-v4-flash 完成 6 项同契约单角色/多角色真实任务（15 次调用，4/6 验收通过）及 2/2 项带引用 RAG 验证。失败记录完整保留，结果仅适用于这些开发场景。
 
-新增回归覆盖 Java 重启后恢复入口保留、训练候选样本分组与失败排除。本地最终测试为 29 项 Java 和 12 项 Python；两项需要真实数据库的 Python 测试由 CI 执行。默认 AI 服务允许域名保持原范围；未扩展到更多服务商。
+部署环境通过 17 项 Python 测试，包括实际 pgvector、真实 ONNX Embedding、状态恢复、调用缓存与输出解析。Java 回归 29 项，Node 契约/控制测试 5 项，实际 HTTPS 网页和个人模型配置回归通过。
+
+六条中文检索开发样例：混合 Recall@3=5/6，词法 Recall@3=2/6。未作泛化性能结论。[详细真实调用、失败与费用记录](GRAPH-LIVE-RESULTS.md)。
+
+规划与评审输出 JSON，编码角色输出完整 HTML 文本，兼容旧缓存 JSON；输出格式适配不改变浏览器验收标准。临时测试 Key 已清除。未进行模型微调。
+
+## 无 Docker 的当前部署
+
+用户目录安装 Python 3.12.15、PostgreSQL 17.11 和 pgvector 0.8.2；数据库仅监听回环端口 15432，AI 服务仅监听 18124。模型缓存预置后设置 `HF_HUB_OFFLINE=1`，不依赖运行时下载。
+
+启动顺序：`bash deploy/start-postgres.sh` → `bash deploy/start-ai.sh` → `bash deploy/start.sh`；停止顺序相反。脚本使用现有初始化数据库，不自动创建或覆盖数据。这些进程跨 SSH 断开运行，但未配置整机重启后的自动启动。
+
+更新前的 JAR 和业务数据备份在私有部署目录 `releases/pre-ai-backup`；回滚时停 Java 和 AI 服务，恢复旧 JAR，保留数据，关闭 `AI_SERVICE_URL` 后启动基础工作台。数据库备份应使用 `pg_dump`，不要把运行中数据目录当作一致性备份。

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究任务进度页</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            padding: 40px 48px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: #4a5568;
+            font-size: 16px;
+            margin-bottom: 32px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 16px;
+        }
+        .progress-section {
+            background: #f7fafc;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 28px;
+        }
+        .progress-label {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+        .progress-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2b6cb0;
+            line-height: 1.2;
+        }
+        .progress-detail {
+            color: #718096;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        .btn {
+            background: #3182ce;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 14px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(49,130,206,0.3);
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #2b6cb0;
+        }
+        .btn:active {
+            transform: scale(0.97);
+        }
+        .btn:focus-visible {
+            outline: 3px solid #90cdf4;
+            outline-offset: 2px;
+        }
+        .result-area {
+            margin-top: 24px;
+            padding: 16px;
+            background: #edf2f7;
+            border-radius: 12px;
+            font-size: 16px;
+            color: #2d3748;
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .result-text {
+            font-weight: 500;
+        }
+        .highlight {
+            color: #2b6cb0;
+            font-weight: 700;
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 20px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .progress-number {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>研究任务</h1>
+        <div class="subtitle">项目进度</div>
+
+        <div class="progress-section">
+            <div class="progress-label">已完成任务</div>
+            <div class="progress-number" id="progressDisplay">0</div>
+            <div class="progress-detail">点击下方按钮增加进度</div>
+        </div>
+
+        <button class="btn" id="primaryActionBtn" data-testid="primary-action">完成一项任务</button>
+
+        <div class="result-area" data-testid="result" id="resultArea">
+            <span class="result-text">当前已完成 <span class="highlight" id="resultCount">0</span> 项研究任务</span>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            let completedCount = 0;
+
+            const progressDisplay = document.getElementById('progressDisplay');
+            const resultCount = document.getElementById('resultCount');
+            const primaryBtn = document.getElementById('primaryActionBtn');
+
+            function updateUI() {
+                progressDisplay.textContent = completedCount;
+                resultCount.textContent = completedCount;
+            }
+
+            function handlePrimaryAction() {
+                completedCount += 1;
+                updateUI();
+            }
+
+            primaryBtn.addEventListener('click', handlePrimaryAction);
+
+            // 初始渲染
+            updateUI();
+        })();
+    </script>
+</body>
+</html>

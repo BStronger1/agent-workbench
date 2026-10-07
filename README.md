@@ -2,7 +2,7 @@
 
 个人 AI 工作台：把项目记忆、应用生成、浏览器验收与开发汇报连接起来。
 
-**AI 技术栈升级：** 可选 Python/FastAPI 服务已接入 LangChain、LangGraph、PostgreSQL/pgvector、本地多语言 Embedding 与规划/编码/评审角色协作。支持结构化浏览器验收、检查点恢复、混合检索和带引用的 RAG。见 [升级架构与运行方法](docs/AI-UPGRADE.md)。新图工作流的外部模型对照尚未完成，内网部署更新待网络恢复；下述六任务结果属于原基础链路。
+**AI 技术栈升级：** 可选 Python/FastAPI 服务已接入 LangChain、LangGraph、PostgreSQL/pgvector、本地多语言 Embedding 与规划/编码/评审角色协作。支持结构化浏览器验收、检查点恢复、混合检索和带引用的 RAG。见 [升级架构与运行方法](docs/AI-UPGRADE.md)。新版已部署内网 HTTPS；使用 DMXAPI-deepseek-v4-flash 完成 6 项同契约单角色/多角色真实任务（15 次调用，4/6 验收通过）及 2/2 项带引用 RAG 验证。失败记录完整保留，结果仅适用于这些开发场景。 详见 [新工作流真实测试](docs/GRAPH-LIVE-RESULTS.md)；下述旧六任务结果属于原基础链路。
 
 核心 AI 链路：需求与记忆上下文 → Chat Completions 模型调用 → HTML 结构与浏览器验收 → 将错误和上一版代码反馈给模型。支持最多 3 次修复、三种上下文策略、Token 预算与运行证据。
 
@@ -88,6 +88,6 @@ node evaluate.mjs
 
 Agent Workbench 是 [BStronger1](https://github.com/BStronger1) 开发的个人 AI 产品工作台，将应用工坊、项目知识、汇报和评测组织在同一项目空间中。
 
-新增验证：13 项 Python 测试在 CI 中通过（含真实 pgvector 与真实 Embedding），结构化交互通过 Chromium 检查；六条中文检索样例的混合检索 Recall@3 为 5/6，关键词为 2/6。这是开发样例结果，不是通用效果结论。新图工作流真实模型对照因 HTTPS 连接错误在首次请求停止，见 [中断记录](evidence/graph-live-network-failure.json)。
+新增验证：17 项 Python 测试（含实际 pgvector 与 Embedding）和 5 项 Node 契约/评测控制测试通过，部署端浏览器回归通过。六条中文检索样例的混合 Recall@3 为 5/6，关键词为 2/6；仅为开发样例。新版已部署内网 HTTPS；使用 DMXAPI-deepseek-v4-flash 完成 6 项同契约单角色/多角色真实任务（15 次调用，4/6 验收通过）及 2/2 项带引用 RAG 验证。失败记录完整保留，结果仅适用于这些开发场景。 [完整新评测](docs/GRAPH-LIVE-RESULTS.md)。
 
 项目采用 [MIT 许可](LICENSE)。依赖组件保留各自许可证，验证范围见 [项目说明](NOTICE.md)。

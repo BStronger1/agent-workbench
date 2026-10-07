@@ -1,0 +1,123 @@
+{
+  "scope": "Offline replay on Windows Chromium under final whitespace-normalized frozen contracts. No model calls; original Linux records unchanged. All outcomes match the deployed Linux replay.",
+  "results": [
+    {
+      "report": "graph-live-initial.json",
+      "caseId": "G-01",
+      "workflow": "graph_single",
+      "runId": "5c988ca6-7369-4fc9-8476-e8817df9fc88",
+      "attempt": 0,
+      "originalStatus": "PASSED",
+      "replayStatus": "PASSED",
+      "errors": [],
+      "artifact": "evidence/graph-artifacts/5c988ca6-7369-4fc9-8476-e8817df9fc88/attempt-0"
+    },
+    {
+      "report": "graph-live-json-quote-failure.json",
+      "caseId": "G-01",
+      "workflow": "graph_single",
+      "runId": "26fcc6b6-fccb-4228-9155-9fb54bbfca11",
+      "attempt": 0,
+      "originalStatus": "PASSED",
+      "replayStatus": "PASSED",
+      "errors": [],
+      "artifact": "evidence/graph-artifacts/26fcc6b6-fccb-4228-9155-9fb54bbfca11/attempt-0"
+    },
+    {
+      "report": "graph-live.json",
+      "caseId": "G-01",
+      "workflow": "graph_single",
+      "runId": "a3408066-80ee-4d2b-8c9f-f46ed797c1b2",
+      "attempt": 0,
+      "originalStatus": "PASSED",
+      "replayStatus": "PASSED",
+      "errors": [],
+      "artifact": "evidence/graph-artifacts/a3408066-80ee-4d2b-8c9f-f46ed797c1b2/attempt-0"
+    },
+    {
+      "report": "graph-live.json",
+      "caseId": "G-01",
+      "workflow": "graph_multi",
+      "runId": "f96f9eaa-c28f-4ea3-8d97-ba81644f6b5a",
+      "attempt": 0,
+      "originalStatus": "PASSED",
+      "replayStatus": "PASSED",
+      "errors": [],
+      "artifact": "evidence/graph-artifacts/f96f9eaa-c28f-4ea3-8d97-ba81644f6b5a/attempt-0"
+    },
+    {
+      "report": "graph-live.json",
+      "caseId": "G-02",
+      "workflow": "graph_single",
+      "runId": "a683ca03-ba48-45e5-95ae-22be4adaefd7",
+      "attempt": 0,
+      "originalStatus": "NOT_RUN",
+      "replayStatus": "NOT_RUN",
+      "errors": [
+        "Missing required text: 项目进度"
+      ],
+      "artifact": "evidence/graph-artifacts/a683ca03-ba48-45e5-95ae-22be4adaefd7/attempt-0"
+    },
+    {
+      "report": "graph-live.json",
+      "caseId": "G-02",
+      "workflow": "graph_single",
+      "runId": "a683ca03-ba48-45e5-95ae-22be4adaefd7",
+      "attempt": 1,
+      "originalStatus": "FAILED",
+      "replayStatus": "FAILED",
+      "errors": [
+        "结构化交互步骤或断言失败"
+      ],
+      "artifact": "evidence/graph-artifacts/a683ca03-ba48-45e5-95ae-22be4adaefd7/attempt-1"
+    },
+    {
+      "report": "graph-live.json",
+      "caseId": "G-02",
+      "workflow": "graph_multi",
+      "runId": "108f355d-0ff3-494c-9819-5b9f0488b5f5",
+      "attempt": 0,
+      "originalStatus": "FAILED",
+      "replayStatus": "FAILED",
+      "errors": [
+        "结构化交互步骤或断言失败"
+      ],
+      "artifact": "evidence/graph-artifacts/108f355d-0ff3-494c-9819-5b9f0488b5f5/attempt-0"
+    },
+    {
+      "report": "graph-live.json",
+      "caseId": "G-02",
+      "workflow": "graph_multi",
+      "runId": "108f355d-0ff3-494c-9819-5b9f0488b5f5",
+      "attempt": 1,
+      "originalStatus": "FAILED",
+      "replayStatus": "FAILED",
+      "errors": [
+        "结构化交互步骤或断言失败"
+      ],
+      "artifact": "evidence/graph-artifacts/108f355d-0ff3-494c-9819-5b9f0488b5f5/attempt-1"
+    },
+    {
+      "report": "graph-live.json",
+      "caseId": "G-03",
+      "workflow": "graph_single",
+      "runId": "18ddf4d8-5282-4377-9c8a-9f001732d6cc",
+      "attempt": 0,
+      "originalStatus": "PASSED",
+      "replayStatus": "PASSED",
+      "errors": [],
+      "artifact": "evidence/graph-artifacts/18ddf4d8-5282-4377-9c8a-9f001732d6cc/attempt-0"
+    },
+    {
+      "report": "graph-live.json",
+      "caseId": "G-03",
+      "workflow": "graph_multi",
+      "runId": "ef96e516-b925-450e-9057-a3b3b3c1c81f",
+      "attempt": 0,
+      "originalStatus": "PASSED",
+      "replayStatus": "PASSED",
+      "errors": [],
+      "artifact": "evidence/graph-artifacts/ef96e516-b925-450e-9057-a3b3b3c1c81f/attempt-0"
+    }
+  ]
+}

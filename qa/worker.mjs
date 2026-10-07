@@ -62,11 +62,11 @@ try {
     const button = page.getByTestId("primary-action"),
       result = page.getByTestId("result");
     try {
-      const before = await result.innerText();
+      const before = (await result.textContent())?.trim();
       await button.click();
       await page.waitForFunction(
         (previous) =>
-          document.querySelector("[data-testid=result]")?.textContent !==
+          document.querySelector("[data-testid=result]")?.textContent?.trim() !==
           previous,
         before,
         { timeout: 2000 },

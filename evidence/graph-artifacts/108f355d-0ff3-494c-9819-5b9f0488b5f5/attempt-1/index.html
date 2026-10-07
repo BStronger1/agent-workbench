@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验准备清单</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 32px;
+            max-width: 480px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        .list-item label {
+            font-size: 16px;
+            color: #1f2937;
+            cursor: pointer;
+            flex: 1;
+        }
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #3b82f6;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .actions {
+            margin-top: 24px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        button:active {
+            background: #1d4ed8;
+        }
+        .result {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: #f0fdf4;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+        .result:empty::before {
+            content: "暂无更新";
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>实验准备</h1>
+        <div class="subtitle">项目进度 · 勾选已完成的项目</div>
+
+        <div data-testid="list">
+            <div class="list-item">
+                <input type="checkbox" data-testid="selection-item" id="item1" />
+                <label for="item1">准备实验器材</label>
+            </div>
+            <div class="list-item">
+                <input type="checkbox" data-testid="selection-item" id="item2" />
+                <label for="item2">配制标准溶液</label>
+            </div>
+            <div class="list-item">
+                <input type="checkbox" data-testid="selection-item" id="item3" />
+                <label for="item3">校准仪器设备</label>
+            </div>
+            <div class="list-item">
+                <input type="checkbox" data-testid="selection-item" id="item4" />
+                <label for="item4">记录初始数据</label>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button data-testid="primary-action">更新进度</button>
+        </div>
+
+        <div class="result" data-testid="result"></div>
+    </div>
+
+    <script>
+        (function() {
+            const checkboxes = document.querySelectorAll('[data-testid="selection-item"]');
+            const updateBtn = document.querySelector('[data-testid="primary-action"]');
+            const resultDiv = document.querySelector('[data-testid="result"]');
+
+            function updateResult() {
+                const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+                if (checkedCount === 0) {
+                    resultDiv.textContent = '';
+                } else {
+                    resultDiv.textContent = '已完成 ' + checkedCount + ' 项';
+                }
+            }
+
+            updateBtn.addEventListener('click', updateResult);
+
+            // 初始状态：无结果文本
+            resultDiv.textContent = '';
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-10-07T16:12:18.629Z",
+  "model": "DMXAPI-deepseek-v4-flash",
+  "scope": "Two authored grounded-answer probes with real local embeddings, pgvector and the configured LLM. Not a held-out faithfulness benchmark.",
+  "results": [
+    {
+      "query": "本项目开发费用上限是多少？",
+      "expected": "500",
+      "passed": true,
+      "durationMs": 5331,
+      "method": "rag-hybrid-pgvector-rrf",
+      "sources": [
+        {
+          "id": "863d4858-eb07-4085-b3fe-4c116ec863ff:0",
+          "title": "项目实施要求",
+          "excerpt": "本项目开发费用上限为500元。API密钥必须采用AES-256-GCM加密保存，不能把完整密钥写入日志或返回前端。页面采用绿色主题。",
+          "score": 0.03278688524590164
+        }
+      ],
+      "answer": "本项目开发费用上限为500元。",
+      "citations": [
+        "863d4858-eb07-4085-b3fe-4c116ec863ff:0"
+      ],
+      "usage": {
+        "inputTokens": 238,
+        "outputTokens": 43,
+        "usageKnown": true,
+        "calls": 1,
+        "roles": [
+          "rag"
+        ]
+      }
+    },
+    {
+      "query": "API密钥需要用什么算法加密保存？",
+      "expected": "AES-256-GCM",
+      "passed": true,
+      "durationMs": 3526,
+      "method": "rag-hybrid-pgvector-rrf",
+      "sources": [
+        {
+          "id": "863d4858-eb07-4085-b3fe-4c116ec863ff:0",
+          "title": "项目实施要求",
+          "excerpt": "本项目开发费用上限为500元。API密钥必须采用AES-256-GCM加密保存，不能把完整密钥写入日志或返回前端。页面采用绿色主题。",
+          "score": 0.03278688524590164
+        }
+      ],
+      "answer": "API密钥必须采用AES-256-GCM加密保存。",
+      "citations": [
+        "863d4858-eb07-4085-b3fe-4c116ec863ff:0"
+      ],
+      "usage": {
+        "inputTokens": 240,
+        "outputTokens": 48,
+        "usageKnown": true,
+        "calls": 1,
+        "roles": [
+          "rag"
+        ]
+      }
+    }
+  ],
+  "status": "passed"
+}

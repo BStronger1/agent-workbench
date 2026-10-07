@@ -44,7 +44,7 @@ curl -f http://127.0.0.1:18123/api/workbench/config
 
 配置按浏览器空间保存在 `data/providers`，AES-256-GCM 主密钥位于 `.master-key`，Linux 权限为目录 700、文件 600。必须将该目录和主密钥一同备份，不能只复制密文。API 不回传完整 Key。清除 Cookie 会失去原空间访问凭据，当前没有账户找回功能。
 
-默认接口域名列表见 `src/main/resources/application.properties`。若使用其他兼容服务，可在 `.env` 设置逗号分隔的 `PROVIDER_ALLOWED_HOSTS`（替换整份列表），重启后生效；只允许 HTTPS 和标准端口。公网访问需配置 HTTPS；当前 HTTP 内网入口只适合可信网络或 SSH 隧道。
+默认接口域名列表见 `src/main/resources/application.properties`。若使用其他兼容服务，可在 `.env` 设置逗号分隔的 `PROVIDER_ALLOWED_HOSTS`（替换整份列表），重启后生效；只允许 HTTPS 和标准端口。公网访问需配置 HTTPS；未启用 TLS 的 HTTP 入口只适合可信网络或 SSH 隧道。
 
 如需提供**服务器共享模型**，部署者可选编辑 `.env`：
 
@@ -66,3 +66,8 @@ LIVE_ACCESS_TOKEN=your-random-access-token-at-least-24-characters
 - 停止服务后备份 `data`；恢复到单一实例时保留原浏览器访问凭据。`.env` 单独安全保存。
 - 更新时备份旧 JAR，停止服务，替换新 JAR，启动并执行冒烟测试；保留 `data`。
 - 不将服务器地址、SSH 凭据或真实 `.env` 提交到公开仓库。
+
+
+## AI 工作流部署
+
+图编排版已完成内网 HTTPS 部署及真实模型、RAG 验证。Python/FastAPI、PostgreSQL/pgvector、本地向量模型的安装与启动顺序见 [AI 升级部署](AI-UPGRADE.md)，实测范围见 [真实工作流报告](GRAPH-LIVE-RESULTS.md)。
