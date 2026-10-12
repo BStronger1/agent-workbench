@@ -67,6 +67,7 @@ class RunInput(BaseModel):
     sources: list[Source] = Field(default_factory=list, max_length=8)
     maxRepairs: int = Field(default=1, ge=0, le=3)
     tokenBudget: int = Field(default=50000, ge=1000, le=50000)
+    skillsEnabled: bool = True
     pauseAfterPlan: bool = False
     resume: bool = False
     credentials: Credentials

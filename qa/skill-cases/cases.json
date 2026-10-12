@@ -1,0 +1,317 @@
+[
+  {
+    "id": "S01",
+    "prompt": "制作中文实验准备清单，先勾选第一项再点击更新，结果精确显示已完成 1 项。",
+    "html": "qa/skill-cases/S01.html",
+    "origin": "historical G-02 graph_multi duplicate-target failure",
+    "contract": {
+      "requiredTexts": [
+        "实验准备",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "steps": [
+        {
+          "action": "check",
+          "target": "selection-item",
+          "value": ""
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "已完成 1 项"
+        }
+      ]
+    }
+  },
+  {
+    "id": "S02",
+    "prompt": "制作中文实验准备清单，先勾选第一项再点击更新，结果精确显示已完成 1 项。",
+    "html": "qa/skill-cases/S02.html",
+    "origin": "historical G-02 graph_single wrapper-target failure",
+    "contract": {
+      "requiredTexts": [
+        "实验准备",
+        "项目进度"
+      ],
+      "checkInteraction": true,
+      "steps": [
+        {
+          "action": "check",
+          "target": "selection-item",
+          "value": ""
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "已完成 1 项"
+        }
+      ]
+    }
+  },
+  {
+    "id": "S03",
+    "prompt": "修复预算累计页面。初始总额10，每次输入金额后点击增加，按数值相加；多次操作要保留之前总额。结果只显示总额数字。",
+    "html": "qa/skill-cases/S03.html",
+    "origin": "new developer probe: numeric state",
+    "contract": {
+      "requiredTexts": [
+        "预算累计"
+      ],
+      "checkInteraction": true,
+      "steps": [
+        {
+          "action": "fill",
+          "target": "amount",
+          "value": "7"
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "17"
+        },
+        {
+          "action": "fill",
+          "target": "amount",
+          "value": "3"
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "20"
+        }
+      ]
+    }
+  },
+  {
+    "id": "S04",
+    "prompt": "修复任务提交页面。每次点击提交，都将输入框此时的内容显示到结果区；允许连续修改输入并提交。",
+    "html": "qa/skill-cases/S04.html",
+    "origin": "new developer probe: stale input",
+    "contract": {
+      "requiredTexts": [
+        "任务提交"
+      ],
+      "checkInteraction": true,
+      "steps": [
+        {
+          "action": "fill",
+          "target": "task-input",
+          "value": "整理文献"
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "整理文献"
+        },
+        {
+          "action": "fill",
+          "target": "task-input",
+          "value": "准备汇报"
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "准备汇报"
+        }
+      ]
+    }
+  },
+  {
+    "id": "S05",
+    "prompt": "修复计数与重置页面。每次增加加1，重置恢复0；重置后增加按钮仍然有效。结果只显示数字。",
+    "html": "qa/skill-cases/S05.html",
+    "origin": "new developer probe: listener lost after render",
+    "contract": {
+      "requiredTexts": [
+        "计数与重置"
+      ],
+      "checkInteraction": true,
+      "steps": [
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "1"
+        },
+        {
+          "action": "click",
+          "target": "reset",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "0"
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "1"
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "S06",
+    "prompt": "修复准备清单。勾选的任务在点击统计时计入完成数，结果格式为已完成 N 项。点击控件应保持勾选状态。",
+    "html": "qa/skill-cases/S06.html",
+    "origin": "new developer probe: bubbling toggles twice",
+    "contract": {
+      "requiredTexts": [
+        "准备清单",
+        "实验准备"
+      ],
+      "checkInteraction": true,
+      "steps": [
+        {
+          "action": "check",
+          "target": "selection-item",
+          "value": ""
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "已完成 1 项"
+        }
+      ]
+    }
+  },
+  {
+    "id": "S07",
+    "prompt": "修复任务筛选统计。三个任务为文献、实验、汇报。可以选择多个任务，切换只看未完成后保留已完成状态。点击统计显示全部任务中的完成数，不受当前筛选影响，格式为已完成 N 项。",
+    "html": "qa/skill-cases/S07.html",
+    "origin": "new developer probe: filtered state",
+    "contract": {
+      "requiredTexts": [
+        "任务筛选统计"
+      ],
+      "checkInteraction": true,
+      "steps": [
+        {
+          "action": "check",
+          "target": "first",
+          "value": ""
+        },
+        {
+          "action": "check",
+          "target": "second",
+          "value": ""
+        },
+        {
+          "action": "click",
+          "target": "filter",
+          "value": ""
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "已完成 2 项"
+        }
+      ]
+    }
+  },
+  {
+    "id": "S08",
+    "prompt": "修复结果展示页面。输入任意任务名称，点击确认后结果区域准确显示名称，提示标签结果放在区域外。多次输入和确认都应有效。",
+    "html": "qa/skill-cases/S08.html",
+    "origin": "new developer probe: nested label text",
+    "contract": {
+      "requiredTexts": [
+        "结果展示"
+      ],
+      "checkInteraction": true,
+      "steps": [
+        {
+          "action": "fill",
+          "target": "task-input",
+          "value": "模型验证"
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "模型验证"
+        },
+        {
+          "action": "fill",
+          "target": "task-input",
+          "value": "演示准备"
+        },
+        {
+          "action": "click",
+          "target": "primary-action",
+          "value": ""
+        },
+        {
+          "action": "assert_text",
+          "target": "result",
+          "value": "演示准备"
+        }
+      ]
+    }
+  }
+]

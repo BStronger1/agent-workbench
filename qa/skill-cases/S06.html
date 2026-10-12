@@ -1,0 +1,4 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>交互验收</title></head><body><h1>准备清单</h1><div id="card"><input data-testid="selection-item" type="checkbox">实验准备</div><button data-testid="primary-action">统计</button><output data-testid="result">已完成 0 项</output><script>
+const box=document.querySelector('input');document.getElementById('card').onclick=()=>box.checked=!box.checked;
+document.querySelector('button').onclick=()=>document.querySelector('output').textContent='已完成 '+Number(box.checked)+' 项';
+</script></body></html>

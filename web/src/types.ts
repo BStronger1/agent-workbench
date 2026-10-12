@@ -22,6 +22,8 @@ export interface Attempt {
 }
 export interface Step { action: string; target: string; value?: string }
 export interface Run {
+  skillsEnabled?: boolean;
+  skillTrace?: {attempt: number; name?: string; version?: string; hash?: string; references: string[]; contextChars: number; reason: string; contractHash: string}[];
   workflow?: string;
   calls?: number;
   steps?: Step[];

@@ -8,6 +8,7 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.types import interrupt, Command
 from .models import Contract, Plan, Code, Review
 from .journal import BudgetExceeded, AmbiguousCall
+from .skills import SkillRegistry, skill_instruction
 
 
 class State(TypedDict, total=False):
@@ -32,6 +33,10 @@ class State(TypedDict, total=False):
     baseUrl: str
     tokenBudget: int
     durationMs: int
+    skillsEnabled: bool
+    skillManifest: list
+    skillTrace: list
+    activeSkill: dict | None
 
 
 def fingerprint(contract):
@@ -57,7 +62,9 @@ def default_steps():
     ]
 
 
-def build(checkpointer, model, validator):
+def build(checkpointer, model, validator, registry=None):
+    registry = registry or SkillRegistry()
+
     def plan(s):
         contract = dict(s["contract"])
         if s["workflow"] == "graph_multi":
@@ -112,7 +119,8 @@ def build(checkpointer, model, validator):
             )
         reply = model.call(
             f"coder-{n}",
-            "You are the coding agent. Build a complete self-contained HTML app with inline CSS/JS, doctype, title, h1 and viewport. No external URLs, network calls, iframe, form, imports or downloads. Implement every frozen test step using matching data-testid attributes. Every target referenced in the contract must match exactly ONE DOM element. For a list, assign the contract target only to the intended item (the first item when requested); give other items distinct IDs, never repeat the target across the list. Use classes for group selection/counting. For every check step put data-testid directly on a visible native input type=checkbox or radio, not its surrounding div/card. For fill steps put it on the actual editable input or textarea. Render every requiredTexts entry visibly, including after a repair. Do not change the contract. Return only the complete HTML document.",
+            "You are the coding agent. Build a complete self-contained HTML app with inline CSS/JS, doctype, title, h1 and viewport. No external URLs, network calls, iframe, form, imports or downloads. Implement every frozen test step using matching data-testid attributes. Every target referenced in the contract must match exactly ONE DOM element. For a list, assign the contract target only to the intended item (the first item when requested); give other items distinct IDs, never repeat the target across the list. Use classes for group selection/counting. For every check step put data-testid directly on a visible native input type=checkbox or radio, not its surrounding div/card. For fill steps put it on the actual editable input or textarea. Render every requiredTexts entry visibly, including after a repair. Do not change the contract. Return only the complete HTML document."
+            + skill_instruction(s),
             data,
             Code,
         )
@@ -137,7 +145,8 @@ def build(checkpointer, model, validator):
         a = s["attempts"][-1]
         result = model.call(
             f"reviewer-{len(s['attempts']) - 1}",
-            "You are an independent code reviewer. Inspect requirement coverage, static validation errors and browser failure evidence. Verify that each contract target identifies exactly one element; repeated data-testid values on a list must be fixed, and every required text must remain visible. A check target must be the checkbox/radio control itself, not a wrapper containing it. Give up to 8 concrete repair suggestions. You cannot alter acceptance steps or override browser results. Empty issues when none. Never request extra tools or network.",
+            "You are an independent code reviewer. Inspect requirement coverage, static validation errors and browser failure evidence. Verify that each contract target identifies exactly one element; repeated data-testid values on a list must be fixed, and every required text must remain visible. A check target must be the checkbox/radio control itself, not a wrapper containing it. Give up to 8 concrete repair suggestions. You cannot alter acceptance steps or override browser results. Empty issues when none. Never request extra tools or network."
+            + skill_instruction(s),
             {
                 "request": s["prompt"],
                 "contract": s["contract"],
@@ -150,6 +159,31 @@ def build(checkpointer, model, validator):
         return {
             "feedback": result["issues"],
             "events": event(s, "review", json.dumps(result, ensure_ascii=False)),
+        }
+
+    def select_skill(s):
+        selected, trace = registry.select(
+            s["attempts"][-1],
+            s["contract"],
+            enabled=s.get("skillsEnabled", False),
+            can_repair=len(s["attempts"]) <= s["maxRepairs"],
+        )
+        trace["contractHash"] = s["contractHash"]
+        return {
+            "activeSkill": selected,
+            "skillTrace": s.get("skillTrace", []) + [trace],
+            "events": event(
+                s,
+                "skill",
+                (
+                    "交互修复技能已加载："
+                    + selected["name"]
+                    + "@"
+                    + selected["version"]
+                    if selected
+                    else "修复技能未加载：" + trace["reason"]
+                ),
+            ),
         }
 
     def after_validate(s):
@@ -189,6 +223,7 @@ def build(checkpointer, model, validator):
         ("code", code),
         ("validate", validate),
         ("review", review),
+        ("select_skill", select_skill),
         ("finish", finish),
     ]:
         g.add_node(name, fn)
@@ -196,20 +231,22 @@ def build(checkpointer, model, validator):
     g.add_edge("plan", "approval")
     g.add_edge("approval", "code")
     g.add_edge("code", "validate")
-    g.add_conditional_edges("validate", after_validate)
+    g.add_edge("validate", "select_skill")
+    g.add_conditional_edges("select_skill", after_validate)
     g.add_conditional_edges("review", after_review)
     g.add_edge("finish", END)
     return g.compile(checkpointer=checkpointer)
 
 
-def execute(request, data, model, validator, journal):
+def execute(request, data, model, validator, journal, registry=None):
+    registry = registry or SkillRegistry()
     started = time.monotonic()
     thread = hashlib.sha256(
         f"{request.owner}/{request.projectId}/{request.runId}".encode()
     ).hexdigest()
     config = {"configurable": {"thread_id": thread}, "recursion_limit": 40}
     with sqlite3.connect(data / "checkpoints.sqlite", check_same_thread=False) as conn:
-        graph = build(SqliteSaver(conn), model, validator)
+        graph = build(SqliteSaver(conn), model, validator, registry)
         snapshot = graph.get_state(config)
         if request.resume:
             if not snapshot.values:
@@ -219,6 +256,12 @@ def execute(request, data, model, validator, journal):
                 or snapshot.values["baseUrl"] != request.credentials.baseUrl
             ):
                 raise ValueError("Resume requires original model and provider")
+            if snapshot.values.get("skillsEnabled", False) and (
+                snapshot.values.get("skillManifest") != registry.manifest()
+            ):
+                raise ValueError(
+                    "Skill version changed; restore original bundle or start a new run"
+                )
             payload = Command(resume=True) if snapshot.interrupts else None
         else:
             if snapshot.values:
@@ -239,6 +282,10 @@ def execute(request, data, model, validator, journal):
                 "baseUrl": request.credentials.baseUrl,
                 "tokenBudget": request.tokenBudget,
                 "durationMs": 0,
+                "skillsEnabled": request.skillsEnabled,
+                "skillManifest": registry.manifest() if request.skillsEnabled else [],
+                "skillTrace": [],
+                "activeSkill": None,
             }
         status = None
         error = ""
@@ -264,6 +311,7 @@ def execute(request, data, model, validator, journal):
         s["durationMs"] = journal.add_duration(
             request.runId, round((time.monotonic() - started) * 1000)
         )
+        s.pop("activeSkill", None)
         # Credentials were captured in request-local node closures, never serialized.
         return {
             **s,

@@ -1,0 +1,5 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>交互验收</title></head><body><h1>计数与重置</h1><section id="controls"><button data-testid="primary-action">增加</button></section><button data-testid="reset">重置</button><output data-testid="result">0</output><script>
+let n=0;const out=document.querySelector('output'),controls=document.getElementById('controls');
+controls.querySelector('button').onclick=()=>out.textContent=++n;
+document.querySelector('[data-testid=reset]').onclick=()=>{n=0;out.textContent=n;controls.innerHTML='<button data-testid="primary-action">增加</button>'};
+</script></body></html>

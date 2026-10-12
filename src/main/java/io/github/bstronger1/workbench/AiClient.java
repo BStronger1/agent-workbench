@@ -44,8 +44,11 @@ public class AiClient {
         body.put("owner",owner);body.put("projectId",projectId);body.put("runId",r.id);body.put("prompt",r.prompt);
         body.put("workflow",r.workflow);body.put("contract",Map.of("requiredTexts",r.requiredTexts,"checkInteraction",r.checkInteraction,"steps",r.steps));
         body.put("sources",r.memorySources);body.put("maxRepairs",r.maxRepairs);body.put("tokenBudget",r.tokenBudget);
+        body.put("skillsEnabled",r.skillsEnabled);
         body.put("pauseAfterPlan",r.pauseAfterPlan);body.put("resume",resume);body.put("credentials",credentials);
         var result=post("/runs",body);
+        r.skillsEnabled=result.path("skillsEnabled").asBoolean(r.skillsEnabled);
+        if(result.has("skillTrace"))r.skillTrace=new ArrayList<>(Arrays.asList(mapper.convertValue(result.get("skillTrace"),SkillEvent[].class)));
         r.status=result.path("status").asText("INTERRUPTED");r.error=result.path("error").asText();
         r.resumable=result.path("resumable").asBoolean();r.contractHash=result.path("contractHash").asText();
         r.calls=result.path("calls").asInt();r.durationMs=result.path("durationMs").asLong();

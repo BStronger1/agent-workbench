@@ -26,7 +26,8 @@ public final class Domain {
         public String id = id(), prompt, mode, model, memoryStrategy, status = "QUEUED", createdAt = now(), completedAt, error;
         public int maxRepairs, tokenBudget, inputTokens, outputTokens, calls;
         public String workflow = "legacy", contractHash;
-        public boolean pauseAfterPlan, resumable;
+        public boolean pauseAfterPlan, resumable, skillsEnabled;
+        public List<SkillEvent> skillTrace = new ArrayList<>();
         public List<Step> steps = new ArrayList<>();
         public java.util.Map<String,Object> plan = new java.util.LinkedHashMap<>();
         public boolean usageKnown = true;
@@ -40,9 +41,13 @@ public final class Domain {
     }
     public record Event(String at, String stage, String message) {}
     public record Attempt(int number, String html, List<String> errors, String browserStatus, String screenshot, long durationMs) {}
+    public record SkillEvent(int attempt, String name, String version, String hash, List<String> references, int contextChars, String reason, String contractHash) {}
     public record Step(String action, String target, String value) {}
     public record GenerateRequest(String prompt, Integer maxRepairs, Integer tokenBudget,
-                                  List<String> requiredTexts, Boolean checkInteraction, String memoryStrategy, Boolean demoFailure, String workflow, List<Step> steps, Boolean pauseAfterPlan) {
+                                  List<String> requiredTexts, Boolean checkInteraction, String memoryStrategy, Boolean demoFailure, String workflow, List<Step> steps, Boolean pauseAfterPlan, Boolean skillsEnabled) {
+        public GenerateRequest(String prompt, Integer maxRepairs, Integer tokenBudget, List<String> requiredTexts, Boolean checkInteraction, String memoryStrategy, Boolean demoFailure, String workflow, List<Step> steps, Boolean pauseAfterPlan) {
+            this(prompt,maxRepairs,tokenBudget,requiredTexts,checkInteraction,memoryStrategy,demoFailure,workflow,steps,pauseAfterPlan,true);
+        }
         public GenerateRequest(String prompt, Integer maxRepairs, Integer tokenBudget, List<String> requiredTexts, Boolean checkInteraction, String memoryStrategy, Boolean demoFailure) {
             this(prompt,maxRepairs,tokenBudget,requiredTexts,checkInteraction,memoryStrategy,demoFailure,"legacy",List.of(),false);
         }

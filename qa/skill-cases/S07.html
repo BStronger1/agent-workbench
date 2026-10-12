@@ -1,0 +1,4 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>交互验收</title></head><body><h1>任务筛选统计</h1><div id="list"><label><input class="task" type="checkbox" data-testid="first">文献</label><label><input class="task" type="checkbox" data-testid="second">实验</label><label><input class="task" type="checkbox">汇报</label></div><button data-testid="filter">只看未完成</button><button data-testid="primary-action">统计</button><output data-testid="result">已完成 0 项</output><script>
+document.querySelector('[data-testid=filter]').onclick=()=>document.querySelectorAll('.task:checked').forEach(x=>x.parentElement.remove());
+document.querySelector('[data-testid=primary-action]').onclick=()=>document.querySelector('output').textContent='已完成 '+document.querySelectorAll('.task:checked').length+' 项';
+</script></body></html>

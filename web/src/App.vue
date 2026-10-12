@@ -15,6 +15,7 @@ const required = ref("项目进度\n研究任务"),
   maxRepairs = ref(2),
   injectFailure = ref(false),
   interaction = ref(true);
+const skillsEnabled = ref(true);
 const workflow = ref("legacy"), acceptance = ref("direct"), inputValue = ref("研究任务"), pauseAfterPlan = ref(false), knowledgeMode = ref("lexical");
 const steps = computed(() => acceptance.value === "check" ? [
   {action:"check",target:"selection-item",value:""}, {action:"click",target:"primary-action",value:""}, {action:"assert_text",target:"result",value:"已完成 1 项"}
@@ -149,6 +150,7 @@ async function generate() {
       maxRepairs: maxRepairs.value,
       tokenBudget: workflow.value === "legacy" ? 24000 : 50000,
       workflow: workflow.value,
+      skillsEnabled: skillsEnabled.value,
       steps: interaction.value ? steps.value : [],
       pauseAfterPlan: pauseAfterPlan.value,
       requiredTexts: required.value.split("\n").filter(Boolean),
@@ -417,6 +419,7 @@ onUnmounted(() => clearInterval(timer));
             </div>
             <label v-if="acceptance === 'fill'">测试输入<input v-model="inputValue" maxlength="100" /></label>
             <label v-if="workflow !== 'legacy'" class="check"><input type="checkbox" v-model="pauseAfterPlan" />生成前由我确认验收计划</label>
+            <label v-if="workflow !== 'legacy'" class="check"><input type="checkbox" v-model="skillsEnabled" />交互失败时使用修复技能</label>
             <div class="form-row">
               <label
                 >记忆策略<select v-model="strategy">
@@ -535,6 +538,13 @@ onUnmounted(() => clearInterval(timer));
               referrerpolicy="no-referrer"
             ></iframe>
             <div v-else-if="previewTab === 'trace' && activeRun" class="trace">
+              <div v-if="activeRun.workflow !== 'legacy'" class="memory-box" data-testid="skill-trace">
+                <h4>交互修复技能 · {{ activeRun.skillsEnabled ? '已启用' : '已关闭' }}</h4>
+                <p v-if="!activeRun.skillTrace?.some(item => item.name)">本次尚未触发适用的修复技能。</p>
+                <p v-for="item in activeRun.skillTrace?.filter(item => item.name)" :key="item.attempt">
+                  第 {{ item.attempt + 1 }} 次验收后 · {{ item.name }} v{{ item.version }} · 使用 {{ item.references.length }} 份诊断参考
+                </p>
+              </div>
               <ol>
                 <li v-for="(event, i) in activeRun.events" :key="i">
                   <small
