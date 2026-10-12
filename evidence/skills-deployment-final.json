@@ -1,0 +1,28 @@
+{
+  "status": "deployed",
+  "commit": "e772dd4",
+  "pythonTestsPassed": 46,
+  "pythonTestsSkipped": 2,
+  "https": true,
+  "aiEnabled": true,
+  "projectsPreserved": 25,
+  "privateConfigUnchanged": true,
+  "skills": [
+    {
+      "name": "web-ui-acceptance-repair",
+      "description": "Diagnose and repair generated HTML that fails a frozen browser interaction contract, including ambiguous targets, invalid action controls, and incorrect visible results.",
+      "version": "1.1.0",
+      "hash": "45463172a4a9c897d5fdd7eff57232d7cc345632a79cb2c51ec098abd1994083"
+    }
+  ],
+  "jarSha256": "dc77cea409a41857a1655888d7ce695d9e837b44f1a24809a43aa6586ac088ad",
+  "verifiedAt": "2026-10-12",
+  "httpsBrowserChecks": {
+    "workflow": "passed",
+    "personalModelSettings": "passed",
+    "skillDefaultOffAndToggle": "passed",
+    "skillVersionTraceRendering": "passed",
+    "externalModelCalls": 0,
+    "method": "Live HTTPS frontend; UI skill forwarding uses a mock API. Workflow demo and provider configuration tests use actual server APIs."
+  }
+}

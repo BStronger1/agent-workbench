@@ -49,3 +49,7 @@ GitHub CI 已通过全部 20 项 Python 测试（含真实数据库/Embedding）
 - [契约一致性、全部尝试和配置清理核对](../evidence/checklist-regression-audit.json)
 - [全部 HTML 与截图](../evidence/checklist-artifacts)
 - [修复前完整评测](GRAPH-LIVE-RESULTS.md)
+
+## 部署状态补充（2026-10-12）
+
+turing SSH 已恢复连接，清单修复代码随 Skill v1.1（`e772dd4`）同步部署，HTTPS 和 AI 服务健康检查通过。本次同步没有重做上述付费模型测试；历史 2/2 结果保持原测试口径。[当前部署记录](../evidence/skills-deployment-final.json)。

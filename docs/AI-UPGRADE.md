@@ -83,4 +83,10 @@ node qa/graph-live.mjs --live
 更新前的 JAR 和业务数据备份在私有部署目录 `releases/pre-ai-backup`；回滚时停 Java 和 AI 服务，恢复旧 JAR，保留数据，关闭 `AI_SERVICE_URL` 后启动基础工作台。数据库备份应使用 `pg_dump`，不要把运行中数据目录当作一致性备份。
 
 
-原失败清单场景修复后，使用同模型、同契约定向复测两种角色模式均通过（2/2）；这是本地完整服务链路结果，本次修复的服务器同步待 SSH 恢复。[修复与复测证据](CHECKLIST-REGRESSION.md)。
+原失败清单场景修复后，使用同模型、同契约定向复测两种角色模式均通过（2/2）；这是本地完整服务链路结果；2026-10-12 已随 Skill v1.1 同步到 turing，HTTPS 服务验证通过。[修复与复测证据](CHECKLIST-REGRESSION.md)。
+
+## Agent Harness 与 Skills 更新（2026-10-12）
+
+页面交互修复 Skill v1.1 已部署 turing，默认关闭、可手动启用。按错误类型选择参考资料，固定技能版本，使用唯一锚点校验的局部补丁，并记录修改与浏览器验收。完成 48 次真实模型调用；Skill 迭代总 Token 从 47,346 降至 31,814（减少 32.8%），两版总体通过率均为 13/16；关闭技能基线为 14/16，未证明质量提升。见 [评测与取舍](SKILL-EVALUATION.md)。
+
+最终代码 `e772dd4` 的 CI 通过 31 项 Java、48 项 Python（含实际 pgvector/Embedding）、7 项 Node 测试及浏览器回归。部署暂存目录测试通过 46 项 Python，跳过 2 项环境集成测试；HTTPS 与 AI 服务健康、原有项目和私有模型配置保持不变。[部署记录](../evidence/skills-deployment-final.json)。
