@@ -1,0 +1,165 @@
+{
+  "mode": "no-model-calls",
+  "cases": [
+    {
+      "caseId": "S01",
+      "htmlHash": "3da8d064b8ca78fa9d9e890fd1e1558516563713dedae7f239cc50bc3e8cda4a",
+      "contractHash": "3aaa11a82c8538c0cf92d2ddb89960c2f5382740da07419c01f2bbdd67ff7036",
+      "browserStatus": "NOT_RUN",
+      "errors": [
+        "Target selection-item must match exactly one element; found 4. Keep this data-testid only on the intended element; use distinct IDs for other list items."
+      ],
+      "skill": {
+        "attempt": 0,
+        "name": "web-ui-acceptance-repair",
+        "version": "1.0.0",
+        "hash": "daec4548fe0ea7b62b721eb9ac6c74153925c2b07187b34ed4c753fd5b4a5ce7",
+        "references": [
+          "references/targets.md"
+        ],
+        "contextChars": 2290,
+        "reason": "interaction_failure"
+      }
+    },
+    {
+      "caseId": "S02",
+      "htmlHash": "3595c4772b4d1d0347b323f4ef7184cf142dfeece8090505e543033ec0511637",
+      "contractHash": "3aaa11a82c8538c0cf92d2ddb89960c2f5382740da07419c01f2bbdd67ff7036",
+      "browserStatus": "NOT_RUN",
+      "errors": [
+        "Step check target selection-item is <div>, not a checkbox/radio. Move data-testid onto the actual checkbox input, not the surrounding list item or card."
+      ],
+      "skill": {
+        "attempt": 0,
+        "name": "web-ui-acceptance-repair",
+        "version": "1.0.0",
+        "hash": "daec4548fe0ea7b62b721eb9ac6c74153925c2b07187b34ed4c753fd5b4a5ce7",
+        "references": [
+          "references/targets.md"
+        ],
+        "contextChars": 2290,
+        "reason": "interaction_failure"
+      }
+    },
+    {
+      "caseId": "S03",
+      "htmlHash": "f6abbbe376eddecb868ff52c37d31f50c29e3482c8c8e8c988a13c997aa142ae",
+      "contractHash": "2cc4c4c3f0b9fb3bce7757553e46da8bf5d8855e6e3916bbbb4448bf44e867a7",
+      "browserStatus": "FAILED",
+      "errors": [
+        "Assertion result failed: expected exact text \"17\"; got \"107\"."
+      ],
+      "skill": {
+        "attempt": 0,
+        "name": "web-ui-acceptance-repair",
+        "version": "1.0.0",
+        "hash": "daec4548fe0ea7b62b721eb9ac6c74153925c2b07187b34ed4c753fd5b4a5ce7",
+        "references": [
+          "references/state.md"
+        ],
+        "contextChars": 2756,
+        "reason": "interaction_failure"
+      }
+    },
+    {
+      "caseId": "S04",
+      "htmlHash": "d1ca554d55fa22c14b8d0a307e9364d79531b6c1a4e271f5ba9a0f22236730c0",
+      "contractHash": "cc88463111b2349c9608671c418b3c339a5afb1bba43185da4a24ed7631e93ed",
+      "browserStatus": "FAILED",
+      "errors": [
+        "Result not visible: result"
+      ],
+      "skill": {
+        "attempt": 0,
+        "name": "web-ui-acceptance-repair",
+        "version": "1.0.0",
+        "hash": "daec4548fe0ea7b62b721eb9ac6c74153925c2b07187b34ed4c753fd5b4a5ce7",
+        "references": [
+          "references/state.md"
+        ],
+        "contextChars": 2756,
+        "reason": "interaction_failure"
+      }
+    },
+    {
+      "caseId": "S05",
+      "htmlHash": "02a3e24294f93c61a89e4fe63423a453b3a745bef061ef98ed658a7a328654dd",
+      "contractHash": "1176b7b064165320140f59cf4e09e0ad4a588df802ece82154cafaf1aaeb665a",
+      "browserStatus": "FAILED",
+      "errors": [
+        "Assertion result failed: expected exact text \"1\"; got \"0\"."
+      ],
+      "skill": {
+        "attempt": 0,
+        "name": "web-ui-acceptance-repair",
+        "version": "1.0.0",
+        "hash": "daec4548fe0ea7b62b721eb9ac6c74153925c2b07187b34ed4c753fd5b4a5ce7",
+        "references": [
+          "references/state.md"
+        ],
+        "contextChars": 2756,
+        "reason": "interaction_failure"
+      }
+    },
+    {
+      "caseId": "S06",
+      "htmlHash": "e565fcbb47a502db72655fde8a6af5dc57c7488e94e9ac2b1be0c0f5da746fb6",
+      "contractHash": "7959e15e64b5cdc9dd4ae614282b43de29c97d06bfca42e4e54817c8e775b680",
+      "browserStatus": "FAILED",
+      "errors": [
+        "Action check on unique target selection-item could not be completed. Check the element type, visibility and interaction handler."
+      ],
+      "skill": {
+        "attempt": 0,
+        "name": "web-ui-acceptance-repair",
+        "version": "1.0.0",
+        "hash": "daec4548fe0ea7b62b721eb9ac6c74153925c2b07187b34ed4c753fd5b4a5ce7",
+        "references": [
+          "references/targets.md"
+        ],
+        "contextChars": 2290,
+        "reason": "interaction_failure"
+      }
+    },
+    {
+      "caseId": "S07",
+      "htmlHash": "ddc0738183e77bc3c259caaf6adeb0ccd90a5b8b8050175972e114635d04d476",
+      "contractHash": "7e1d20f83eabe6aba94daf52d2b25be87650885564699350ebad5b2fdedca49d",
+      "browserStatus": "FAILED",
+      "errors": [
+        "Assertion result failed: expected exact text \"已完成 2 项\"; got \"已完成 0 项\"."
+      ],
+      "skill": {
+        "attempt": 0,
+        "name": "web-ui-acceptance-repair",
+        "version": "1.0.0",
+        "hash": "daec4548fe0ea7b62b721eb9ac6c74153925c2b07187b34ed4c753fd5b4a5ce7",
+        "references": [
+          "references/state.md"
+        ],
+        "contextChars": 2756,
+        "reason": "interaction_failure"
+      }
+    },
+    {
+      "caseId": "S08",
+      "htmlHash": "bb266647cc36d2f579ddf0f0990e22f780a54786ab12afe3b39d6d5bbbe2cbdb",
+      "contractHash": "cb2c0bde5c511b666c38a32cabc53146f5cafbfc42192475aa00a01c45fa41ec",
+      "browserStatus": "FAILED",
+      "errors": [
+        "Assertion result failed: expected exact text \"模型验证\"; got \"结果：模型验证\"."
+      ],
+      "skill": {
+        "attempt": 0,
+        "name": "web-ui-acceptance-repair",
+        "version": "1.0.0",
+        "hash": "daec4548fe0ea7b62b721eb9ac6c74153925c2b07187b34ed4c753fd5b4a5ce7",
+        "references": [
+          "references/state.md"
+        ],
+        "contextChars": 2756,
+        "reason": "interaction_failure"
+      }
+    }
+  ]
+}

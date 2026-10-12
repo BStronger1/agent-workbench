@@ -1,0 +1,19 @@
+{
+  "status": "deployed",
+  "commit": "57fb29b",
+  "pythonTestsPassed": 36,
+  "pythonTestsSkipped": 2,
+  "https": true,
+  "aiEnabled": true,
+  "projectsPreserved": 23,
+  "privateConfigUnchanged": true,
+  "skills": [
+    {
+      "name": "web-ui-acceptance-repair",
+      "description": "Diagnose and repair generated HTML that fails a frozen browser interaction contract, including ambiguous targets, invalid action controls, and incorrect visible results.",
+      "version": "1.0.0",
+      "hash": "daec4548fe0ea7b62b721eb9ac6c74153925c2b07187b34ed4c753fd5b4a5ce7"
+    }
+  ],
+  "jarSha256": "6f4686021661012bd491831c7f12689dbee9ba20703423977a65adec589f4fe9"
+}
