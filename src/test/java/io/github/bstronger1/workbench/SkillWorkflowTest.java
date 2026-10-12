@@ -14,6 +14,7 @@ class SkillWorkflowTest {
                 assertEquals(Boolean.FALSE, ((Map<?,?>)body).get("skillsEnabled"));
                 return mapper.valueToTree(Map.of(
                     "status","PASSED","skillsEnabled",false,
+                    "patchTrace",List.of(Map.of("attempt",1,"status","APPLIED","beforeHash","before","afterHash","after")),
                     "skillTrace",List.of(Map.of("attempt",0,"reason","disabled",
                         "references",List.of(),"contextChars",0,"contractHash","frozen"))
                 ));
@@ -28,6 +29,8 @@ class SkillWorkflowTest {
         assertEquals("frozen",run.skillTrace.getFirst().contractHash());
         Run restored=mapper.convertValue(mapper.valueToTree(run),Run.class);
         assertEquals(run.skillTrace,restored.skillTrace);
+        assertEquals(run.patchTrace,restored.patchTrace);
+        assertEquals("APPLIED",restored.patchTrace.getFirst().get("status"));
     }
 
     @Test void legacyStoredRunsHaveNoSyntheticSkillHistory() throws Exception {

@@ -47,6 +47,7 @@ public class AiClient {
         body.put("skillsEnabled",r.skillsEnabled);
         body.put("pauseAfterPlan",r.pauseAfterPlan);body.put("resume",resume);body.put("credentials",credentials);
         var result=post("/runs",body);
+        if(result.has("patchTrace"))r.patchTrace=mapper.convertValue(result.get("patchTrace"),List.class);
         r.skillsEnabled=result.path("skillsEnabled").asBoolean(r.skillsEnabled);
         if(result.has("skillTrace"))r.skillTrace=new ArrayList<>(Arrays.asList(mapper.convertValue(result.get("skillTrace"),SkillEvent[].class)));
         r.status=result.path("status").asText("INTERRUPTED");r.error=result.path("error").asText();

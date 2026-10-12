@@ -1,6 +1,13 @@
 import json, uuid
 import pytest
-from ai_service.models import RunInput, Contract, Step, Credentials, KnowledgeInput
+from ai_service.models import (
+    RunInput,
+    Contract,
+    Step,
+    Credentials,
+    KnowledgeInput,
+    CodeEdits,
+)
 from ai_service.graph import execute
 from ai_service.journal import Journal, BudgetExceeded, AmbiguousCall
 from ai_service.llm import parse_json, validate_provider
@@ -20,7 +27,9 @@ class FakeModel:
             if role == "planner"
             else {"issues": ["fix button"]}
             if role.startswith("reviewer")
-            else {"html": "<!doctype html><h1>test</h1>"}
+            else {"edits": [{"old": "<h1>test</h1>", "new": "<h1>test fixed</h1>"}]}
+            if schema is CodeEdits
+            else {"html": "<!doctype html><html><h1>test</h1></html>"}
         )
         r = self.journal.invoke(
             self.run,

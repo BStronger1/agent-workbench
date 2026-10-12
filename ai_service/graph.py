@@ -6,7 +6,8 @@ from typing import TypedDict
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.types import interrupt, Command
-from .models import Contract, Plan, Code, Review
+from .models import Contract, Plan, Code, CodeEdits, Review
+from .patching import apply_edits, html_hash, PatchError
 from .journal import BudgetExceeded, AmbiguousCall
 from .skills import SkillRegistry, skill_instruction
 
@@ -37,6 +38,8 @@ class State(TypedDict, total=False):
     skillManifest: list
     skillTrace: list
     activeSkill: dict | None
+    generationErrors: list
+    patchTrace: list
 
 
 def fingerprint(contract):
@@ -117,15 +120,42 @@ def build(checkpointer, model, validator, registry=None):
                 browserErrors=s["attempts"][-1]["errors"],
                 reviewFeedback=s.get("feedback", []),
             )
-        reply = model.call(
-            f"coder-{n}",
-            "You are the coding agent. Build a complete self-contained HTML app with inline CSS/JS, doctype, title, h1 and viewport. No external URLs, network calls, iframe, form, imports or downloads. Implement every frozen test step using matching data-testid attributes. Every target referenced in the contract must match exactly ONE DOM element. For a list, assign the contract target only to the intended item (the first item when requested); give other items distinct IDs, never repeat the target across the list. Use classes for group selection/counting. For every check step put data-testid directly on a visible native input type=checkbox or radio, not its surrounding div/card. For fill steps put it on the actual editable input or textarea. Render every requiredTexts entry visibly, including after a repair. Do not change the contract. Return only the complete HTML document."
-            + skill_instruction(s),
-            data,
-            Code,
-        )
+        system = "You are the coding agent. Build a complete self-contained HTML app with inline CSS/JS, doctype, title, h1 and viewport. No external URLs, network calls, iframe, form, imports or downloads. Implement every frozen test step using matching data-testid attributes. Every target referenced in the contract must match exactly ONE DOM element. For a list, assign the contract target only to the intended item (the first item when requested); give other items distinct IDs, never repeat the target across the list. Use classes for group selection/counting. For every check step put data-testid directly on a visible native input type=checkbox or radio, not its surrounding div/card. For fill steps put it on the actual editable input or textarea. Render every requiredTexts entry visibly, including after a repair. Do not change the contract. Return only the complete HTML document."
+        patch_trace = s.get("patchTrace", [])
+        errors = []
+        if n and s.get("activeSkill"):
+            system = system.replace(
+                "Return only the complete HTML document.",
+                "For this repair return JSON edits with exact old/new substring anchors; preserve untouched HTML.",
+            )
+            record = {"attempt": n, "beforeHash": html_hash(s["html"])}
+            try:
+                reply = model.call(
+                    f"coder-{n}", system + skill_instruction(s), data, CodeEdits
+                )
+                html = apply_edits(s["html"], reply)
+                record.update(
+                    status="APPLIED", edits=reply["edits"], afterHash=html_hash(html)
+                )
+            except (PatchError, ValueError) as error:
+                reason = (
+                    str(error)
+                    if isinstance(error, PatchError)
+                    else "Invalid edit response schema"
+                )
+                errors = ["Patch rejected: " + reason]
+                html = s["html"]
+                record.update(
+                    status="REJECTED", reason=reason, afterHash=html_hash(html)
+                )
+            patch_trace = patch_trace + [record]
+        else:
+            reply = model.call(f"coder-{n}", system, data, Code)
+            html = reply["html"]
         return {
-            "html": reply["html"],
+            "html": html,
+            "generationErrors": errors,
+            "patchTrace": patch_trace,
             "events": event(
                 s, "generate" if n == 0 else "repair", f"编码角色第 {n + 1} 次生成"
             ),
@@ -135,7 +165,17 @@ def build(checkpointer, model, validator, registry=None):
         if fingerprint(s["contract"]) != s["contractHash"]:
             raise ValueError("Contract changed")
         attempts = s.get("attempts", [])
-        a = validator(s["runId"], len(attempts), s["html"], s["contract"])
+        if s.get("generationErrors"):
+            a = {
+                "number": len(attempts),
+                "html": s["html"],
+                "errors": s["generationErrors"],
+                "browserStatus": "NOT_RUN",
+                "screenshot": None,
+                "durationMs": 0,
+            }
+        else:
+            a = validator(s["runId"], len(attempts), s["html"], s["contract"])
         return {
             "attempts": attempts + [a],
             "events": event(s, "validate", a["browserStatus"]),
@@ -286,6 +326,8 @@ def execute(request, data, model, validator, journal, registry=None):
                 "skillManifest": registry.manifest() if request.skillsEnabled else [],
                 "skillTrace": [],
                 "activeSkill": None,
+                "generationErrors": [],
+                "patchTrace": [],
             }
         status = None
         error = ""

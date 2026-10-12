@@ -4,6 +4,8 @@
 
 **AI 技术栈升级：** 可选 Python/FastAPI 服务已接入 LangChain、LangGraph、PostgreSQL/pgvector、本地多语言 Embedding 与规划/编码/评审角色协作。支持结构化浏览器验收、检查点恢复、混合检索和带引用的 RAG。见 [升级架构与运行方法](docs/AI-UPGRADE.md)。新版已部署内网 HTTPS；使用 DMXAPI-deepseek-v4-flash 完成 6 项同契约单角色/多角色真实任务（15 次调用，4/6 验收通过）及 2/2 项带引用 RAG 验证。失败记录完整保留，结果仅适用于这些开发场景。 详见 [新工作流真实测试](docs/GRAPH-LIVE-RESULTS.md)；下述旧六任务结果属于原基础链路。
 
+**Agent Skills：** 图工作流支持按验收错误选择修复技能、按需注入参考资料、固定技能版本并保存调用轨迹；局部替换工具保留未修改的 HTML，再执行原 Playwright 契约。见 [技能架构与评测方法](docs/SKILLS.md)。
+
 核心 AI 链路：需求与记忆上下文 → Chat Completions 模型调用 → HTML 结构与浏览器验收 → 将错误和上一版代码反馈给模型。支持最多 3 次修复、三种上下文策略、Token 预算与运行证据。
 
 **状态：已完成真实模型测试，也支持无密钥演示。** 2026-10-07 使用 `DMXAPI-deepseek-v4-flash` 执行 6 个真实任务、8 次生成/修复调用，按原定契约最终通过 4/6；两项交互前置条件不匹配的失败及修复记录完整保留。见 [真实测试报告](docs/LIVE-RESULTS.md)。固定模板演示结果与真实结果分别记录。

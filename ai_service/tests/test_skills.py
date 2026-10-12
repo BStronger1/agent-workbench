@@ -129,7 +129,7 @@ def test_escaping_reference_and_invalid_metadata_are_rejected(tmp_path):
     skill.write_text(original + "\n[bad](references/../../../outside.md)")
     with pytest.raises(ValueError, match="escapes"):
         SkillRegistry(bundle)
-    skill.write_text(original.replace('version: "1.0.0"', "version: 1"))
+    skill.write_text(original.replace('version: "1.1.0"', "version: 1"))
     with pytest.raises(ValueError, match="metadata"):
         SkillRegistry(bundle)
 
@@ -152,3 +152,27 @@ def test_skill_does_not_override_budget_or_repair_limit(tmp_path):
     result2 = execute(r2, tmp_path, CaptureModel(j, r2.runId), fail_then_pass, j)
     assert result2["status"] == "FAILED" and result2["calls"] == 1
     assert not any(t["name"] for t in result2["skillTrace"])
+
+
+def test_invalid_model_edits_are_rejected_without_changing_html(tmp_path):
+    class BadEdits(CaptureModel):
+        def call(self, role, *args):
+            result = super().call(role, *args)
+            if role == "coder-1":
+                return {"edits": [{"old": "missing-anchor", "new": "fake pass"}]}
+            return result
+
+    r = request(workflow="graph_single")
+    j = Journal(tmp_path / "calls.db")
+    calls = []
+
+    def validator(*args):
+        calls.append(args[1])
+        return fail_then_pass(*args)
+
+    result = execute(r, tmp_path, BadEdits(j, r.runId), validator, j)
+    assert result["status"] == "FAILED"
+    assert calls == [0]
+    assert result["attempts"][0]["html"] == result["attempts"][1]["html"]
+    assert result["patchTrace"][0]["status"] == "REJECTED"
+    assert result["patchTrace"][0]["beforeHash"] == result["patchTrace"][0]["afterHash"]

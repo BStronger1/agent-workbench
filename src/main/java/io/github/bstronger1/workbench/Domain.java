@@ -28,6 +28,7 @@ public final class Domain {
         public String workflow = "legacy", contractHash;
         public boolean pauseAfterPlan, resumable, skillsEnabled;
         public List<SkillEvent> skillTrace = new ArrayList<>();
+        public List<java.util.Map<String,Object>> patchTrace = new ArrayList<>();
         public List<Step> steps = new ArrayList<>();
         public java.util.Map<String,Object> plan = new java.util.LinkedHashMap<>();
         public boolean usageKnown = true;

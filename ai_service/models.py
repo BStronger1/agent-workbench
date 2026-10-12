@@ -40,6 +40,15 @@ class Code(BaseModel):
     html: str = Field(min_length=20, max_length=150000)
 
 
+class LiteralEdit(BaseModel):
+    old: str = Field(min_length=1, max_length=12000)
+    new: str = Field(max_length=30000)
+
+
+class CodeEdits(BaseModel):
+    edits: list[LiteralEdit] = Field(min_length=1, max_length=6)
+
+
 class Review(BaseModel):
     issues: list[str] = Field(default_factory=list, max_length=8)
 

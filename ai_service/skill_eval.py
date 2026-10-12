@@ -135,6 +135,10 @@ def preflight(cases, data, registry):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--live", action="store_true")
+    parser.add_argument(
+        "--baseline-report",
+        help="Reuse every baseline trial from a complete frozen paired run",
+    )
     parser.add_argument("--repeats", type=int, choices=(1, 2), default=2)
     parser.add_argument("--output", default="evidence/skill-ablation.json")
     args = parser.parse_args()
@@ -211,15 +215,57 @@ def main():
         "order": "case order S01..S08; baseline-first and skill-first alternate by case and repeat",
         "results": [],
     }
+    if args.baseline_report:
+        baseline_path = (ROOT / args.baseline_report).resolve()
+        if not baseline_path.is_relative_to(ROOT / "evidence"):
+            raise ValueError("Baseline must be a retained evidence report")
+        baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+        if baseline["status"] != "COMPLETE" or baseline["fixtures"] != inputs:
+            raise ValueError("Baseline incomplete or fixtures changed")
+        for key in (
+            "model",
+            "baseUrl",
+            "temperature",
+            "maxRepairs",
+            "tokenBudgetPerRun",
+            "repeats",
+        ):
+            if baseline[key] != report[key]:
+                raise ValueError("Baseline evaluation conditions differ: " + key)
+        rows = [row for row in baseline["results"] if row["skillsEnabled"] is False]
+        if len(rows) != len(cases) * args.repeats:
+            raise ValueError("Baseline must include all trials, including failures")
+        report["results"] = [
+            {**row, "reusedFrom": args.baseline_report} for row in rows
+        ]
+        report["baselineSource"] = {
+            "path": args.baseline_report,
+            "sha256": sha(baseline_path),
+        }
+        report["plannedCalls"] = len(cases) * args.repeats
+        report["order"] = (
+            "all baseline trials reused from complete prior run; new skill trials S01..S08, two repeats"
+        )
+        report["scope"] += (
+            "; non-contemporaneous development comparison, including skill-guided literal edit tool"
+        )
+    report["sourceHashes"]["ai_service/patching.py"] = sha(
+        ROOT / "ai_service/patching.py"
+    )
+    report["sourceHashes"]["ai_service/models.py"] = sha(ROOT / "ai_service/models.py")
     write(output, report)
     journal = Journal(data / "calls.sqlite")
     try:
         for repeat in range(1, args.repeats + 1):
             for index, case in enumerate(cases):
                 order = (False, True) if (index + repeat) % 2 else (True, False)
+                if args.baseline_report:
+                    order = (True,)
                 for enabled in order:
                     spent = sum(
-                        r["inputTokens"] + r["outputTokens"] for r in report["results"]
+                        r["inputTokens"] + r["outputTokens"]
+                        for r in report["results"]
+                        if not r.get("reusedFrom")
                     )
                     if spent + 50000 > report["totalTokenStop"]:
                         raise RuntimeError("Aggregate conservative budget reached")
@@ -264,6 +310,7 @@ def main():
                             "durationMs",
                         ]
                     }
+                    public["patchTrace"] = outcome.get("patchTrace", [])
                     public.update(
                         caseId=case["id"],
                         repeat=repeat,
@@ -295,6 +342,14 @@ def main():
         )
         raise
     finally:
+        report["newCalls"] = sum(
+            r["calls"] for r in report["results"] if not r.get("reusedFrom")
+        )
+        report["newTokens"] = sum(
+            r["inputTokens"] + r["outputTokens"]
+            for r in report["results"]
+            if not r.get("reusedFrom")
+        )
         report["finishedAt"] = datetime.now(timezone.utc).isoformat()
         report["summary"] = summary(report["results"])
         write(output, report)
