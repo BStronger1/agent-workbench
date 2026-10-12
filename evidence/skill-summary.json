@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-12",
+  "model": "DMXAPI-deepseek-v4-flash",
+  "scope": "Repair-only developer fixtures: 8 cases (2 historical, 6 authored), two repeats per variant. Not an independent benchmark.",
+  "conditions": {
+    "workflow": "graph_single",
+    "maxRepairs": 1,
+    "tokenBudget": 50000,
+    "temperature": 0.2
+  },
+  "variants": {
+    "baseline": {
+      "trials": 16,
+      "passedLive": 14,
+      "inputTokens": 21198,
+      "outputTokens": 13688,
+      "calls": 16,
+      "usageKnown": true,
+      "meanLiveDurationMs": 31815,
+      "totalTokens": 34886,
+      "perCasePassed": {
+        "S01": 2,
+        "S02": 0,
+        "S03": 2,
+        "S04": 2,
+        "S05": 2,
+        "S06": 2,
+        "S07": 2,
+        "S08": 2
+      }
+    },
+    "skillGuidance": {
+      "trials": 16,
+      "passedLive": 13,
+      "inputTokens": 29272,
+      "outputTokens": 18074,
+      "calls": 16,
+      "usageKnown": true,
+      "meanLiveDurationMs": 38142,
+      "totalTokens": 47346,
+      "perCasePassed": {
+        "S01": 2,
+        "S02": 0,
+        "S03": 2,
+        "S04": 2,
+        "S05": 2,
+        "S06": 2,
+        "S07": 1,
+        "S08": 2
+      }
+    },
+    "skillEdits": {
+      "trials": 16,
+      "passedLive": 13,
+      "inputTokens": 28832,
+      "outputTokens": 2982,
+      "calls": 16,
+      "usageKnown": true,
+      "meanLiveDurationMs": 11264,
+      "totalTokens": 31814,
+      "perCasePassed": {
+        "S01": 1,
+        "S02": 0,
+        "S03": 2,
+        "S04": 2,
+        "S05": 2,
+        "S06": 2,
+        "S07": 2,
+        "S08": 2
+      }
+    }
+  },
+  "totalNewModelCalls": 48,
+  "totalProviderTokens": 114046,
+  "finalFrozenOutputReplay": {
+    "providerCalls": 0,
+    "baselinePassed": 14,
+    "skillPassed": 13,
+    "trialsPerGroup": 16
+  },
+  "deltas": {
+    "skillIterationTokenReductionPct": 32.81,
+    "vsBaselineTokenReductionPct": 8.81,
+    "vsBaselineOutputTokenReductionPct": 78.21
+  },
+  "limitations": [
+    "v1.1 reuses all 16 earlier baseline trials; non-contemporaneous comparison",
+    "Prompt, payload, schema and budget equivalence checked for every baseline case",
+    "The upgrade includes instructions, shorter context and a literal edit applicator; gains cannot be attributed to SKILL.md alone",
+    "Live skill acceptance is 13/16 versus baseline 14/16; no quality-gain claim",
+    "Neutral-edit handling was verified by frozen-output browser replay, not fresh model requests",
+    "Raw replies and generated artifacts retained locally; this public file contains aggregate metrics only"
+  ],
+  "default": "skills off; explicit opt-in"
+}

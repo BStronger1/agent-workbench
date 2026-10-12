@@ -53,6 +53,7 @@ def request(**kw):
         runId=str(uuid.uuid4()),
         prompt="build app",
         workflow="graph_multi",
+        skillsEnabled=True,
         contract={
             "requiredTexts": ["test"],
             "steps": [

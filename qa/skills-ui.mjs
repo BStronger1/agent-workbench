@@ -34,7 +34,7 @@ try {
   await page.goto(process.env.BASE_URL || 'http://127.0.0.1:8123');
   await page.getByLabel('执行方式').selectOption('graph_single');
   const toggle=page.getByLabel('交互失败时使用修复技能');
-  assert.equal(await toggle.isChecked(),true);
+  assert.equal(await toggle.isChecked(),false);
   await toggle.uncheck();
   await page.getByRole('button',{name:'开始生成与验证'}).click();
   await page.getByRole('button',{name:'过程',exact:true}).click();

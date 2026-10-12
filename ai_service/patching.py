@@ -12,15 +12,19 @@ def apply_edits(html, reply):
     edits = CodeEdits.model_validate(reply).edits
     spans = []
     for edit in edits:
-        if edit.old == edit.new:
-            raise PatchError("No-op edit")
         if html.count(edit.old) != 1:
             raise PatchError("Edit anchor must occur exactly once in original HTML")
+        # An unchanged, uniquely matched anchor has no effect. Other edits still
+        # must pass every check; an all-no-op response is rejected below.
+        if edit.old == edit.new:
+            continue
         start = html.index(edit.old)
         end = start + len(edit.old)
         if any(start < b and end > a for a, b, _ in spans):
             raise PatchError("Edit anchors overlap")
         spans.append((start, end, edit.new))
+    if not spans:
+        raise PatchError("No effective edits")
     result = html
     for start, end, replacement in sorted(spans, reverse=True):
         result = result[:start] + replacement + result[end:]

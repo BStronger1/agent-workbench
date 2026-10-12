@@ -47,7 +47,7 @@ public final class Domain {
     public record GenerateRequest(String prompt, Integer maxRepairs, Integer tokenBudget,
                                   List<String> requiredTexts, Boolean checkInteraction, String memoryStrategy, Boolean demoFailure, String workflow, List<Step> steps, Boolean pauseAfterPlan, Boolean skillsEnabled) {
         public GenerateRequest(String prompt, Integer maxRepairs, Integer tokenBudget, List<String> requiredTexts, Boolean checkInteraction, String memoryStrategy, Boolean demoFailure, String workflow, List<Step> steps, Boolean pauseAfterPlan) {
-            this(prompt,maxRepairs,tokenBudget,requiredTexts,checkInteraction,memoryStrategy,demoFailure,workflow,steps,pauseAfterPlan,true);
+            this(prompt,maxRepairs,tokenBudget,requiredTexts,checkInteraction,memoryStrategy,demoFailure,workflow,steps,pauseAfterPlan,false);
         }
         public GenerateRequest(String prompt, Integer maxRepairs, Integer tokenBudget, List<String> requiredTexts, Boolean checkInteraction, String memoryStrategy, Boolean demoFailure) {
             this(prompt,maxRepairs,tokenBudget,requiredTexts,checkInteraction,memoryStrategy,demoFailure,"legacy",List.of(),false);

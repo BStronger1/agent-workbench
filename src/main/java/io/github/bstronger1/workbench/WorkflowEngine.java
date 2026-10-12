@@ -37,7 +37,7 @@ public class WorkflowEngine {
         if (!Set.of("legacy","graph_single","graph_multi").contains(r.workflow)) throw new IllegalArgumentException("未知工作流");
         r.steps = request.steps() == null ? List.of() : request.steps(); validateSteps(r.steps);
         r.pauseAfterPlan = Boolean.TRUE.equals(request.pauseAfterPlan());
-        r.skillsEnabled = !r.workflow.equals("legacy") && !Boolean.FALSE.equals(request.skillsEnabled());
+        r.skillsEnabled = !r.workflow.equals("legacy") && Boolean.TRUE.equals(request.skillsEnabled());
         r.resumable = !r.workflow.equals("legacy");
         if (!r.workflow.equals("legacy") && (ai == null || !ai.enabled() || credentials == null)) throw new IllegalArgumentException("请启用 AI 服务并保存个人模型配置");
         r.maxRepairs = request.maxRepairs() == null ? 2 : request.maxRepairs();

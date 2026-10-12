@@ -15,7 +15,7 @@ const required = ref("项目进度\n研究任务"),
   maxRepairs = ref(2),
   injectFailure = ref(false),
   interaction = ref(true);
-const skillsEnabled = ref(true);
+const skillsEnabled = ref(false);
 const workflow = ref("legacy"), acceptance = ref("direct"), inputValue = ref("研究任务"), pauseAfterPlan = ref(false), knowledgeMode = ref("lexical");
 const steps = computed(() => acceptance.value === "check" ? [
   {action:"check",target:"selection-item",value:""}, {action:"click",target:"primary-action",value:""}, {action:"assert_text",target:"result",value:"已完成 1 项"}
@@ -419,7 +419,7 @@ onUnmounted(() => clearInterval(timer));
             </div>
             <label v-if="acceptance === 'fill'">测试输入<input v-model="inputValue" maxlength="100" /></label>
             <label v-if="workflow !== 'legacy'" class="check"><input type="checkbox" v-model="pauseAfterPlan" />生成前由我确认验收计划</label>
-            <label v-if="workflow !== 'legacy'" class="check"><input type="checkbox" v-model="skillsEnabled" />交互失败时使用修复技能</label>
+            <label v-if="workflow !== 'legacy'" class="check"><input type="checkbox" v-model="skillsEnabled" />交互失败时使用修复技能（实验性）</label>
             <div class="form-row">
               <label
                 >记忆策略<select v-model="strategy">

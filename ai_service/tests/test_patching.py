@@ -44,3 +44,16 @@ def test_new_text_cannot_be_used_as_a_later_anchor():
             HTML,
             {"edits": [{"old": "Go", "new": "Next"}, {"old": "Next", "new": "Other"}]},
         )
+
+
+def test_unchanged_context_does_not_discard_valid_edits():
+    result = apply_edits(
+        HTML,
+        {
+            "edits": [
+                {"old": "<title>unchanged</title>", "new": "<title>unchanged</title>"},
+                {"old": '<p id="out">0</p>', "new": '<p id="out">1</p>'},
+            ]
+        },
+    )
+    assert result == HTML.replace('<p id="out">0</p>', '<p id="out">1</p>')

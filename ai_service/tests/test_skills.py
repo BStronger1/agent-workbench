@@ -176,3 +176,11 @@ def test_invalid_model_edits_are_rejected_without_changing_html(tmp_path):
     assert result["attempts"][0]["html"] == result["attempts"][1]["html"]
     assert result["patchTrace"][0]["status"] == "REJECTED"
     assert result["patchTrace"][0]["beforeHash"] == result["patchTrace"][0]["afterHash"]
+
+
+def test_new_runs_keep_skills_opt_in():
+    from ai_service.models import RunInput
+
+    payload = request().model_dump()
+    payload.pop("skillsEnabled")
+    assert RunInput(**payload).skillsEnabled is False

@@ -18,3 +18,11 @@ ai.pid
 __pycache__/
 .pytest_cache/
 *.pyc
+
+# Private live-model evidence; publish aggregate metrics only.
+evidence/skill-edits-evaluation.json
+evidence/skill-edit-replies.json
+evidence/skill-edit-replay.json
+evidence/skill-replay-artifacts/
+evidence/skill-artifacts/
+/test-results/
